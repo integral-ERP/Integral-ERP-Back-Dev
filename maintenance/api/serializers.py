@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from maintenance.models import carrier, port, vendor, employee, forwarAgent,company, address, agent, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, wareHouseProviders, forWardingAgents, containerCode, containerEquipType, containerType, customer, location
+from maintenance.models import carrier, port, vendor, employee, forwarAgent,company, address, agent, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, wareHouseProviders, forWardingAgents, containerCode, containerEquipType, containerType, customer, location, consignee
 
 from drf_extra_fields.fields import Base64ImageField
 
@@ -368,5 +368,14 @@ class containerEquipTypeSerializer(serializers.ModelSerializer):
         fields = [  'id',
                     'code',
                     'description'
+                ]
+
+class consigneeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = consignee
+        fields = ['id',
+                    'customerId',
+                    'vendorId',
+                    'forwarAgentId'
                 ]
 

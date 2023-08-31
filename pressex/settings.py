@@ -41,10 +41,10 @@ INSTALLED_APPS = [
     # Mis app'
     'rest_framework',
     'drf_yasg',
+    'wareHouse',
     'user',
     'accounting',
     'maintenance',
-    'wareHouse',
     'import_export',
 ]
 

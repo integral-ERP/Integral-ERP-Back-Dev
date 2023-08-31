@@ -276,3 +276,13 @@ class containerCode(models.Model):
 class containerEquipType(models.Model):
     code            =   models.CharField(max_length=200, blank=True, null=True)
     description     =   models.CharField(max_length=200, blank=True, null=True)
+
+class consignee (models.Model):
+    customerId      =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING)
+    vendorId        =   models.ForeignKey(vendor, blank=True, null=True, on_delete=models.DO_NOTHING)
+    forwarAgentId   =   models.ForeignKey(forwarAgent, blank=True, null=True, on_delete=models.DO_NOTHING)
+
+# class consignee(models.Model):
+#     vendors = models.ForeignKey(vendor, related_name='vendor', on_delete=models.DO_NOTHING)
+#     agents = models.ForeignKey(agent, related_name='agent', on_delete=models.DO_NOTHING)
+#     customers = models.ForeignKey(customer, related_name='customer', on_delete=models.DO_NOTHING)

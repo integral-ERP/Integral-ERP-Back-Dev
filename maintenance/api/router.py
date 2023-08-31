@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from maintenance.api.views import carrierApiViewSet, portApiViewSet, vendorApiViewSet, employeeApiViewSet, forwarAgentApiViewSet, companyApiViewSet, addressApiViewSet, agentApiViewSet, companyTypeApiViewSet, companyInfoApiViewSet, addressInfoApiViewSet, companyLogoApiViewSet, companyRegisCodeApiViewSet, systCurrenApiViewSet, importScheduleApiViewSet, packTypeApiViewSet, wareHouseProvidersApiViewSet, forWardingAgentsApiViewSet, containerTypeApiViewSet, customerApiViewSet, containerCodeApiViewSet, locationApiViewSet, containerEquipTypeApiViewSet
+from maintenance.api.views import carrierApiViewSet, portApiViewSet, vendorApiViewSet, employeeApiViewSet, forwarAgentApiViewSet, companyApiViewSet, addressApiViewSet, agentApiViewSet, companyTypeApiViewSet, companyInfoApiViewSet, addressInfoApiViewSet, companyLogoApiViewSet, companyRegisCodeApiViewSet, systCurrenApiViewSet, importScheduleApiViewSet, packTypeApiViewSet, wareHouseProvidersApiViewSet, forWardingAgentsApiViewSet, containerTypeApiViewSet, customerApiViewSet, containerCodeApiViewSet, locationApiViewSet, containerEquipTypeApiViewSet, consigneeApiViewSet
 
 router_maintenance = DefaultRouter()
 
@@ -27,4 +27,5 @@ router_maintenance.register(prefix='customer', basename='customer', viewset=cust
 router_maintenance.register(prefix='location', basename='location', viewset=locationApiViewSet)
 router_maintenance.register(prefix='containerCode', basename='containerCode', viewset=containerCodeApiViewSet)
 router_maintenance.register(prefix='containerEquipType', basename='containerEquipType', viewset=containerEquipTypeApiViewSet)
-
+#-------------------------
+# router_maintenance.register(prefix='consignee', basename='consignee', viewset=consigneeApiViewSet)

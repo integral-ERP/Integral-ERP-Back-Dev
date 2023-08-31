@@ -1,5 +1,5 @@
 from django.contrib import admin
-from maintenance.models import carrier, port, vendor, employee, forwarAgent,company, address, agent, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, wareHouseProviders, forWardingAgents, containerCode, containerEquipType, containerType, customer, location
+from maintenance.models import carrier, port, vendor, employee, forwarAgent,company, address, agent, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, forWardingAgents, containerCode, containerEquipType, containerType, customer, location, wareHouseProviders, consignee
 
 # ---------------Import/Export------------------------
 from import_export import resources
@@ -99,6 +99,11 @@ class containerCodeResource(resources.ModelResource):
 class containerEquipTypeResource(resources.ModelResource):
     class Meta:
         model = containerEquipType
+
+class consigneeResource(resources.ModelResource):
+    class Meta:
+        model = consignee
+
 
 # Register your models here.
 
@@ -469,3 +474,14 @@ class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'description'
                 ]
     resource_class = containerEquipTypeResource
+
+@admin.register(consignee)
+class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['id',
+                    'customerId',
+                    'vendorId',
+                    'forwarAgentId'
+                ]
+    resource_class = consigneeResource
+
+    

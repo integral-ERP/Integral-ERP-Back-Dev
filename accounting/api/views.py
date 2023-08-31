@@ -13,3 +13,6 @@ class ItemServicesApiViewSet(ModelViewSet):
 class openingBalanceApiViewSet(ModelViewSet):
     serializer_class = openingBalanceSerializer
     queryset = openingBalance.objects.all()
+
+
+    

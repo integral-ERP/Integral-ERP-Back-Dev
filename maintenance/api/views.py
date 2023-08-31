@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from maintenance.models import carrier, port, vendor, employee, forwarAgent, company, address, agent, companyType, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, companyInfo, packType, wareHouseProviders, forWardingAgents, containerType, customer, location, containerCode, containerEquipType
-from maintenance.api.serializers import carrierSerializer, portSerializer, vendorSerializer, employeeSerializer, forwarAgentSerializer, companySerializer, addresSerializer, agentSerializer, companyTypeSerializer, companyInfoSerializer, addressInfoSerializer, companyLogoSerializer, companyRegisCodeSerializer, systCurrenSerializer, importScheduleSerializer, packTypeSerializer, wareHouseProvidersSerializer, forWardingAgentsSerializer, containerTypeSerializer, customerSerializer, locationSerializer, containerCodeSerializer, containerEquipTypeSerializer
+from maintenance.models import carrier, port, vendor, employee, forwarAgent, company, address, agent, companyType, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, companyInfo, packType, wareHouseProviders, forWardingAgents, containerType, customer, location, containerCode, containerEquipType, consignee
+from maintenance.api.serializers import carrierSerializer, portSerializer, vendorSerializer, employeeSerializer, forwarAgentSerializer, companySerializer, addresSerializer, agentSerializer, companyTypeSerializer, companyInfoSerializer, addressInfoSerializer, companyLogoSerializer, companyRegisCodeSerializer, systCurrenSerializer, importScheduleSerializer, packTypeSerializer, wareHouseProvidersSerializer, forWardingAgentsSerializer, containerTypeSerializer, customerSerializer, locationSerializer, containerCodeSerializer, containerEquipTypeSerializer, consigneeSerializer
 
 
 class carrierApiViewSet(ModelViewSet):
@@ -95,4 +95,6 @@ class containerEquipTypeApiViewSet(ModelViewSet):
     serializer_class = containerEquipTypeSerializer
     queryset = containerEquipType.objects.all()
     
-    
+class consigneeApiViewSet(ModelViewSet):
+    serializer_class = consigneeSerializer
+    queryset = consignee.objects.all()

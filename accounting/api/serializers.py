@@ -12,7 +12,7 @@ class chartAccountsSerializer(serializers.ModelSerializer):
                     'currency', 
                     'parentAccount',
                     ]
-
+ 
 class ItemServicesSerializer(serializers.ModelSerializer):
     class Meta :
         model   = ItemServices

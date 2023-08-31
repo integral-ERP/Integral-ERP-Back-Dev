@@ -19,7 +19,7 @@ class ItemServices(models.Model):
     autCreation     =   models.CharField(max_length=100, blank=True, null=True)
     currency        =   models.CharField(max_length=100, blank=True, null=True)
     iataCode        =   models.CharField(max_length=100, blank=True, null=True)
- 
+  
 class openingBalance(models.Model):
     name            =   models.CharField(max_length=100, blank=True, null=True)
     balance         =   models.FloatField(blank=True, null=True)

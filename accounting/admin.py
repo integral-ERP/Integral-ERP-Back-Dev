@@ -24,7 +24,7 @@ class openingBalanceResource(resources.ModelResource):
 @admin.register (chartAccounts)
 class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
-                    'name', 
+                    'name',  
                     'type', 
                     'referenceNum', 
                     'balanceUSD', 
