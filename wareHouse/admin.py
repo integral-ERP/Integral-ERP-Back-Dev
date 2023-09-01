@@ -28,8 +28,8 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(issuedBy)
 class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id',
-                    'forwarAgent',
-                    'wareHouseProvider',
+                    'forWardingAgents',
+                    'forWardingAgents',
                 ]
 
 @admin.register(pickUpLocation)

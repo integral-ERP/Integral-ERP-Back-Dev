@@ -14,7 +14,7 @@ class issuedBySerializer(serializers.ModelSerializer):
     class Meta:
         model = issuedBy
         fields = [  'id',
-                    'forwarAgent',
+                    'forWardingAgents',
                     'wareHouseProvider'
                 ]
 
