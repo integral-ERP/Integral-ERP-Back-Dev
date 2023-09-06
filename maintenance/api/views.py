@@ -1,6 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
-from maintenance.models import carrier, port, vendor, employee, forwarAgent, company, address, agent, companyType, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, companyInfo, packType, wareHouseProviders, forWardingAgents, containerType, customer, location, containerCode, containerEquipType, consignee
-from maintenance.api.serializers import carrierSerializer, portSerializer, vendorSerializer, employeeSerializer, forwarAgentSerializer, companySerializer, addresSerializer, agentSerializer, companyTypeSerializer, companyInfoSerializer, addressInfoSerializer, companyLogoSerializer, companyRegisCodeSerializer, systCurrenSerializer, importScheduleSerializer, packTypeSerializer, wareHouseProvidersSerializer, forWardingAgentsSerializer, containerTypeSerializer, customerSerializer, locationSerializer, containerCodeSerializer, containerEquipTypeSerializer, consigneeSerializer
+
+from maintenance.models import carrier, port, vendor, employee, company, address, companyType, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, companyInfo, packType, wareHouseProviders, forWardingAgents, containerType, customer, location, containerCode, containerEquipType, consignee
+from maintenance.api.serializers import carrierSerializer, portSerializer, vendorSerializer, employeeSerializer, companySerializer, addresSerializer, companyTypeSerializer, companyInfoSerializer, addressInfoSerializer, companyLogoSerializer, companyRegisCodeSerializer, systCurrenSerializer, importScheduleSerializer, packTypeSerializer, wareHouseProvidersSerializer, forWardingAgentsSerializer, containerTypeSerializer, customerSerializer, locationSerializer, containerCodeSerializer, containerEquipTypeSerializer, consigneeSerializer
 
 
 class carrierApiViewSet(ModelViewSet):
@@ -19,10 +20,6 @@ class employeeApiViewSet(ModelViewSet):
     serializer_class = employeeSerializer
     queryset = employee.objects.all()
 
-class forwarAgentApiViewSet(ModelViewSet):
-    serializer_class = forwarAgentSerializer
-    queryset = forwarAgent.objects.all()
-
 class companyApiViewSet(ModelViewSet):
     serializer_class = companySerializer
     queryset = company.objects.all()
@@ -30,10 +27,6 @@ class companyApiViewSet(ModelViewSet):
 class addressApiViewSet(ModelViewSet):
     serializer_class = addresSerializer
     queryset = address.objects.all()
-
-class agentApiViewSet(ModelViewSet):
-    serializer_class = agentSerializer
-    queryset = agent.objects.all()
 
 class companyTypeApiViewSet(ModelViewSet):
     serializer_class = companyTypeSerializer

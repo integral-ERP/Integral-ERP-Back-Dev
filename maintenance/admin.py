@@ -1,12 +1,10 @@
 from django.contrib import admin
-from maintenance.models import carrier, port, vendor, employee, forwarAgent,company, address, agent, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, forWardingAgents, containerCode, containerEquipType, containerType, customer, location, wareHouseProviders, consignee
+from maintenance.models import carrier, port, vendor, employee,company, address, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, forWardingAgents, containerCode, containerEquipType, containerType, customer, location, wareHouseProviders, consignee
 
-# ---------------Import/Export------------------------
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-
-#Classes assigned for import/export. here
+##################### Classes assigned for import/export HERE #####################
 
 class carrierResource(resources.ModelResource):
     class Meta:
@@ -24,10 +22,6 @@ class employeeResource(resources.ModelResource):
     class Meta:
         model = employee
 
-class forwarAgentResource(resources.ModelResource):
-    class Meta:
-        model = forwarAgent
-
 class companyResource(resources.ModelResource):
     class Meta:
         model = company
@@ -35,10 +29,6 @@ class companyResource(resources.ModelResource):
 class addressResource(resources.ModelResource):
     class Meta:
         model = address
-
-class agentResource(resources.ModelResource):
-    class Meta:
-        model = agent
 
 class companyTypeResource(resources.ModelResource):
     class Meta:
@@ -105,7 +95,7 @@ class consigneeResource(resources.ModelResource):
         model = consignee
 
 
-# Register your models here.
+################### Register your models here. #########################
 
 @admin.register(carrier)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -207,29 +197,6 @@ class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = employeeResource
 
 
-@admin.register(forwarAgent)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'sistenID',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode'
-                    ]
-    resource_class = forwarAgentResource
-    
 @admin.register (company)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
@@ -260,16 +227,6 @@ class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'port'
                 ]
     resource_class = addressResource
-
-@admin.register (agent)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 
-                    'iataCode', 
-                    'fmc', 
-                    'scacCodeUs', 
-                    'tsaNumber'
-                ]
-    resource_class = agentResource
 
 @admin.register (companyType)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -436,7 +393,8 @@ class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'city',
                     'state',
                     'country',
-                    'zipCode'
+                    'zipCode',
+                    'TypePerson'
                 ]
 resource_class = customerResource
 

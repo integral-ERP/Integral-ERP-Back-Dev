@@ -24,12 +24,16 @@ class carrier(models.Model):
     carrierType     =   models.CharField(max_length=200, blank=True, null=True)
     methodCode      =   models.CharField(max_length=200, blank=True, null=True)
     carrierCode     =   models.CharField(max_length=200, blank=True, null=True)
-    scacNumber      =   models.CharField(max_length=200, blank=True, null=True)     # Nuevas columnas
+    scacNumber      =   models.CharField(max_length=200, blank=True, null=True)
     iataCode        =   models.CharField(max_length=200, blank=True, null=True)
     airlineCode     =   models.CharField(max_length=200, blank=True, null=True)
     airlinePrefix   =   models.CharField(max_length=200, blank=True, null=True)
-    airwayBillNumbers   =   models.TextField(blank=True, null=True)
+    airwayBillNumbers    =  models.TextField(blank=True, null=True)
     passengerOnlyAirline =  models.BooleanField(default=False)
+    TypePerson      =   models.CharField(max_length=200, blank=True, null=True, default="Carrier")
+
+    def __str__(self):
+        return self.name
 
 class port(models.Model):
     code            =   models.CharField(max_length=200, blank=True, null=True)
@@ -46,6 +50,10 @@ class port(models.Model):
     mail            =   models.BooleanField(default=False)
     borderCrossing  =   models.BooleanField(default=False)
     usCustomsCode   =   models.CharField(max_length=200, blank=True, null=True)
+    TypePerson      =   models.CharField(max_length=200, blank=True, null=True, default="Port")
+
+    def __str__(self):
+        return self.name
 
 class vendor(models.Model):
     name            =   models.CharField(max_length=200, blank=True, null=True)
@@ -65,6 +73,10 @@ class vendor(models.Model):
     state           =   models.CharField(max_length=200, blank=True, null=True)
     country         =   models.CharField(max_length=200, blank=True, null=True)
     zipCode         =   models.CharField(max_length=200, blank=True, null=True)
+    TypePerson      =   models.CharField(max_length=200, blank=True, null=True, default="Vendor")
+
+    def __str__(self):
+        return self.name
 
 class employee(models.Model):
     name            =   models.CharField(max_length=200, blank=True, null=True)
@@ -84,26 +96,11 @@ class employee(models.Model):
     state           =   models.CharField(max_length=200, blank=True, null=True)
     country         =   models.CharField(max_length=200, blank=True, null=True)
     zipCode         =   models.CharField(max_length=200, blank=True, null=True)
+    TypePerson      =   models.CharField(max_length=200, blank=True, null=True, default="Employee")
 
-class forwarAgent(models.Model):
-    name            =   models.CharField(max_length=200, blank=True, null=True)
-    phone           =   models.CharField(max_length=200, blank=True, null=True)
-    movelPhone      =   models.CharField(max_length=200, blank=True, null=True)
-    email           =   models.CharField(max_length=200, blank=True, null=True)
-    fax             =   models.CharField(max_length=200, blank=True, null=True)
-    webSide         =   models.CharField(max_length=200, blank=True, null=True)
-    referentNumber  =   models.CharField(max_length=200, blank=True, null=True)
-    firstNameContac =   models.CharField(max_length=200, blank=True, null=True)
-    lasNameContac   =   models.CharField(max_length=200, blank=True, null=True)
-    numIdentification = models.CharField(max_length=200, blank=True, null=True)  # No acepta valores
-    typeIdentificacion = models.CharField(max_length=200, blank=True, null=True)
-    sistenID        =   models.CharField(max_length=200, blank=True, null=True)
-    streetNumber    =   models.TextField(blank=True, null=True)
-    city            =   models.CharField(max_length=200, blank=True, null=True)
-    state           =   models.CharField(max_length=200, blank=True, null=True)
-    country         =   models.CharField(max_length=200, blank=True, null=True)
-    zipCode         =   models.CharField(max_length=200, blank=True, null=True)
-
+    def __str__(self):
+        return self.name
+    
 class company(models.Model):
     nameCompany     =   models.CharField(max_length=200, blank=True, null=True)
     idEntity        =   models.CharField(max_length=50, blank=True, null=True)
@@ -126,12 +123,6 @@ class address(models.Model):
     state           =   models.CharField(max_length=200, blank=True, null=True)
     zipCode         =   models.IntegerField(blank=True, null=True)
     port            =   models.IntegerField(blank=True, null=True)
-
-class agent(models.Model):
-    iataCode        =   models.CharField(max_length=200, blank=True, null=True)
-    fmc             =   models.CharField(max_length=200, blank=True, null=True)
-    scacCodeUs      =   models.CharField(max_length=200, blank=True, null=True)
-    tsaNumber       =   models.CharField(max_length=200, blank=True, null=True)
 
 class companyType(models.Model):
     logisticsProvi  =   models.BooleanField(default=False)
@@ -191,6 +182,9 @@ class packType(models.Model):
     air             =   models.BooleanField(default=False)
     ocean           =   models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.description
+
 class wareHouseProviders (models.Model):
     name            =   models.CharField(max_length=200, blank=True, null=True)
     phone           =   models.CharField(max_length=200, blank=True, null=True)
@@ -225,7 +219,11 @@ class forWardingAgents (models.Model):
     state           =   models.CharField(max_length=200, blank=True, null=True)
     country         =   models.CharField(max_length=200, blank=True, null=True)
     zipCode         =   models.CharField(max_length=200, blank=True, null=True)
+    TypePerson      =   models.CharField(max_length=200, blank=True, null=True, default="Agent")
 
+    def __str__(self):
+        return self.name
+    
 class containerType(models.Model):
     type            =   models.CharField(max_length=200, blank=True, null=True)
     description     =   models.CharField(max_length=200, blank=True, null=True)
@@ -253,6 +251,10 @@ class customer(models.Model):
     state           =   models.CharField(max_length=200, blank=True, null=True)
     country         =   models.CharField(max_length=200, blank=True, null=True)
     zipCode         =   models.CharField(max_length=200, blank=True, null=True)
+    TypePerson      =   models.CharField(max_length=200, blank=True, default='Customer')
+
+    def __str__(self):
+        return self.name
 
 class location(models.Model):
     status          =   models.CharField(max_length=200, blank=True, null=True)
@@ -269,6 +271,9 @@ class location(models.Model):
     maxWeight       =   models.FloatField(blank=True, null=True, default=0)
     disable         =   models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.code
+
 class containerCode(models.Model):
     code            =   models.CharField(max_length=200, blank=True, null=True)
     description     =   models.CharField(max_length=200, blank=True, null=True)
@@ -280,9 +285,4 @@ class containerEquipType(models.Model):
 class consignee (models.Model):
     customerId      =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING)
     vendorId        =   models.ForeignKey(vendor, blank=True, null=True, on_delete=models.DO_NOTHING)
-    forwarAgentId   =   models.ForeignKey(forwarAgent, blank=True, null=True, on_delete=models.DO_NOTHING)
-
-# class consignee(models.Model):
-#     vendors = models.ForeignKey(vendor, related_name='vendor', on_delete=models.DO_NOTHING)
-#     agents = models.ForeignKey(agent, related_name='agent', on_delete=models.DO_NOTHING)
-#     customers = models.ForeignKey(customer, related_name='customer', on_delete=models.DO_NOTHING)
+    forwarAgentId   =   models.ForeignKey(forWardingAgents, blank=True, null=True, on_delete=models.DO_NOTHING)

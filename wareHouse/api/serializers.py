@@ -1,5 +1,10 @@
 from rest_framework import serializers
+
+from maintenance.models import employee
+
 from wareHouse.models import shipper, issuedBy, pickUpLocation, consignee, deliveryLocation, pickUpOrder, pieces
+
+from maintenance.api.serializers import employeeSerializer, forWardingAgentsSerializer, carrierSerializer, customerSerializer
 
 class shipperSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,7 +14,7 @@ class shipperSerializer(serializers.ModelSerializer):
                     'vendorName',
                     'agentName'
                 ]
- 
+  
 class issuedBySerializer(serializers.ModelSerializer):
     class Meta:
         model = issuedBy
@@ -48,9 +53,16 @@ class deliveryLocationSerializer(serializers.ModelSerializer):
                 ]
 
 class pickUpOrderSerializer(serializers.ModelSerializer):
+    employeekey         =   employeeSerializer()
+    destinationAgentKey =   forWardingAgentsSerializer()
+    inlandCarrierKey    =   carrierSerializer()    
+    mainCarrierKey      =   carrierSerializer()
+    supplierKey         =   customerSerializer()
+
     class Meta:
         model = pickUpOrder
-        fields = ['id',
+    
+        fields = [  'id',
                     'status',
                     'number',
                     'creationDate',
@@ -71,8 +83,9 @@ class pickUpOrderSerializer(serializers.ModelSerializer):
                     'supplierKey',
                     'invoiceNumber',
                     'purchaseOrderNum'
-                ]
-        
+                ]  
+
+
 class piecesSerializer(serializers.ModelSerializer):
     class Meta:
         model = pieces
@@ -88,3 +101,4 @@ class piecesSerializer(serializers.ModelSerializer):
                     'weight',
                     'volume'
                 ]
+        

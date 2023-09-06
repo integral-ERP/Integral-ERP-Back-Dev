@@ -1,8 +1,8 @@
 from django.db import models
 
-from maintenance.models import employee, forWardingAgents, carrier, customer, vendor, wareHouseProviders, forWardingAgents
+from maintenance.models import employee, forWardingAgents, carrier, customer, vendor, wareHouseProviders
 
-# Create your models here.
+######################### Create your models here. #################################
 
 class shipper(models.Model):
     customerName    =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.CASCADE, related_name='shippers')
@@ -14,7 +14,7 @@ class issuedBy(models.Model):
     wareHouseProvider   =   models.ForeignKey(wareHouseProviders, blank=True, on_delete=models.DO_NOTHING)
 
 class pickUpLocation(models.Model):
-    customerName    = models.ForeignKey(customer, blank=True, null=True, on_delete=models.CASCADE, related_name='shippersa')
+    customerName    =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.CASCADE, related_name='shippersa')
     vendorName      =   models.ForeignKey(vendor, blank=True, null=True, on_delete=models.CASCADE, related_name='shippersb')
     agentName       =   models.ForeignKey(forWardingAgents, blank=True, null=True, on_delete=models.CASCADE, related_name='shippersc')
 
@@ -37,10 +37,10 @@ class pickUpOrder(models.Model):
     pickUpDate          =   models.DateField(blank=True, null=True)
     deliveryDate        =   models.DateField(blank=True, null=True)
     date                =   models.DateField(blank=True, null=True)
-    issuedByKey         =   models.ForeignKey(issuedBy, blank=True, null=True, on_delete=models.DO_NOTHING)
+    issuedByKey         =   models.CharField(max_length=200, blank=True, null=True)
     destinationAgentKey =   models.ForeignKey(forWardingAgents, blank=True, null=True, on_delete=models.DO_NOTHING) 
     employeekey         =   models.ForeignKey(employee, blank=True, null=True, on_delete=models.DO_NOTHING)     
-    shipperkey          =   models.ForeignKey(shipper, blank=True, null=True, on_delete=models.DO_NOTHING)
+    shipperkey          =   models.CharField(max_length=200, blank=True, null=True)
     PickUpLocationkey   =   models.TextField(blank=True, null=True)
     consigneekey        =   models.TextField(blank=True, null=True)
     deliveryLocationkey =   models.CharField(max_length=200, blank=True, null=True)
@@ -51,7 +51,7 @@ class pickUpOrder(models.Model):
     supplierKey         =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING) 
     invoiceNumber       =   models.CharField(max_length=200, blank=True, null=True)
     purchaseOrderNum    =   models.CharField(max_length=200, blank=True, null=True)
-    
+  
 class pieces(models.Model):
     status      =   models.FloatField(blank=True, null=True, default=0) 
     package     =   models.FloatField(blank=True, null=True, default=0) 
@@ -62,3 +62,4 @@ class pieces(models.Model):
     width       =   models.FloatField(blank=True, null=True, default=0) 
     weight      =   models.FloatField(blank=True, null=True, default=0)    
     volume      =   models.FloatField(blank=True, null=True, default=0)
+

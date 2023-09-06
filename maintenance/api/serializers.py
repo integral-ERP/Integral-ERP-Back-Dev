@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from maintenance.models import carrier, port, vendor, employee, forwarAgent,company, address, agent, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, wareHouseProviders, forWardingAgents, containerCode, containerEquipType, containerType, customer, location, consignee
+from maintenance.models import carrier, port, vendor, employee,company, address, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, wareHouseProviders, forWardingAgents, containerCode, containerEquipType, containerType, customer, location, consignee
 
 from drf_extra_fields.fields import Base64ImageField
 
@@ -100,29 +100,6 @@ class employeeSerializer(serializers.ModelSerializer):
                     'country',
                     'zipCode'
                   ]
-
-class forwarAgentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = forwarAgent
-        fields = [  'id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'sistenID',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode'
-                  ]
         
 class companySerializer(serializers.ModelSerializer):
     class Meta:
@@ -153,16 +130,6 @@ class addresSerializer(serializers.ModelSerializer):
                     'state', 
                     'zipCode', 
                     'port'
-                ]
-
-class agentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = agent
-        fields = ['id', 
-                    'iataCode', 
-                    'fmc', 
-                    'scacCodeUs', 
-                    'tsaNumber'
                 ]
 
 class companyTypeSerializer(serializers.ModelSerializer):
@@ -332,7 +299,8 @@ class customerSerializer(serializers.ModelSerializer):
                     'city',
                     'state',
                     'country',
-                    'zipCode'
+                    'zipCode',
+                    'TypePerson'
                 ]
 
 class locationSerializer(serializers.ModelSerializer):

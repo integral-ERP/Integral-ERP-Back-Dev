@@ -1,11 +1,12 @@
 from django.contrib import admin
 from wareHouse.models import pickUpOrder, pieces, shipper, issuedBy, pickUpLocation, consignee, deliveryLocation
 
-# ---------------Import/Export------------------------
+
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-#Classes assigned for import/export. here
+######################## Classes assigned for import/export. HERE ############################## 
+
 class pickUpOrderResource(resources.ModelResource):
     class Meta:
         model = pickUpOrder
@@ -14,7 +15,7 @@ class piecesResource(resources.ModelResource):
     class Meta:
         model = pieces
 
-        
+         
 # Register your models here.
 
 @admin.register(shipper)
@@ -101,4 +102,3 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = piecesResource
 
 
-    
