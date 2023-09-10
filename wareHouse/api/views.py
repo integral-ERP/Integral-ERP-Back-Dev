@@ -22,11 +22,11 @@ class consigneeApiViewSet(ModelViewSet):
 
 class deliveryLocationApiViewSet(ModelViewSet):
     serializer_class = deliveryLocationSerializer
-    queryset = deliveryLocation.objects.all()
+    queryset = deliveryLocation.objects.all().select_related("destinationAgentKey")
 
 class pickUpOrderApiViewSet(ModelViewSet):
     serializer_class = pickUpOrderSerializer
-    queryset = pickUpOrder.objects.all()
+    queryset = pickUpOrder.objects.all().select_related('destinationAgentKey', 'employeekey', 'inlandCarrierKey', 'mainCarrierKey', 'supplierKey')
 
 class piecesApiViewSet(ModelViewSet):
     serializer_class = piecesSerializer

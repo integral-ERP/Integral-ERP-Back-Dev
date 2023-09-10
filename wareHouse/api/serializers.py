@@ -53,11 +53,11 @@ class deliveryLocationSerializer(serializers.ModelSerializer):
                 ]
 
 class pickUpOrderSerializer(serializers.ModelSerializer):
-    employeekey         =   employeeSerializer()
-    destinationAgentKey =   forWardingAgentsSerializer()
-    inlandCarrierKey    =   carrierSerializer()    
-    mainCarrierKey      =   carrierSerializer()
-    supplierKey         =   customerSerializer()
+    destinationAgent = forWardingAgentsSerializer(required=False, source="destinationAgentKey")
+    employee         =   employeeSerializer(required=False, source="employeekey")
+    inlandCarrier    =   carrierSerializer(required=False, source="inlandCarrierKey")    
+    mainCarrier      =   carrierSerializer(required=False, source="mainCarrierKey")
+    supplier         =   customerSerializer(required=False, source="supplierKey")
 
     class Meta:
         model = pickUpOrder
@@ -71,16 +71,21 @@ class pickUpOrderSerializer(serializers.ModelSerializer):
                     'date',
                     'issuedByKey',
                     'destinationAgentKey',
+                    'destinationAgent',
                     'employeekey',
+                    'employee',
                     'shipperkey',
                     'PickUpLocationkey',
                     'consigneekey',
                     'deliveryLocationkey',
                     'inlandCarrierKey',
+                    'inlandCarrier',
                     'mainCarrierKey',
+                    'mainCarrier',
                     'proNumber',
                     'trackingNumber',
                     'supplierKey',
+                    'supplier',
                     'invoiceNumber',
                     'purchaseOrderNum'
                 ]  
