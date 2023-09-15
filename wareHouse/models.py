@@ -42,7 +42,7 @@ class pickUpOrder(models.Model):
     employeekey         =   models.ForeignKey(employee, blank=True, null=True, on_delete=models.DO_NOTHING)     
     shipperkey          =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='shipper')
     PickUpLocationkey   =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='pickUpLocation')
-    consigneekey        =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='consigneeName')
+    consigneekey        =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='consigneekey')
     deliveryLocationkey =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='deliveryLocation')
     inlandCarrierKey    =   models.ForeignKey(carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='inlandCarri') 
     mainCarrierKey      =   models.ForeignKey(carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='mainCarri')
