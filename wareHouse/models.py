@@ -1,5 +1,4 @@
 from django.db import models
-
 from maintenance.models import employee, forWardingAgents, carrier, customer, vendor, wareHouseProviders
 
 ######################### Create your models here. #################################
@@ -51,6 +50,7 @@ class pickUpOrder(models.Model):
     supplierKey         =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING) 
     invoiceNumber       =   models.CharField(max_length=200, blank=True, null=True)
     purchaseOrderNum    =   models.CharField(max_length=200, blank=True, null=True)
+    commodities         =   models.JSONField(blank=True, null=True)
   
 class pieces(models.Model):
     status      =   models.FloatField(blank=True, null=True, default=0) 

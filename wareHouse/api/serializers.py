@@ -87,7 +87,8 @@ class pickUpOrderSerializer(serializers.ModelSerializer):
                     'supplierKey',
                     'supplier',
                     'invoiceNumber',
-                    'purchaseOrderNum'
+                    'purchaseOrderNum',
+                    'commodities'
                 ]  
 
 
