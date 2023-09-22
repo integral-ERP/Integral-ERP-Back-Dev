@@ -2,55 +2,11 @@ from rest_framework import serializers
 
 from maintenance.models import employee
 
-from wareHouse.models import shipper, issuedBy, pickUpLocation, consignee, deliveryLocation, pickUpOrder, pieces
+from wareHouse.models import  pickUpOrder, pieces
 
 from maintenance.api.serializers import employeeSerializer, forWardingAgentsSerializer, carrierSerializer, customerSerializer
 
-class shipperSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = shipper
-        fields = [  'id',
-                    'customerName',
-                    'vendorName',
-                    'agentName'
-                ]
-  
-class issuedBySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = issuedBy
-        fields = [  'id',
-                    'forWardingAgents',
-                    'wareHouseProvider'
-                ]
 
-class pickUpLocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = pickUpLocation
-        fields = [  'id',
-                    'customerName',
-                    'vendorName',
-                    'agentName'
-                ]
-
-class consigneeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = consignee
-        fields = [  'id',
-                    'customerName',
-                    'vendorName',
-                    'agentName',
-                    'carrierName'
-                ]
-
-class deliveryLocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = deliveryLocation
-        fields = [  'id',
-                    'customerName',
-                    'vendorName',
-                    'agentName',
-                    'carrierName'
-                ]
 
 class pickUpOrderSerializer(serializers.ModelSerializer):
     destinationAgent = forWardingAgentsSerializer(required=False, source="destinationAgentKey")
@@ -87,8 +43,7 @@ class pickUpOrderSerializer(serializers.ModelSerializer):
                     'supplierKey',
                     'supplier',
                     'invoiceNumber',
-                    'purchaseOrderNum',
-                    'commodities'
+                    'purchaseOrderNum'
                 ]  
 
 

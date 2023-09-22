@@ -284,5 +284,5 @@ class containerEquipType(models.Model):
 
 class consignee (models.Model):
     customerId      =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING)
-    vendorId        =   models.ForeignKey(vendor, blank=True, null=True, on_delete=models.DO_NOTHING,related_name='consigneeVendor')
+    vendorId        =   models.ForeignKey(vendor, blank=True, null=True, on_delete=models.DO_NOTHING)
     forwarAgentId   =   models.ForeignKey(forWardingAgents, blank=True, null=True, on_delete=models.DO_NOTHING)

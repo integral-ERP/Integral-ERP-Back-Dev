@@ -1,5 +1,5 @@
 from django.contrib import admin
-from wareHouse.models import pickUpOrder, pieces, shipper, issuedBy, pickUpLocation, consignee, deliveryLocation
+from wareHouse.models import pickUpOrder, pieces
 
 
 from import_export import resources
@@ -18,46 +18,7 @@ class piecesResource(resources.ModelResource):
          
 # Register your models here.
 
-@admin.register(shipper)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customerName',
-                    'vendorName',
-                    'agentName'
-                ]
 
-@admin.register(issuedBy)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'forWardingAgents',
-                    'forWardingAgents',
-                ]
-
-@admin.register(pickUpLocation)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customerName',
-                    'vendorName',
-                    'agentName'
-                ]
-
-@admin.register(consignee)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customerName',
-                    'vendorName',
-                    'agentName',
-                    'carrierName'
-                ]
-    
-@admin.register(deliveryLocation)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customerName',
-                    'vendorName',
-                    'agentName',
-                    'carrierName'
-                ]
 
 @admin.register(pickUpOrder)
 class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -81,8 +42,7 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'trackingNumber',
                     'supplierKey',
                     'invoiceNumber',
-                    'purchaseOrderNum',
-                    'commodities'
+                    'purchaseOrderNum'
                 ]
     resource_class = pickUpOrderResource
 
