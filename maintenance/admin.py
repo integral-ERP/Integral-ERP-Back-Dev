@@ -80,3 +80,4 @@ class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['name','phone','mobile_phone','email','website','account_number','contact_first_name','contact_last_name','identification_number','division','street_and_number','city','state','country','zip_code','port',
                     'type_logistic_provider','type_distribution','type_airline_carrier','type_ocean_carrier','type_company_warehouse','company_iata_code','company_fmc_code','company_scac_code','company_tsa_code','company_img_name','company_img_logo']
     resource_class = CompanyResource
+    

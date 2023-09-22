@@ -1,49 +1,17 @@
 from rest_framework import serializers
 
-from maintenance.models import employee
 
-from wareHouse.models import  pickUpOrder, pieces
 
-from maintenance.api.serializers import employeeSerializer, forWardingAgentsSerializer, carrierSerializer, customerSerializer
+from wareHouse.models import  PickUpOrder, pieces
 
 
 
-class pickUpOrderSerializer(serializers.ModelSerializer):
-    destinationAgent = forWardingAgentsSerializer(required=False, source="destinationAgentKey")
-    employee         =   employeeSerializer(required=False, source="employeekey")
-    inlandCarrier    =   carrierSerializer(required=False, source="inlandCarrierKey")    
-    mainCarrier      =   carrierSerializer(required=False, source="mainCarrierKey")
-    supplier         =   customerSerializer(required=False, source="supplierKey")
-
+class PickUpOrderSerializer(serializers.ModelSerializer):
+  
     class Meta:
-        model = pickUpOrder
+        model = PickUpOrder
     
-        fields = [  'id',
-                    'status',
-                    'number',
-                    'creationDate',
-                    'pickUpDate',
-                    'deliveryDate',
-                    'date',
-                    'issuedByKey',
-                    'destinationAgentKey',
-                    'destinationAgent',
-                    'employeekey',
-                    'employee',
-                    'shipperkey',
-                    'PickUpLocationkey',
-                    'consigneekey',
-                    'deliveryLocationkey',
-                    'inlandCarrierKey',
-                    'inlandCarrier',
-                    'mainCarrierKey',
-                    'mainCarrier',
-                    'proNumber',
-                    'trackingNumber',
-                    'supplierKey',
-                    'supplier',
-                    'invoiceNumber',
-                    'purchaseOrderNum'
+        fields = [  'status','number','creation_date','pick_up_date','delivery_date','date','issued_by','destination_agent','employee','shipper','pick_up_location','consignee','delivery_location','inland_carrier','main_carrier','pro_number','tracking_number','supplier','invoice_number','purchase_order_number'
                 ]  
 
 

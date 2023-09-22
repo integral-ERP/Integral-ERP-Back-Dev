@@ -51,6 +51,7 @@ class LocationApiViewSet(ModelViewSet):
     queryset = Location.objects.all()
     filter_backends = [filters.SearchFilter]
     search_fields = ['status','code','description','empty','type','zone','length','width','height','volume','weight','max_weight','disabled']
+    
 
 class CompanyApiViewSet(ModelViewSet):
     serializer_class = CompanySerializer
@@ -58,3 +59,4 @@ class CompanyApiViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['name','phone','mobile_phone','email','website','account_number','contact_first_name','contact_last_name','identification_number','division','street_and_number','city','state','country','zip_code','port',
                     'type_logistic_provider','type_distribution','type_airline_carrier','type_ocean_carrier','type_company_warehouse','company_iata_code','company_fmc_code','company_scac_code','company_tsa_code','company_img_name','company_img_logo']
+
