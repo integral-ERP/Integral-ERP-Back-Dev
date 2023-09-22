@@ -1,349 +1,54 @@
 from rest_framework import serializers
-from maintenance.models import carrier, port, vendor, employee,company, address, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, wareHouseProviders, forWardingAgents, containerCode, containerEquipType, containerType, customer, location, consignee
+from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company
 
 from drf_extra_fields.fields import Base64ImageField
 
-class carrierSerializer(serializers.ModelSerializer):
+class CarrierSerializer(serializers.ModelSerializer):
     class Meta:
-        model = carrier
-        fields = [  'id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'sistenID',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode',
-                    'parentAccount',
-                    'carrierType',
-                    'methodCode',
-                    'carrierCode',
-                    'scacNumber',
-                    'iataCode',
-                    'airlineCode',
-                    'airlinePrefix',
-                    'airwayBillNumbers',
-                    'passengerOnlyAirline'
-                  ]
+        model = Carrier
+        fields = ('name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person')
 
-class portSerializer(serializers.ModelSerializer):
+class AgentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = port
-        fields = [  'id',
-                    'code',
-                    'name',
-                    'method',
-                    'country',
-                    'subdivision',
-                    'used',
-                    'remarks',
-                    'maritime',
-                    'rail',
-                    'road',
-                    'air',
-                    'mail',
-                    'borderCrossing',
-                    'usCustomsCode',
-                  ]
+        model = Agent
+        fields = ('name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person')
 
-class vendorSerializer(serializers.ModelSerializer):
+class VendorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = vendor
-        fields = [  'id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode',
-                  ]
-        
-class employeeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = employee
-        fields = [  'id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'sistenID',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode'
-                  ]
-        
-class companySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = company
-        fields = [  'id', 
-                    'nameCompany', 
-                    'firstNameContac', 
-                    'lasNameContac', 
-                    'numIdentification', 
-                    'idEntity', 
-                    'email',
-                    'webSide',
-                    'numCuent',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'division',
-                    'idNetWord'
-                ]
+        model = Vendor
+        fields = ('name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person')
 
-class addresSerializer(serializers.ModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = address
-        fields = [  'id', 
-                    'streetNumber', 
-                    'city', 
-                    'country', 
-                    'state', 
-                    'zipCode', 
-                    'port'
-                ]
+        model = Customer
+        fields = ('name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person')
 
-class companyTypeSerializer(serializers.ModelSerializer):
+class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = companyType
-        fields = [  'id', 
-                    'logisticsProvi', 
-                    'distribution', 
-                    'airlineCarrier', 
-                    'oceanCarrier', 
-                    'companyWarehouse'
-                ]
+        model = Employee
+        fields = ('name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person')
 
-class companyInfoSerializer(serializers.ModelSerializer):
+class PortSerializer(serializers.ModelSerializer):
     class Meta:
-        model = companyInfo
-        fields = [  'id', 
-                    'nameCompany', 
-                    'phone', 
-                    'fax', 
-                    'email', 
-                    'webSide', 
-                    'firstNameContac', 
-                    'lasNameContac'
-                ]
+        model = Port
+        fields = ('code','name','method','country','sub_division','used','remarks','maritime','rail','road','air','mail','border_crossing','us_customs_code')
+class PackageTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackageType
+        fields = ('description','length','height','width','weight','volume','max_weight','type','type_code','container_code','container_type','ground','air','ocean')
 
-class addressInfoSerializer(serializers.ModelSerializer):
+class LocationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = addressInfo
-        fields = [  'id', 
-                    'streetNumber',
-                    'city', 
-                    'country', 
-                    'state', 
-                    'zipCode'
-                ]
+        model = Location
+        fields = ('status','code','description','empty','type','zone','length','width','height','volume','weight','max_weight','disabled')
 
-class companyLogoSerializer(serializers.ModelSerializer):
-    imgLogo = Base64ImageField(required=False)
+class CompanySerializer(serializers.ModelSerializer):
+    
     class Meta:
-        model = companyLogo
-        fields = [  'id', 
-                  'imgName', 
-                  'imgLogo'
-                ]
+        model = Company
+        fields = ('name','phone','mobile_phone','email','website','account_number','contact_first_name','contact_last_name','identification_number','division','street_and_number','city','state','country','zip_code','port',
+                    'type_logistic_provider','type_distribution','type_airline_carrier','type_ocean_carrier','type_company_warehouse','company_iata_code','company_fmc_code','company_scac_code','company_tsa_code','company_img_name','company_img_logo')
 
-class companyRegisCodeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = companyRegisCode
-        fields = [ 'id', 
-                    'iataCode', 
-                    'fmc', 
-                    'scacCodeUs', 
-                    'tsaNumber'
-                ]
 
-class systCurrenSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = systCurren
-        fields = [ 'id', 
-                    'localCurrency', 
-                    'companyMoreCurren'
-                ]
 
-class importScheduleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = importSchedule
-        fields = [  'id', 
-                    'schedulesB', 
-                    'schedulesD', 
-                    'schedulesK'
-                ]
-
-class packTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = packType
-        fields = [  'id',
-                    'description',
-                    'length',
-                    'height',
-                    'width',  
-                    'weight',
-                    'volume',
-                    'maxWeight',
-                    'type',
-                    'typeCode',
-                    'containerCode',
-                    'containerType',
-                    'ground',
-                    'air',
-                    'ocean'
-                ]
-        
-class wareHouseProvidersSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = wareHouseProviders
-        fields = [  'id',
-                    'name',
-                    'phone',
-                    'mobilePhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode'
-                ]
-
-class forWardingAgentsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = forWardingAgents
-        fields = [  'id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'sistenID',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode'
-                ]
-
-class containerTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = containerType
-        fields = [  'id',
-                    'type',
-                    'description',
-                    'containerCode',
-                    'containerType',
-                    'ground',
-                    'air',
-                    'ocean'
-                ]
-
-class customerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = customer
-        fields = [  'id',
-                    'name',
-                    'phone',
-                    'mobilePhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'streetNumber',
-                    'sistenID',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode',
-                    'TypePerson'
-                ]
-
-class locationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = location
-        fields = [  'id',
-                    'status',
-                    'code',
-                    'description',
-                    'empty',
-                    'type',
-                    'zone',
-                    'length',
-                    'width',
-                    'height',
-                    'volume',
-                    'weight',
-                    'maxWeight',
-                    'disable'
-                ]
-
-class containerCodeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = containerCode
-        fields = [  'id',
-                    'code',
-                    'description'
-                ]
-
-class containerEquipTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = containerEquipType
-        fields = [  'id',
-                    'code',
-                    'description'
-                ]
-
-class consigneeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = consignee
-        fields = ['id',
-                    'customerId',
-                    'vendorId',
-                    'forwarAgentId'
-                ]
 

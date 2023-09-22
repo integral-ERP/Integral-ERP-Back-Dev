@@ -1,445 +1,82 @@
 from django.contrib import admin
-from maintenance.models import carrier, port, vendor, employee,company, address, companyType, companyInfo, addressInfo, companyLogo, companyRegisCode, systCurren, importSchedule, packType, forWardingAgents, containerCode, containerEquipType, containerType, customer, location, wareHouseProviders, consignee
+from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 ##################### Classes assigned for import/export HERE #####################
-
-class carrierResource(resources.ModelResource):
-    class Meta:
-        model = carrier
-
-class portResource(resources.ModelResource):
-    class Meta:
-        model = port
-
-class vendorResource(resources.ModelResource):
-    class Meta:
-        model = vendor
-
-class employeeResource(resources.ModelResource):
-    class Meta:
-        model = employee
-
-class companyResource(resources.ModelResource):
-    class Meta:
-        model = company
-
-class addressResource(resources.ModelResource):
-    class Meta:
-        model = address
-
-class companyTypeResource(resources.ModelResource):
-    class Meta:
-        model = companyType
-
-class companyInfoResource(resources.ModelResource):
-    class Meta:
-        model = companyInfo
-
-class addressInfoResource(resources.ModelResource):
-    class Meta:
-        model = addressInfo
-
-class companyLogoResource(resources.ModelResource):
-    class Meta:
-        model = companyLogo
-
-class companyRegisCodeResource(resources.ModelResource):
-    class Meta:
-        model = companyRegisCode
-
-class systCurrenResource(resources.ModelResource):
-    class Meta:
-        model = systCurren
-
-class importScheduleResource(resources.ModelResource):
-    class Meta:
-        model = importSchedule
-
-class packTypeResource(resources.ModelResource):
-    class Meta:
-        model = packType
-
-class wareHouseProvidersResource(resources.ModelResource):
-    class Meta:
-        model = wareHouseProviders
-
-class forWardingAgentsResource(resources.ModelResource):
-    class Meta:
-        model = forWardingAgents
-
-class containerTypeResource(resources.ModelResource):
-    class Meta:
-        model = containerType
-
-class customerResource(resources.ModelResource):
-    class Meta:
-        model = customer
-
-class locationResource(resources.ModelResource):
-    class Meta:
-        model = location
-
-class containerCodeResource(resources.ModelResource):
-    class Meta:
-        model = containerCode
-
-class containerEquipTypeResource(resources.ModelResource):
-    class Meta:
-        model = containerEquipType
-
-class consigneeResource(resources.ModelResource):
-    class Meta:
-        model = consignee
-
-
 ################### Register your models here. #########################
-
-@admin.register(carrier)
+class CarrierResource(resources.ModelResource):
+    class Meta:
+        model = Carrier
+        
+@admin.register(Carrier)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'sistenID',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode',
-                    'parentAccount',
-                    'carrierType',
-                    'methodCode',
-                    'carrierCode',
-                    'scacNumber',
-                    'iataCode',
-                    'airlineCode',
-                    'airlinePrefix',
-                    'airwayBillNumbers',
-                    'passengerOnlyAirline'
-                    ]
-    resource_class = carrierResource 
+    list_display = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+    resource_class = CarrierResource 
 
-@admin.register(port)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'code',
-                    'name',
-                    'method',
-                    'country',
-                    'subdivision',
-                    'used',
-                    'remarks',
-                    'maritime',
-                    'rail',
-                    'road',
-                    'air',
-                    'mail',
-                    'borderCrossing',
-                    'usCustomsCode',
-                    ]
-    resource_class = portResource 
+class AgentResource(resources.ModelResource):
+    class Meta:
+        model = Agent
 
-@admin.register(vendor)
+@admin.register(Agent)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'sistenID',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode',
-                    ]
-    resource_class = vendorResource 
-    
-@admin.register(employee)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'sistenID',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode'
-                    ]
-    resource_class = employeeResource
+    list_display = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+    resource_class = AgentResource
 
-
-@admin.register (company)
+class VendorResource(resources.ModelResource):
+    class Meta:
+        model = Vendor
+@admin.register(Vendor)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 
-                    'nameCompany', 
-                    'firstNameContac', 
-                    'lasNameContac', 
-                    'numIdentification', 
-                    'idEntity', 
-                    'email',
-                    'webSide',
-                    'numCuent',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'division',
-                    'idNetWord'
-                ]
-    resource_class = companyResource
+    list_display = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+    resource_class = VendorResource
 
-@admin.register (address)
+class CustomerResource(resources.ModelResource):
+    class Meta:
+        model = Customer
+@admin.register(Customer)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 
-                    'streetNumber', 
-                    'city', 
-                    'country', 
-                    'state', 
-                    'zipCode', 
-                    'port'
-                ]
-    resource_class = addressResource
+    list_display = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+    resource_class = CustomerResource
 
-@admin.register (companyType)
+class EmployeeResource(resources.ModelResource):
+    class Meta:
+        model = Employee
+@admin.register(Employee)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 
-                    'logisticsProvi', 
-                    'distribution', 
-                    'airlineCarrier', 
-                    'oceanCarrier', 
-                    'companyWarehouse'
-                ]
-    resource_class = companyTypeResource
+    list_display = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+    resource_class = EmployeeResource
 
-@admin.register (companyInfo)
+class PortResource(resources.ModelResource):
+    class Meta:
+        model = Port
+@admin.register(Port)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 
-                    'nameCompany', 
-                    'phone', 
-                    'fax', 
-                    'email', 
-                    'webSide', 
-                    'firstNameContac', 
-                    'lasNameContac'
-                ]
-    resource_class = companyInfoResource
+    list_display = ['code','name','method','country','sub_division','used','remarks','maritime','rail','road','air','mail','border_crossing','us_customs_code']
+    resource_class = PortResource
 
-@admin.register (addressInfo)
+class PackageTypeResource(resources.ModelResource):
+    class Meta:
+        model = PackageType
+@admin.register(PackageType)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 
-                    'streetNumber', 
-                    'city', 
-                    'country', 
-                    'state', 
-                    'zipCode'
-                ]
-    resource_class = addressInfoResource
+    list_display = ['description','length','height','width','weight','volume','max_weight','type','type_code','container_code','container_type','ground','air','ocean']
+    resource_class = PackageTypeResource
 
-@admin.register (companyLogo)
+class LocationResource(resources.ModelResource):
+    class Meta:
+        model = Location
+@admin.register(Location)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 
-                    'imgName', 
-                    'imgLogo'
-                ]
-    resource_class = companyLogoResource
+    list_display = ['status','code','description','empty','type','zone','length','width','height','volume','weight','max_weight','disabled']
+    resource_class = LocationResource
 
-@admin.register (companyRegisCode)
+class CompanyResource(resources.ModelResource):
+    class Meta:
+        model = Company
+@admin.register(Company)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 
-                    'iataCode', 
-                    'fmc', 
-                    'scacCodeUs', 
-                    'tsaNumber'
-                ]
-    resource_class = companyRegisCode
-
-@admin.register (systCurren)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 
-                    'localCurrency', 
-                    'companyMoreCurren'
-                ]
-    resource_class = systCurrenResource
-
-@admin.register (importSchedule)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-        list_display = ['id',
-                        'schedulesB', 
-                        'schedulesD',
-                        'schedulesK'
-                        ]
-        resource_class = importScheduleResource
-
-@admin.register (packType)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-        list_display = [    'id',
-                            'description',
-                            'length',
-                            'height',
-                            'width',  
-                            'weight',
-                            'volume',
-                            'maxWeight',
-                            'type',
-                            'typeCode',
-                            'containerCode',
-                            'containerType',
-                            'ground',
-                            'air',
-                            'ocean'
-                        ]
-        resource_class = packTypeResource
-
-@admin.register(wareHouseProviders)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'name',
-                    'phone',
-                    'mobilePhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode'
-                ]
-    resource_class = wareHouseProvidersResource
-
-@admin.register(forWardingAgents)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'name',
-                    'phone',
-                    'movelPhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'sistenID',
-                    'streetNumber',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode'
-                ]
-    resource_class = forWardingAgentsResource
-
-@admin.register(containerType)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'type',
-                    'description',
-                    'containerCode',
-                    'containerType',
-                    'ground',
-                    'air',
-                    'ocean'
-                ]
-    resource_class = containerTypeResource
-
-@admin.register(customer)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'name',
-                    'phone',
-                    'mobilePhone',
-                    'email',
-                    'fax',
-                    'webSide',
-                    'referentNumber',
-                    'firstNameContac',
-                    'lasNameContac',
-                    'numIdentification',
-                    'typeIdentificacion',
-                    'streetNumber',
-                    'sistenID',
-                    'city',
-                    'state',
-                    'country',
-                    'zipCode',
-                    'TypePerson'
-                ]
-resource_class = customerResource
-
-@admin.register(location)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'status',
-                    'code',
-                    'description',
-                    'empty',
-                    'type',
-                    'zone',
-                    'length',
-                    'width',
-                    'height',
-                    'volume',
-                    'weight',
-                    'maxWeight',
-                    'disable'
-                ]
-    resource_class = locationResource
-
-@admin.register(containerCode)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'code',
-                    'description'
-                ]
-    resource_class = containerCodeResource
-    
-@admin.register(containerEquipType)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'code',
-                    'description'
-                ]
-    resource_class = containerEquipTypeResource
-
-@admin.register(consignee)
-class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customerId',
-                    'vendorId',
-                    'forwarAgentId'
-                ]
-    resource_class = consigneeResource
-
-    
+    list_display = ['name','phone','mobile_phone','email','website','account_number','contact_first_name','contact_last_name','identification_number','division','street_and_number','city','state','country','zip_code','port',
+                    'type_logistic_provider','type_distribution','type_airline_carrier','type_ocean_carrier','type_company_warehouse','company_iata_code','company_fmc_code','company_scac_code','company_tsa_code','company_img_name','company_img_logo']
+    resource_class = CompanyResource

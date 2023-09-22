@@ -1,30 +1,30 @@
 from django.db import models
 
-from maintenance.models import employee, forWardingAgents, carrier, customer, vendor, wareHouseProviders
+from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company
 
 ######################### Create your models here. #################################
 
-class pickUpOrder(models.Model):
+class PickUpOrder(models.Model):
     status              =   models.CharField(max_length=200, blank=True, null=True)
     number              =   models.PositiveBigIntegerField(blank=True, null=True)
-    creationDate        =   models.DateField(blank=True, null=True)
-    pickUpDate          =   models.DateField(blank=True, null=True)
-    deliveryDate        =   models.DateField(blank=True, null=True)
+    creation_date        =   models.DateField(blank=True, null=True)
+    pick_up_date          =   models.DateField(blank=True, null=True)
+    delivery_date        =   models.DateField(blank=True, null=True)
     date                =   models.DateField(blank=True, null=True)
-    issuedByKey         =   models.CharField(max_length=200, blank=True, null=True)
-    destinationAgentKey =   models.ForeignKey(forWardingAgents, blank=True, null=True, on_delete=models.DO_NOTHING) 
-    employeekey         =   models.ForeignKey(employee, blank=True, null=True, on_delete=models.DO_NOTHING)     
-    shipperkey          =   models.CharField(max_length=200, blank=True, null=True)
-    PickUpLocationkey   =   models.TextField(blank=True, null=True)
-    consigneekey        =   models.TextField(blank=True, null=True)
-    deliveryLocationkey =   models.CharField(max_length=200, blank=True, null=True)
-    inlandCarrierKey    =   models.ForeignKey(carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='inlandCarri') 
-    mainCarrierKey      =   models.ForeignKey(carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='mainCarri')
-    proNumber           =   models.CharField(max_length=200, blank=True, null=True)
-    trackingNumber      =   models.CharField(max_length=200, blank=True, null=True)
-    supplierKey         =   models.ForeignKey(customer, blank=True, null=True, on_delete=models.DO_NOTHING) 
-    invoiceNumber       =   models.CharField(max_length=200, blank=True, null=True)
-    purchaseOrderNum    =   models.CharField(max_length=200, blank=True, null=True)
+    issued_by         =   models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='issuedBy')
+    destination_agent =   models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING) 
+    employee         =   models.ForeignKey(Employee, blank=True, null=True, on_delete=models.DO_NOTHING)     
+    shipper          =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='shipper')
+    pick_up_location   =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='pickUpLocation')
+    consignee        =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='consigneekey')
+    delivery_location =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='deliveryLocation')
+    inland_carrier    =   models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='inlandCarri') 
+    main_carrier      =   models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='mainCarri')
+    pro_number           =   models.CharField(max_length=200, blank=True, null=True)
+    tracking_number      =   models.CharField(max_length=200, blank=True, null=True)
+    supplier         =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING) 
+    invoice_number       =   models.CharField(max_length=200, blank=True, null=True)
+    purchase_order_number    =   models.CharField(max_length=200, blank=True, null=True)
   
 class pieces(models.Model):
     status      =   models.FloatField(blank=True, null=True, default=0) 
