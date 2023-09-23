@@ -4,6 +4,11 @@ from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port,
 
 ######################### Create your models here. #################################
 
+class Shipper(models.Model):
+    customer = models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING)
+    agent = models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING)
+    vendor = models.ForeignKey(Vendor, blank=True, null=True, on_delete=models.DO_NOTHING)
+
 class PickUpOrder(models.Model):
     status              =   models.CharField(max_length=200, blank=True, null=True)
     number              =   models.PositiveBigIntegerField(blank=True, null=True)
@@ -14,7 +19,7 @@ class PickUpOrder(models.Model):
     issued_by         =   models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='issuedBy')
     destination_agent =   models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING) 
     employee         =   models.ForeignKey(Employee, blank=True, null=True, on_delete=models.DO_NOTHING)     
-    shipper          =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='shipper')
+    shipper          =   models.ForeignKey(Shipper, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='shipper')
     pick_up_location   =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='pickUpLocation')
     consignee        =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='consigneekey')
     delivery_location =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='deliveryLocation')
