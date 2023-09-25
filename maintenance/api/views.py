@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
-from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company
-from maintenance.api.serializers import CarrierSerializer,AgentSerializer,VendorSerializer,CustomerSerializer,EmployeeSerializer,PortSerializer,PackageTypeSerializer,LocationSerializer,CompanySerializer
+from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation
+from maintenance.api.serializers import CarrierSerializer,AgentSerializer,VendorSerializer,CustomerSerializer,EmployeeSerializer,PortSerializer,PackageTypeSerializer,LocationSerializer,CompanySerializer,ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer
 
 
 class CarrierApiViewSet(ModelViewSet):
@@ -59,4 +59,28 @@ class CompanyApiViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['name','phone','mobile_phone','email','website','account_number','contact_first_name','contact_last_name','identification_number','division','street_and_number','city','state','country','zip_code','port',
                     'type_logistic_provider','type_distribution','type_airline_carrier','type_ocean_carrier','type_company_warehouse','company_iata_code','company_fmc_code','company_scac_code','company_tsa_code','company_img_name','company_img_logo']
+    
+class ShipperApiViewSet(ModelViewSet):
+    serializer_class = ShipperSerializer
+    queryset = Shipper.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['customer','vendor','agent']
 
+
+class PickUpLocationApiViewSet(ModelViewSet):
+    serializer_class = PickUpLocationSerializer
+    queryset = PickUpLocation.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['customer','vendor','agent']
+
+class ConsigneeApiViewSet(ModelViewSet):
+    serializer_class = ConsigneeSerializer
+    queryset = Consignee.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['customer','vendor','agent','carrier']
+
+class DeliveryLocationApiViewSet(ModelViewSet):
+    serializer_class = DeliveryLocationSerializer
+    queryset = DeliveryLocation.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['customer','vendor','agent','carrier']

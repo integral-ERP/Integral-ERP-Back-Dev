@@ -1,5 +1,5 @@
 from django.contrib import admin
-from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company
+from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -80,4 +80,35 @@ class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['name','phone','mobile_phone','email','website','account_number','contact_first_name','contact_last_name','identification_number','division','street_and_number','city','state','country','zip_code','port',
                     'type_logistic_provider','type_distribution','type_airline_carrier','type_ocean_carrier','type_company_warehouse','company_iata_code','company_fmc_code','company_scac_code','company_tsa_code','company_img_name','company_img_logo']
     resource_class = CompanyResource
-    
+
+class ShipperResource(resources.ModelResource):
+    class Meta:
+        model = Shipper
+@admin.register(Shipper)
+class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['customer','vendor','agent']
+    resource_class = ShipperResource
+
+class PickUpLocationResource(resources.ModelResource):
+    class Meta:
+        model = PickUpLocation
+@admin.register(PickUpLocation)
+class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['customer','vendor','agent']
+    resource_class = PickUpLocationResource
+
+class ConsigneeResource(resources.ModelResource):
+    class Meta:
+        model = Consignee
+@admin.register(Consignee)
+class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['customer','vendor','agent','carrier']
+    resource_class = ConsigneeResource
+
+class DeliveryLocationResource(resources.ModelResource):
+    class Meta:
+        model = DeliveryLocation
+@admin.register(DeliveryLocation)
+class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['customer','vendor','agent','carrier']
+    resource_class = DeliveryLocationResource

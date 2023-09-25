@@ -216,3 +216,70 @@ class Company(models.Model):
     company_tsa_code        = models.CharField(max_length=200, blank=True, null=True)
     company_img_name        = models.CharField(max_length=200, blank=True, null=True)
     company_img_logo        = models.ImageField(upload_to="./logo", blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+    
+
+class Shipper(models.Model):
+    customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='shipper_customer')
+    vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='shipper_vendor')
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='shipper_agent')  
+    def __str__(self):
+        if self.customer:
+            return self.customer.name
+        elif self.vendor:
+            return self.vendor.name
+        elif self.agent:
+            return self.agent.name
+        else:
+            return "N/A"
+    
+
+class PickUpLocation(models.Model):
+    customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='pickup_customer')
+    vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='pickup_vendor')
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='pickup_agent')
+    def __str__(self):
+        if self.customer:
+            return self.customer.name
+        elif self.vendor:
+            return self.vendor.name
+        elif self.agent:
+            return self.agent.name
+        else:
+            return "N/A"
+
+class Consignee(models.Model):
+    customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_customer')
+    vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_vendor')
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_agent')
+    carrier = models.ForeignKey(Carrier,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_carrier')
+    def __str__(self):
+        if self.customer:
+            return self.customer.name
+        elif self.vendor:
+            return self.vendor.name
+        elif self.agent:
+            return self.agent.name
+        elif self.carrier:
+            return self.carrier.name
+        else:
+            return "N/A"
+
+class DeliveryLocation(models.Model):
+    customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_customer')
+    vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_vendor')
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_agent')
+    carrier = models.ForeignKey(Carrier,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_carrier')
+    def __str__(self):
+        if self.customer:
+            return self.customer.name
+        elif self.vendor:
+            return self.vendor.name
+        elif self.agent:
+            return self.agent.name
+        elif self.carrier:
+            return self.carrier.name
+        else:
+            return "N/A"

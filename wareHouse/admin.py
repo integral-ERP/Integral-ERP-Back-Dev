@@ -1,5 +1,5 @@
 from django.contrib import admin
-from wareHouse.models import PickUpOrder,Shipper, pieces
+from wareHouse.models import PickUpOrder, pieces
 
 
 from import_export import resources
@@ -11,9 +11,7 @@ class PickUpOrderResource(resources.ModelResource):
     class Meta:
         model = PickUpOrder
 
-class ShipperResource(resources.ModelResource):
-    class Meta:
-        model = Shipper
+
 
 class piecesResource(resources.ModelResource):
     class Meta:
@@ -47,14 +45,6 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                 ]
     resource_class = PickUpOrderResource
 
-@admin.register(Shipper)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customer',
-                    'agent',
-                    'vendor'
-                ]
-    resource_class = ShipperResource
 
 @admin.register(pieces)
 class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
