@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company
+from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation
 
 from drf_extra_fields.fields import Base64ImageField
 
@@ -47,4 +47,39 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = ['name','phone','mobile_phone','email','website','account_number','contact_first_name','contact_last_name','identification_number','division','street_and_number','city','state','country','zip_code','port',
-                    'type_logistic_provider','type_distribution','type_airline_carrier','type_ocean_carrier','type_company_warehouse','company_iata_code','company_fmc_code','company_scac_code','company_tsa_code','company_img_name','company_img_logo']
+                    'type_logistic_provider','type_distribution','type_airline_carrier','type_ocean_carrier','type_company_warehouse','company_iata_code','company_fmc_code','company_scac_code','company_tsa_code','company_img_name','company_img_logo']       
+        
+
+class ShipperSerializer(serializers.ModelSerializer):
+    customerObj = CustomerSerializer(required=False,source='customer')
+    vendorObj = VendorSerializer(required=False,source='vendor')
+    agentObj = AgentSerializer(required=False,source='agent')
+    class Meta:
+        model = Shipper
+        fields = ['customerObj','vendorObj','agentObj']
+
+class PickUpLocationSerializer(serializers.ModelSerializer):
+    customerObj = CustomerSerializer(required=False,source='customer')
+    vendorObj = VendorSerializer(required=False,source='vendor')
+    agentObj = AgentSerializer(required=False,source='agent')
+    class Meta:
+        model = PickUpLocation
+        fields = ['customerObj','vendorObj','agentObj']
+
+class ConsigneeSerializer(serializers.ModelSerializer):
+    customerObj = CustomerSerializer(required=False,source='customer')
+    vendorObj = VendorSerializer(required=False,source='vendor')
+    agentObj = AgentSerializer(required=False,source='agent')
+    carrierObj = CarrierSerializer(required=False,source='carrier')
+    class Meta:
+        model = Consignee
+        fields = ['customerObj','vendorObj','agentObj','carrierObj']
+
+class DeliveryLocationSerializer(serializers.ModelSerializer):
+    customerObj = CustomerSerializer(required=False,source='customer')
+    vendorObj = VendorSerializer(required=False,source='vendor')
+    agentObj = AgentSerializer(required=False,source='agent')
+    carrierObj = CarrierSerializer(required=False,source='carrier')
+    class Meta:
+        model = DeliveryLocation
+        fields = ['customerObj','vendorObj','agentObj','carrierObj']
