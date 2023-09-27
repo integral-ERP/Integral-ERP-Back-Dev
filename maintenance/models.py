@@ -222,9 +222,13 @@ class Company(models.Model):
     
 
 class Shipper(models.Model):
+    customerid = models.CharField(max_length=200, blank=True, null=True)
     customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='shipper_customer')
+    vendorid = models.CharField(max_length=200, blank=True, null=True)
     vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='shipper_vendor')
+    agentid = models.CharField(max_length=200, blank=True, null=True)
     agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='shipper_agent')  
+    data = models.JSONField(blank=True, null=True)
     def __str__(self):
         if self.customer:
             return self.customer.name
@@ -237,9 +241,13 @@ class Shipper(models.Model):
     
 
 class PickUpLocation(models.Model):
+    customerid = models.CharField(max_length=200, blank=True, null=True)
     customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='pickup_customer')
+    vendorid = models.CharField(max_length=200, blank=True, null=True)
     vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='pickup_vendor')
+    agentid = models.CharField(max_length=200, blank=True, null=True)
     agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='pickup_agent')
+    data = models.JSONField(blank=True, null=True)
     def __str__(self):
         if self.customer:
             return self.customer.name
@@ -251,10 +259,15 @@ class PickUpLocation(models.Model):
             return "N/A"
 
 class Consignee(models.Model):
+    customerid = models.CharField(max_length=200, blank=True, null=True)
     customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_customer')
+    vendorid = models.CharField(max_length=200, blank=True, null=True)
     vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_vendor')
-    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_agent')
+    carrierid = models.CharField(max_length=200, blank=True, null=True)
     carrier = models.ForeignKey(Carrier,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_carrier')
+    agentid = models.CharField(max_length=200, blank=True, null=True)
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_agent')
+    data = models.JSONField(blank=True, null=True)
     def __str__(self):
         if self.customer:
             return self.customer.name
@@ -268,10 +281,15 @@ class Consignee(models.Model):
             return "N/A"
 
 class DeliveryLocation(models.Model):
+    customerid = models.CharField(max_length=200, blank=True, null=True)
     customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_customer')
+    vendorid = models.CharField(max_length=200, blank=True, null=True)
     vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_vendor')
-    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_agent')
+    carrierid = models.CharField(max_length=200, blank=True, null=True)
     carrier = models.ForeignKey(Carrier,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_carrier')
+    agentid = models.CharField(max_length=200, blank=True, null=True)
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_agent')
+    data = models.JSONField(blank=True, null=True)
     def __str__(self):
         if self.customer:
             return self.customer.name

@@ -28,6 +28,8 @@ class PickUpOrder(models.Model):
     supplier                =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING) 
     invoice_number          =   models.CharField(max_length=200, blank=True, null=True)
     purchase_order_number   =   models.CharField(max_length=200, blank=True, null=True)
+    commodities             =   models.JSONField(blank=True, null=True)
+    charges                 =   models.JSONField(blank=True, null=True)
   
 class pieces(models.Model):
     status      =   models.FloatField(blank=True, null=True, default=0) 
