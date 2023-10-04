@@ -1,54 +1,248 @@
 from rest_framework import serializers
-from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation
+from maintenance.models import (
+    Carrier,
+    Agent,
+    Vendor,
+    Customer,
+    Employee,
+    Port,
+    PackageType,
+    Location,
+    Company,
+    Shipper,
+    PickUpLocation,
+    Consignee,
+    DeliveryLocation,
+    ClientToBill,
+)
 
 from drf_extra_fields.fields import Base64ImageField
+
 
 class CarrierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Carrier
-        fields = ['id','name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+        fields = [
+            "id",
+            "name",
+            "phone",
+            "mobile_phone",
+            "email",
+            "fax",
+            "website",
+            "reference_number",
+            "contact_first_name",
+            "contact_last_name",
+            "identification_number",
+            "identification_type",
+            "street_and_number",
+            "city",
+            "state",
+            "country",
+            "zip_code",
+            "type_person",
+        ]
+
 
 class AgentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Agent
-        fields = ['id', 'name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+        fields = [
+            "id",
+            "name",
+            "phone",
+            "mobile_phone",
+            "email",
+            "fax",
+            "website",
+            "reference_number",
+            "contact_first_name",
+            "contact_last_name",
+            "identification_number",
+            "identification_type",
+            "street_and_number",
+            "city",
+            "state",
+            "country",
+            "zip_code",
+            "type_person",
+        ]
+
 
 class VendorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vendor
-        fields = ['id','name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+        fields = [
+            "id",
+            "name",
+            "phone",
+            "mobile_phone",
+            "email",
+            "fax",
+            "website",
+            "reference_number",
+            "contact_first_name",
+            "contact_last_name",
+            "identification_number",
+            "identification_type",
+            "street_and_number",
+            "city",
+            "state",
+            "country",
+            "zip_code",
+            "type_person",
+        ]
+
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ['id','name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+        fields = [
+            "id",
+            "name",
+            "phone",
+            "mobile_phone",
+            "email",
+            "fax",
+            "website",
+            "reference_number",
+            "contact_first_name",
+            "contact_last_name",
+            "identification_number",
+            "identification_type",
+            "street_and_number",
+            "city",
+            "state",
+            "country",
+            "zip_code",
+            "type_person",
+        ]
+
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['id','name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+        fields = [
+            "id",
+            "name",
+            "phone",
+            "mobile_phone",
+            "email",
+            "fax",
+            "website",
+            "reference_number",
+            "contact_first_name",
+            "contact_last_name",
+            "identification_number",
+            "identification_type",
+            "street_and_number",
+            "city",
+            "state",
+            "country",
+            "zip_code",
+            "type_person",
+        ]
+
 
 class PortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Port
-        fields = ['id','code','name','method','country','sub_division','used','remarks','maritime','rail','road','air','mail','border_crossing','us_customs_code']
+        fields = [
+            "id",
+            "code",
+            "name",
+            "method",
+            "country",
+            "sub_division",
+            "used",
+            "remarks",
+            "maritime",
+            "rail",
+            "road",
+            "air",
+            "mail",
+            "border_crossing",
+            "us_customs_code",
+        ]
+
+
 class PackageTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = PackageType
-        fields = ['id','description','length','height','width','weight','volume','max_weight','type','type_code','container_code','container_type','ground','air','ocean']
+        fields = [
+            "id",
+            "description",
+            "length",
+            "height",
+            "width",
+            "weight",
+            "volume",
+            "max_weight",
+            "type",
+            "type_code",
+            "container_code",
+            "container_type",
+            "ground",
+            "air",
+            "ocean",
+        ]
+
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ['id','status','code','description','empty','type','zone','length','width','height','volume','weight','max_weight','disabled']
+        fields = [
+            "id",
+            "status",
+            "code",
+            "description",
+            "empty",
+            "type",
+            "zone",
+            "length",
+            "width",
+            "height",
+            "volume",
+            "weight",
+            "max_weight",
+            "disabled",
+        ]
+
 
 class CompanySerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Company
-        fields = ['id','name','phone','mobile_phone','email','website','account_number','contact_first_name','contact_last_name','identification_number','division','street_and_number','city','state','country','zip_code','port',
-                    'type_logistic_provider','type_distribution','type_airline_carrier','type_ocean_carrier','type_company_warehouse','company_iata_code','company_fmc_code','company_scac_code','company_tsa_code','company_img_name','company_img_logo']       
-        
+        fields = [
+            "id",
+            "name",
+            "phone",
+            "mobile_phone",
+            "email",
+            "website",
+            "account_number",
+            "contact_first_name",
+            "contact_last_name",
+            "identification_number",
+            "division",
+            "street_and_number",
+            "city",
+            "state",
+            "country",
+            "zip_code",
+            "port",
+            "type_logistic_provider",
+            "type_distribution",
+            "type_airline_carrier",
+            "type_ocean_carrier",
+            "type_company_warehouse",
+            "company_iata_code",
+            "company_fmc_code",
+            "company_scac_code",
+            "company_tsa_code",
+            "company_img_name",
+            "company_img_logo",
+        ]
+
 
 class ShipperSerializer(serializers.ModelSerializer):
     customerid = serializers.CharField(max_length=200, required=False, allow_null=True)
@@ -57,12 +251,21 @@ class ShipperSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shipper
-        fields = ['id', 'customer', 'vendor', 'agent', 'customerid', 'vendorid', 'agentid', 'data']
+        fields = [
+            "id",
+            "customer",
+            "customerid",
+            "vendor",
+            "vendorid",
+            "agent",
+            "agentid",
+            "data",
+        ]
 
     def create(self, validated_data):
-        customer_id = validated_data.pop('customerid', None)
-        vendor_id = validated_data.pop('vendorid', None)
-        agent_id = validated_data.pop('agentid', None)
+        customer_id = validated_data.pop("customerid", None)
+        vendor_id = validated_data.pop("vendorid", None)
+        agent_id = validated_data.pop("agentid", None)
 
         # Buscar los objetos correspondientes en las tablas respectivas
         customer = None
@@ -89,15 +292,13 @@ class ShipperSerializer(serializers.ModelSerializer):
 
         # Almacena los datos recuperados como una propiedad JSON
         shipperObj = None
-        if(customer):
+        if customer:
             shipperObj = CustomerSerializer(customer).data
-        if(vendor):
+        if vendor:
             shipperObj = VendorSerializer(vendor).data
-        if(agent):
+        if agent:
             shipperObj = AgentSerializer(shipper).data
-        data = {
-            'obj': shipperObj
-        }
+        data = {"obj": shipperObj}
 
         # Crea el objeto Shipper con los datos proporcionados
         shipper = Shipper.objects.create(**validated_data)
@@ -108,6 +309,7 @@ class ShipperSerializer(serializers.ModelSerializer):
 
         return shipper
 
+
 class PickUpLocationSerializer(serializers.ModelSerializer):
     customerid = serializers.CharField(max_length=200, required=False, allow_null=True)
     vendorid = serializers.CharField(max_length=200, required=False, allow_null=True)
@@ -115,12 +317,21 @@ class PickUpLocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PickUpLocation
-        fields = ['id', 'customer', 'vendor', 'agent', 'customerid', 'vendorid', 'agentid', 'data']
+        fields = [
+            "id",
+            "customer",
+            "vendor",
+            "agent",
+            "customerid",
+            "vendorid",
+            "agentid",
+            "data",
+        ]
 
     def create(self, validated_data):
-        customer_id = validated_data.pop('customerid', None)
-        vendor_id = validated_data.pop('vendorid', None)
-        agent_id = validated_data.pop('agentid', None)
+        customer_id = validated_data.pop("customerid", None)
+        vendor_id = validated_data.pop("vendorid", None)
+        agent_id = validated_data.pop("agentid", None)
 
         # Buscar los objetos correspondientes en las tablas respectivas
         customer = None
@@ -147,15 +358,13 @@ class PickUpLocationSerializer(serializers.ModelSerializer):
 
         # Almacena los datos recuperados como una propiedad JSON
         shipperObj = None
-        if(customer):
+        if customer:
             shipperObj = CustomerSerializer(customer).data
-        if(vendor):
+        if vendor:
             shipperObj = VendorSerializer(vendor).data
-        if(agent):
-            shipperObj = AgentSerializer(shipper).data
-        data = {
-            'obj': shipperObj
-        }
+        if agent:
+            shipperObj = AgentSerializer(agent).data
+        data = {"obj": shipperObj}
 
         # Crea el objeto Shipper con los datos proporcionados
         shipper = PickUpLocation.objects.create(**validated_data)
@@ -166,20 +375,33 @@ class PickUpLocationSerializer(serializers.ModelSerializer):
 
         return shipper
 
+
 class ConsigneeSerializer(serializers.ModelSerializer):
     customerid = serializers.CharField(max_length=200, required=False, allow_null=True)
     vendorid = serializers.CharField(max_length=200, required=False, allow_null=True)
     agentid = serializers.CharField(max_length=200, required=False, allow_null=True)
     carrierid = serializers.CharField(max_length=200, required=False, allow_null=True)
+
     class Meta:
         model = Consignee
-        fields = ['id', 'customer', 'vendor', 'agent','carrier', 'customerid', 'vendorid', 'agentid', 'carrierid', 'data']
+        fields = [
+            "id",
+            "customer",
+            "vendor",
+            "agent",
+            "carrier",
+            "customerid",
+            "vendorid",
+            "agentid",
+            "carrierid",
+            "data",
+        ]
 
     def create(self, validated_data):
-        customer_id = validated_data.pop('customerid', None)
-        vendor_id = validated_data.pop('vendorid', None)
-        agent_id = validated_data.pop('agentid', None)
-        carrier_id = validated_data.pop('carrierid', None)
+        customer_id = validated_data.pop("customerid", None)
+        vendor_id = validated_data.pop("vendorid", None)
+        agent_id = validated_data.pop("agentid", None)
+        carrier_id = validated_data.pop("carrierid", None)
 
         # Buscar los objetos correspondientes en las tablas respectivas
         customer = None
@@ -213,17 +435,15 @@ class ConsigneeSerializer(serializers.ModelSerializer):
 
                 # Almacena los datos recuperados como una propiedad JSON
         shipperObj = None
-        if(customer):
+        if customer:
             shipperObj = CustomerSerializer(customer).data
-        if(vendor):
+        if vendor:
             shipperObj = VendorSerializer(vendor).data
-        if(agent):
+        if agent:
             shipperObj = AgentSerializer(agent).data
-        if(carrier):
+        if carrier:
             shipperObj = CarrierSerializer(carrier).data
-        data = {
-            'obj': shipperObj
-        }
+        data = {"obj": shipperObj}
 
         # Crea el objeto Shipper con los datos proporcionados
         consignee = Consignee.objects.create(**validated_data)
@@ -234,20 +454,33 @@ class ConsigneeSerializer(serializers.ModelSerializer):
 
         return consignee
 
+
 class DeliveryLocationSerializer(serializers.ModelSerializer):
     customerid = serializers.CharField(max_length=200, required=False, allow_null=True)
     vendorid = serializers.CharField(max_length=200, required=False, allow_null=True)
     agentid = serializers.CharField(max_length=200, required=False, allow_null=True)
     carrierid = serializers.CharField(max_length=200, required=False, allow_null=True)
+
     class Meta:
         model = DeliveryLocation
-        fields = ['id', 'customer', 'vendor', 'agent','carrier', 'customerid', 'vendorid', 'agentid', 'carrierid', 'data']
+        fields = [
+            "id",
+            "customer",
+            "vendor",
+            "agent",
+            "carrier",
+            "customerid",
+            "vendorid",
+            "agentid",
+            "carrierid",
+            "data",
+        ]
 
     def create(self, validated_data):
-        customer_id = validated_data.pop('customerid', None)
-        vendor_id = validated_data.pop('vendorid', None)
-        agent_id = validated_data.pop('agentid', None)
-        carrier_id = validated_data.pop('carrierid', None)
+        customer_id = validated_data.pop("customerid", None)
+        vendor_id = validated_data.pop("vendorid", None)
+        agent_id = validated_data.pop("agentid", None)
+        carrier_id = validated_data.pop("carrierid", None)
 
         # Buscar los objetos correspondientes en las tablas respectivas
         customer = None
@@ -280,17 +513,15 @@ class DeliveryLocationSerializer(serializers.ModelSerializer):
                 pass
 
         shipperObj = None
-        if(customer):
+        if customer:
             shipperObj = CustomerSerializer(customer).data
-        if(vendor):
+        if vendor:
             shipperObj = VendorSerializer(vendor).data
-        if(agent):
+        if agent:
             shipperObj = AgentSerializer(agent).data
-        if(carrier):
+        if carrier:
             shipperObj = CarrierSerializer(carrier).data
-        data = {
-            'obj': shipperObj
-        }
+        data = {"obj": shipperObj}
 
         # Crea el objeto Shipper con los datos proporcionados
         shipper = DeliveryLocation.objects.create(**validated_data)
@@ -300,3 +531,59 @@ class DeliveryLocationSerializer(serializers.ModelSerializer):
         shipper.save()
 
         return shipper
+
+
+class ClientToBillSerializer(serializers.ModelSerializer):
+    shipperid = serializers.CharField(max_length=200, required=False, allow_null=True)
+    shipperObj = ShipperSerializer(required=False,source='shipper')
+    consigneeid = serializers.CharField(max_length=200, required=False, allow_null=True)
+    consigneeObj = ConsigneeSerializer(required=False,source='consignee')
+
+    class Meta:
+        model = ClientToBill
+        fields = [
+            "id",
+            "shipper",
+            "shipperid",
+            "shipperObj",
+            "consignee",
+            "consigneeid",
+            "consigneeObj",
+            "data",
+        ]
+
+    def create(self, validated_data):
+        shipper_id = validated_data.pop("shipperid", None)
+        consignee_id = validated_data.pop("consigneeid", None)
+        # Buscar los objetos correspondientes en las tablas respectivas
+        shipper = None
+        consignee = None
+
+        if shipper_id:
+            try:
+                shipper = Shipper.objects.get(id=shipper_id)
+            except Shipper.DoesNotExist:
+                pass
+
+        if consignee_id:
+            try:
+                consignee = Consignee.objects.get(id=consignee_id)
+            except Consignee.DoesNotExist:
+                pass
+
+        # Almacena los datos recuperados como una propiedad JSON
+        clientBillObj = None
+        if shipper:
+            clientBillObj = ShipperSerializer(shipper).data
+        if consignee:
+            clientBillObj = ConsigneeSerializer(consignee).data
+        data = {"obj": clientBillObj}
+
+        # Crea el objeto Shipper con los datos proporcionados
+        clientBill = ClientToBill.objects.create(**validated_data)
+
+        # Almacenar los datos JSON en un campo separado
+        clientBill.data = data
+        clientBill.save()
+
+        return clientBill

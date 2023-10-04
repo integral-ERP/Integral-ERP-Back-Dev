@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
-from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation
-from maintenance.api.serializers import CarrierSerializer,AgentSerializer,VendorSerializer,CustomerSerializer,EmployeeSerializer,PortSerializer,PackageTypeSerializer,LocationSerializer,CompanySerializer,ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer
+from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill
+from maintenance.api.serializers import CarrierSerializer,AgentSerializer,VendorSerializer,CustomerSerializer,EmployeeSerializer,PortSerializer,PackageTypeSerializer,LocationSerializer,CompanySerializer,ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer
 
 
 class CarrierApiViewSet(ModelViewSet):
@@ -84,3 +84,9 @@ class DeliveryLocationApiViewSet(ModelViewSet):
     queryset = DeliveryLocation.objects.all()
     filter_backends = [filters.SearchFilter]
     search_fields = ['customer','vendor','agent','carrier']
+
+class ClientToBillApiViewSet(ModelViewSet):
+    serializer_class = ClientToBillSerializer
+    queryset = ClientToBill.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['shipper','consignee']

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation
+from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -112,3 +112,11 @@ class DeliveryLocationResource(resources.ModelResource):
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['customer','vendor','agent','carrier']
     resource_class = DeliveryLocationResource
+
+class ClientToBillResource(resources.ModelResource):
+    class Meta:
+        model = ClientToBill
+@admin.register(ClientToBill)
+class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['shipper','consignee']
+    resource_class = ClientToBillResource

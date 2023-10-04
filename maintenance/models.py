@@ -301,3 +301,18 @@ class DeliveryLocation(models.Model):
             return self.carrier.name
         else:
             return "N/A"
+        
+class ClientToBill(models.Model):
+    shipperid = models.CharField(max_length=200, blank=True, null=True)
+    shipper = models.ForeignKey(Shipper,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_shipper')
+    consigneeid = models.CharField(max_length=200, blank=True, null=True)
+    consignee = models.ForeignKey(Consignee,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_consignee')
+    data = models.JSONField(blank=True, null=True)
+    # def __str__(self):
+    #     if self.shipper:
+    #         return self.shipper.data.obj.id
+    #     elif self.consignee:
+    #         return self.consignee.name
+    #     else:
+    #         return "N/A"
+    

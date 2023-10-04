@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from maintenance.api.views import CarrierApiViewSet, AgentApiViewSet, VendorApiViewSet, CustomerApiViewSet, EmployeeApiViewSet, PortApiViewSet, PackageTypeApiViewSet, LocationApiViewSet, CompanyApiViewSet, ShipperApiViewSet, PickUpLocationApiViewSet, ConsigneeApiViewSet, DeliveryLocationApiViewSet
+from maintenance.api.views import CarrierApiViewSet, AgentApiViewSet, VendorApiViewSet, CustomerApiViewSet, EmployeeApiViewSet, PortApiViewSet, PackageTypeApiViewSet, LocationApiViewSet, CompanyApiViewSet, ShipperApiViewSet, PickUpLocationApiViewSet, ConsigneeApiViewSet, DeliveryLocationApiViewSet, ClientToBillApiViewSet
 
 router_maintenance = DefaultRouter()
 
@@ -16,3 +16,4 @@ router_maintenance.register(prefix='shipper', basename='shipper', viewset=Shippe
 router_maintenance.register(prefix='pickUpLocation', basename='pickUpLocation', viewset=PickUpLocationApiViewSet)
 router_maintenance.register(prefix='consignee', basename='consignee', viewset=ConsigneeApiViewSet)
 router_maintenance.register(prefix='deliveryLocation', basename='deliveryLocation', viewset=DeliveryLocationApiViewSet)
+router_maintenance.register(prefix='clientToBill', basename='clientToBill', viewset=ClientToBillApiViewSet)
