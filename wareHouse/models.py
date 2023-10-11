@@ -44,5 +44,9 @@ class ReceptionOrder(models.Model):
     attachments = models.JSONField(blank=True, null=True)
     notes = models.JSONField(blank=True, null=True)
     charges = models.JSONField(blank=True, null=True)
+    pro_number              =   models.CharField(max_length=200, blank=True, null=True)
+    tracking_number         =   models.CharField(max_length=200, blank=True, null=True)
+    invoice_number          =   models.CharField(max_length=200, blank=True, null=True)
+    purchase_order_number   =   models.CharField(max_length=200, blank=True, null=True)
     
 
