@@ -42,5 +42,7 @@ class ReceptionOrder(models.Model):
     commodities  = models.JSONField(blank=True, null=True)
     events = models.JSONField(blank=True, null=True)
     attachments = models.JSONField(blank=True, null=True)
+    notes = models.JSONField(blank=True, null=True)
+    charges = models.JSONField(blank=True, null=True)
     
 
