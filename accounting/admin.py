@@ -26,10 +26,10 @@ class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
                     'name',  
                     'type', 
-                    'referenceNum', 
-                    'balanceUSD', 
+                    'accountNumber', 
+                    'parentAccount', 
                     'currency', 
-                    'parentAccount'
+                    'note'
                     ] 
      
 
