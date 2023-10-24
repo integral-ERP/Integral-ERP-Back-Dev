@@ -308,11 +308,51 @@ class ClientToBill(models.Model):
     consigneeid = models.CharField(max_length=200, blank=True, null=True)
     consignee = models.ForeignKey(Consignee,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_consignee')
     data = models.JSONField(blank=True, null=True)
-    # def __str__(self):
-    #     if self.shipper:
-    #         return self.shipper.data.obj.id
-    #     elif self.consignee:
-    #         return self.consignee.name
-    #     else:
-    #         return "N/A"
+    def __str__(self):
+        if self.shipper:
+            if self.customer:
+                return self.customer.name
+            elif self.vendor:
+                return self.vendor.name
+            elif self.agent:
+                return self.agent.name
+            else:
+                return "N/A"
+        elif self.consignee:
+            if self.customer:
+                return self.customer.name
+            elif self.vendor:
+                return self.vendor.name
+            elif self.agent:
+                return self.agent.name
+            elif self.carrier:
+                return self.carrier.name
+            else:
+                return "N/A"
+        else:
+            return "N/A"
+
+
+class ReleasedTo(models.Model):
+    customerid = models.CharField(max_length=200, blank=True, null=True)
+    customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='releasedto_customer')
+    vendorid = models.CharField(max_length=200, blank=True, null=True)
+    vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='releasedto_vendor')
+    carrierid = models.CharField(max_length=200, blank=True, null=True)
+    carrier = models.ForeignKey(Carrier,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='releasedto_carrier')
+    agentid = models.CharField(max_length=200, blank=True, null=True)
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='releasedto_agent')
+    data = models.JSONField(blank=True, null=True)
+    def __str__(self):
+        if self.customer:
+            return self.customer.name
+        elif self.vendor:
+            return self.vendor.name
+        elif self.agent:
+            return self.agent.name
+        elif self.carrier:
+            return self.carrier.name
+        else:
+            return "N/A"
+        
     

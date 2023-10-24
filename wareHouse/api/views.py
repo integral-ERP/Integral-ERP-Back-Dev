@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
-from wareHouse.models import  PickUpOrder, ReceptionOrder
-from wareHouse.api.serializers import PickUpOrderSerializer, ReceptionOrderSerializer
+from wareHouse.models import  PickUpOrder, ReceptionOrder, ReleaseOrder
+from wareHouse.api.serializers import PickUpOrderSerializer, ReceptionOrderSerializer, ReleaseOrderSerializer
 
 class PickUpOrderApiViewSet(ModelViewSet):
     serializer_class = PickUpOrderSerializer
@@ -14,3 +14,9 @@ class ReceptionOrderApiViewSet(ModelViewSet):
     queryset = ReceptionOrder.objects.all().select_related('employee')
     filter_backends = [filters.SearchFilter]
     search_fields = ['status','number','creation_date','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier','commodities','events','attachments']
+
+class ReleaseOrderApiViewSet(ModelViewSet):
+    serializer_class = ReleaseOrderSerializer
+    queryset = ReleaseOrder.objects.all().select_related('employee')
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['status','number','creation_date','employee','issued_by','client_to_bill','carrier','commodities']

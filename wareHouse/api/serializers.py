@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from wareHouse.models import  PickUpOrder, ReceptionOrder
-from maintenance.api.serializers import AgentSerializer,CustomerSerializer,EmployeeSerializer,CarrierSerializer, ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer
+from wareHouse.models import  PickUpOrder, ReceptionOrder, ReleaseOrder
+from maintenance.api.serializers import AgentSerializer,CustomerSerializer,EmployeeSerializer,CarrierSerializer, ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer, ReleasedToSerializer
 
 
 
@@ -35,3 +35,14 @@ class ReceptionOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReceptionOrder
         fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','mainCarrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number']
+
+class ReleaseOrderSerializer(serializers.ModelSerializer):
+    issued_byObj = AgentSerializer(required=False,source='issued_by')
+    clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill')
+    carrierObj = CarrierSerializer(required=False,source='carrier')
+    employeeObj = EmployeeSerializer(required=False, source='employee')
+    warehouseReceiptObj = PickUpOrderSerializer(required=False, source='warehouse_receipt')
+    releasedToObj = ReleasedToSerializer(required=False, source='released_to')
+    class Meta:
+        model = ReleaseOrder
+        fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities']

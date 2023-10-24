@@ -1,5 +1,5 @@
 from django.contrib import admin
-from wareHouse.models import PickUpOrder, ReceptionOrder
+from wareHouse.models import PickUpOrder, ReceptionOrder, ReleaseOrder
 
 
 from import_export import resources
@@ -14,7 +14,10 @@ class PickUpOrderResource(resources.ModelResource):
 class ReceptionOrderResource(resources.ModelResource):
     class Meta:
         model = ReceptionOrder
-# Register your models here.
+
+class ReleaseOrderResource(resources.ModelResource):
+    class Meta:
+        model = ReleaseOrder
 
 @admin.register(PickUpOrder)
 class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -63,4 +66,7 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ReceptionOrderResource
 
 
-
+@admin.register(ReleaseOrder)
+class warehouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'issued_by', 'client_to_bill', 'carrier', 'warehouse_receipt', 'released_to', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities']
+    resource_class = ReleaseOrderResource
