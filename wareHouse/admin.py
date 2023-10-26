@@ -1,5 +1,5 @@
 from django.contrib import admin
-from wareHouse.models import pickUpOrder, pieces, shipper, issuedBy, pickUpLocation, consignee, deliveryLocation
+from wareHouse.models import PickUpOrder, ReceptionOrder
 
 
 from import_export import resources
@@ -7,99 +7,60 @@ from import_export.admin import ImportExportModelAdmin
 
 ######################## Classes assigned for import/export. HERE ############################## 
 
-class pickUpOrderResource(resources.ModelResource):
+class PickUpOrderResource(resources.ModelResource):
     class Meta:
-        model = pickUpOrder
+        model = PickUpOrder
 
-class piecesResource(resources.ModelResource):
+class ReceptionOrderResource(resources.ModelResource):
     class Meta:
-        model = pieces
-
-         
+        model = ReceptionOrder
 # Register your models here.
 
-@admin.register(shipper)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customerName',
-                    'vendorName',
-                    'agentName'
-                ]
-
-@admin.register(issuedBy)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'forWardingAgents',
-                    'forWardingAgents',
-                ]
-
-@admin.register(pickUpLocation)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customerName',
-                    'vendorName',
-                    'agentName'
-                ]
-
-@admin.register(consignee)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customerName',
-                    'vendorName',
-                    'agentName',
-                    'carrierName'
-                ]
-    
-@admin.register(deliveryLocation)
-class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id',
-                    'customerName',
-                    'vendorName',
-                    'agentName',
-                    'carrierName'
-                ]
-
-@admin.register(pickUpOrder)
+@admin.register(PickUpOrder)
 class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id',
                     'status',
                     'number',
-                    'creationDate',
-                    'pickUpDate',
-                    'deliveryDate',
+                    'creation_date',
+                    'pick_up_date',
+                    'delivery_date',
                     'date',
-                    'issuedByKey',
-                    'destinationAgentKey',
-                    'employeekey',
-                    'shipperkey',
-                    'PickUpLocationkey',
-                    'consigneekey',
-                    'deliveryLocationkey',
-                    'inlandCarrierKey',
-                    'mainCarrierKey',
-                    'proNumber',
-                    'trackingNumber',
-                    'supplierKey',
-                    'invoiceNumber',
-                    'purchaseOrderNum',
-                    'commodities'
+                    'issued_by',
+                    'destination_agent',
+                    'employee',
+                    'shipper',
+                    'pick_up_location',
+                    'consignee',
+                    'delivery_location',
+                    'inland_carrier',
+                    'main_carrier',
+                    'pro_number',
+                    'tracking_number',
+                    'supplier',
+                    'invoice_number',
+                    'purchase_order_number'
                 ]
-    resource_class = pickUpOrderResource
+    resource_class = PickUpOrderResource
 
-@admin.register(pieces)
+
+@admin.register(ReceptionOrder)
 class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id',
                     'status',
-                    'package',
-                    'description',
-                    'pieces',
-                    'length',
-                    'height',
-                    'width',
-                    'width',
-                    'weight',
-                    'volume'
+                    'number',
+                    'creation_date',
+                    'employee',
+                    'issued_by',
+                    'destination_agent',
+                    'shipper',
+                    'consignee',
+                    'client_to_bill',
+                    'main_carrier',
+                    'commodities',
+                    'events',
+                    'attachments'
                 ]
-    resource_class = piecesResource
+    resource_class = ReceptionOrderResource
+
 
 

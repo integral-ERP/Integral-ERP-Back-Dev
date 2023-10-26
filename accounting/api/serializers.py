@@ -5,12 +5,12 @@ class chartAccountsSerializer(serializers.ModelSerializer):
     class Meta:
         model   = chartAccounts
         fields  = ['id', 
-                    'name',  
+                    'name', 
                     'type', 
-                    'accountNumber', 
-                    'parentAccount', 
+                    'referenceNum', 
+                    'balanceUSD', 
                     'currency', 
-                    'note'
+                    'parentAccount',
                     ]
  
 class ItemServicesSerializer(serializers.ModelSerializer):

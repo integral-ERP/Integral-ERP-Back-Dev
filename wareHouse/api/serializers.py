@@ -1,110 +1,37 @@
 from rest_framework import serializers
 
-from maintenance.models import employee
+from wareHouse.models import  PickUpOrder, ReceptionOrder
+from maintenance.api.serializers import AgentSerializer,CustomerSerializer,EmployeeSerializer,CarrierSerializer, ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer
 
-from wareHouse.models import shipper, issuedBy, pickUpLocation, consignee, deliveryLocation, pickUpOrder, pieces
 
-from maintenance.api.serializers import employeeSerializer, forWardingAgentsSerializer, carrierSerializer, customerSerializer
 
-class shipperSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = shipper
-        fields = [  'id',
-                    'customerName',
-                    'vendorName',
-                    'agentName'
-                ]
-  
-class issuedBySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = issuedBy
-        fields = [  'id',
-                    'forWardingAgents',
-                    'wareHouseProvider'
-                ]
-
-class pickUpLocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = pickUpLocation
-        fields = [  'id',
-                    'customerName',
-                    'vendorName',
-                    'agentName'
-                ]
-
-class consigneeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = consignee
-        fields = [  'id',
-                    'customerName',
-                    'vendorName',
-                    'agentName',
-                    'carrierName'
-                ]
-
-class deliveryLocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = deliveryLocation
-        fields = [  'id',
-                    'customerName',
-                    'vendorName',
-                    'agentName',
-                    'carrierName'
-                ]
-
-class pickUpOrderSerializer(serializers.ModelSerializer):
-    destinationAgent = forWardingAgentsSerializer(required=False, source="destinationAgentKey")
-    employee         =   employeeSerializer(required=False, source="employeekey")
-    inlandCarrier    =   carrierSerializer(required=False, source="inlandCarrierKey")    
-    mainCarrier      =   carrierSerializer(required=False, source="mainCarrierKey")
-    supplier         =   customerSerializer(required=False, source="supplierKey")
-
-    class Meta:
-        model = pickUpOrder
+class PickUpOrderSerializer(serializers.ModelSerializer):
+    issued_byObj = AgentSerializer(required=False,source='issued_by')
+    destination_agentObj = AgentSerializer(required=False,source='destination_agent')
+    employeeObj = EmployeeSerializer(required=False,source='employee')
+    shipperObj = ShipperSerializer(required=False,source='shipper')
+    pickUpLocationObj = PickUpLocationSerializer(required=False,source='pick_up_location')
+    consigneeObj = ConsigneeSerializer(required=False,source='consignee')
+    deliveryLocationObj = DeliveryLocationSerializer(required=False,source='delivery_location')
+    inland_carrierObj = CarrierSerializer(required=False,source='inland_carrier')
+    main_carrierObj = CarrierSerializer(required=False,source='main_carrier')
+    supplierObj = CustomerSerializer(required=False,source='supplier')
     
-        fields = [  'id',
-                    'status',
-                    'number',
-                    'creationDate',
-                    'pickUpDate',
-                    'deliveryDate',
-                    'date',
-                    'issuedByKey',
-                    'destinationAgentKey',
-                    'destinationAgent',
-                    'employeekey',
-                    'employee',
-                    'shipperkey',
-                    'PickUpLocationkey',
-                    'consigneekey',
-                    'deliveryLocationkey',
-                    'inlandCarrierKey',
-                    'inlandCarrier',
-                    'mainCarrierKey',
-                    'mainCarrier',
-                    'proNumber',
-                    'trackingNumber',
-                    'supplierKey',
-                    'supplier',
-                    'invoiceNumber',
-                    'purchaseOrderNum',
-                    'commodities'
-                ]  
-
-
-class piecesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = pieces
-        fields = [  'id',
-                    'status',
-                    'package',
-                    'description',
-                    'pieces',
-                    'length',
-                    'height',
-                    'width',
-                    'width',
-                    'weight',
-                    'volume'
-                ]
-        
+        model = PickUpOrder
+       
+        fields = [ 'id', 'status','number','creation_date','pick_up_date','delivery_date','date','issued_by','issued_byObj','destination_agent','destination_agentObj','employee','employeeObj','shipper','shipperObj','pick_up_location','pickUpLocationObj','consignee','consigneeObj','delivery_location','deliveryLocationObj','inland_carrier','inland_carrierObj','main_carrier','main_carrierObj','pro_number','tracking_number','supplier','supplierObj','invoice_number','purchase_order_number'
+                ] 
+ 
+
+class ReceptionOrderSerializer(serializers.ModelSerializer):
+    issued_byObj = AgentSerializer(required=False,source='issued_by')
+    destination_agentObj = AgentSerializer(required=False,source='destination_agent')
+    shipperObj = ShipperSerializer(required=False,source='shipper')
+    consigneeObj = ConsigneeSerializer(required=False,source='consignee')
+    clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill')
+    mainCarrierObj = CarrierSerializer(required=False,source='main_carrier')
+    employeeObj = EmployeeSerializer(required=False, source='employee')
+    class Meta:
+        model = ReceptionOrder
+        fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','mainCarrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number']

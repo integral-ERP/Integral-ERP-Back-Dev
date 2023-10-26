@@ -1,61 +1,16 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
-from wareHouse.models import shipper, issuedBy, pickUpLocation, consignee, deliveryLocation, pickUpOrder, pieces
-from wareHouse.api.serializers import pickUpLocationSerializer, consigneeSerializer, deliveryLocationSerializer, piecesSerializer,  pickUpOrderSerializer, issuedBySerializer, shipperSerializer
+from wareHouse.models import  PickUpOrder, ReceptionOrder
+from wareHouse.api.serializers import PickUpOrderSerializer, ReceptionOrderSerializer
 
-
-class shipperApiViewSet(ModelViewSet):
-    serializer_class = shipperSerializer
-    queryset = shipper.objects.all()
-
-class issuedByApiViewSet(ModelViewSet):
-    serializer_class = issuedBySerializer
-    queryset = issuedBy.objects.all()
-
-class pickUpLocationApiViewSet(ModelViewSet):
-    serializer_class = pickUpLocationSerializer
-    queryset = pickUpLocation.objects.all()
-
-class consigneeApiViewSet(ModelViewSet):
-    serializer_class = consigneeSerializer
-    queryset = consignee.objects.all()
-
-class deliveryLocationApiViewSet(ModelViewSet):
-    serializer_class = deliveryLocationSerializer
-    queryset = deliveryLocation.objects.all().select_related("destinationAgentKey")
-
-class pickUpOrderApiViewSet(ModelViewSet):
-    serializer_class = pickUpOrderSerializer
-    queryset = pickUpOrder.objects.all().select_related('destinationAgentKey', 'employeekey', 'inlandCarrierKey', 'mainCarrierKey', 'supplierKey')
+class PickUpOrderApiViewSet(ModelViewSet):
+    serializer_class = PickUpOrderSerializer
+    queryset = PickUpOrder.objects.all().select_related('employee')
     filter_backends = [filters.SearchFilter]
-    search_fields = ['id',
-                    'status',
-                    'number',
-                    'creationDate',
-                    'pickUpDate',
-                    'deliveryDate',
-                    'date',
-                    'issuedByKey',
-                    'destinationAgentKey',
-                    'destinationAgent',
-                    'employeekey',
-                    'employee',
-                    'shipperkey',
-                    'PickUpLocationkey',
-                    'consigneekey',
-                    'deliveryLocationkey',
-                    'inlandCarrierKey',
-                    'inlandCarrier',
-                    'mainCarrierKey',
-                    'mainCarrier',
-                    'proNumber',
-                    'trackingNumber',
-                    'supplierKey',
-                    'supplier',
-                    'invoiceNumber',
-                    'purchaseOrderNum']
+    search_fields = ['status','number','creation_date','pick_up_date','delivery_date','date','issued_by','destination_agent','employee','shipper','pick_up_location','consignee','delivery_location','inland_carrier','main_carrier','pro_number','tracking_number','supplier','invoice_number','purchase_order_number']
 
-class piecesApiViewSet(ModelViewSet):
-    serializer_class = piecesSerializer
-    queryset = pieces.objects.all()
-
+class ReceptionOrderApiViewSet(ModelViewSet):
+    serializer_class = ReceptionOrderSerializer
+    queryset = ReceptionOrder.objects.all().select_related('employee')
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['status','number','creation_date','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier','commodities','events','attachments']
