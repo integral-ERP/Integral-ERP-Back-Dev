@@ -2,6 +2,8 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
 from wareHouse.models import  PickUpOrder, ReceptionOrder, ReleaseOrder
 from wareHouse.api.serializers import PickUpOrderSerializer, ReceptionOrderSerializer, ReleaseOrderSerializer
+from rest_framework import status
+from rest_framework.response import Response
 
 class PickUpOrderApiViewSet(ModelViewSet):
     serializer_class = PickUpOrderSerializer
@@ -17,6 +19,12 @@ class ReceptionOrderApiViewSet(ModelViewSet):
 
 class ReleaseOrderApiViewSet(ModelViewSet):
     serializer_class = ReleaseOrderSerializer
-    queryset = ReleaseOrder.objects.all().select_related('employee')
+    queryset = ReleaseOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
-    search_fields = ['status','number','creation_date','employee','issued_by','client_to_bill','carrier','commodities']
+    search_fields = ['status', 'number', 'creation_date', 'employee', 'issued_by', 'client_to_bill', 'carrier', 'commodities']
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.disabled = True  # Mark the record as disabled
+        instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -20,7 +20,7 @@ class PickUpOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = PickUpOrder
        
-        fields = [ 'id', 'status','number','creation_date','pick_up_date','delivery_date','date','issued_by','issued_byObj','destination_agent','destination_agentObj','employee','employeeObj','shipper','shipperObj','pick_up_location','pickUpLocationObj','consignee','consigneeObj','delivery_location','deliveryLocationObj','inland_carrier','inland_carrierObj','main_carrier','main_carrierObj','pro_number','tracking_number','supplier','supplierObj','invoice_number','purchase_order_number'
+        fields = [ 'id', 'status','number','creation_date','pick_up_date','delivery_date','date','issued_by','issued_byObj','destination_agent','destination_agentObj','employee','employeeObj','shipper','shipperObj','pick_up_location','pickUpLocationObj','consignee','consigneeObj','delivery_location','deliveryLocationObj','inland_carrier','inland_carrierObj','main_carrier','main_carrierObj','pro_number','tracking_number','supplier','supplierObj','invoice_number','purchase_order_number', 'commodities'
                 ] 
  
 
@@ -38,11 +38,11 @@ class ReceptionOrderSerializer(serializers.ModelSerializer):
 
 class ReleaseOrderSerializer(serializers.ModelSerializer):
     issued_byObj = AgentSerializer(required=False,source='issued_by')
-    clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill')
+    clientBillObj = ReleasedToSerializer(required=False,source='client_to_bill')
     carrierObj = CarrierSerializer(required=False,source='carrier')
     employeeObj = EmployeeSerializer(required=False, source='employee')
     warehouseReceiptObj = PickUpOrderSerializer(required=False, source='warehouse_receipt')
     releasedToObj = ReleasedToSerializer(required=False, source='released_to')
     class Meta:
         model = ReleaseOrder
-        fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities']
+        fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities', 'disabled']
