@@ -1,6 +1,6 @@
 from django.db import models
 
-from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill
+from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill, ReleasedTo
 
 ######################### Create your models here. #################################
 
@@ -49,4 +49,21 @@ class ReceptionOrder(models.Model):
     invoice_number          =   models.CharField(max_length=200, blank=True, null=True)
     purchase_order_number   =   models.CharField(max_length=200, blank=True, null=True)
     
+class ReleaseOrder(models.Model):
+    status = models.CharField(max_length=200, blank=True, null=True)
+    number =  models.PositiveBigIntegerField(blank=True, null=True)
+    creation_date = models.DateField(blank=True, null=True)
+    release_date = models.DateField(blank=True, null=True)
+    employee = models.ForeignKey(Employee, blank=True, null=True, on_delete=models.DO_NOTHING, related_name="releaseEmployee")
+    issued_by = models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING, related_name="releaseAgent")
+    carrier = models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='releaseCarrier')
+    client_to_bill = models.ForeignKey(ReleasedTo, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='releaseclientToBill')
+    released_to = models.ForeignKey(ReleasedTo, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='releaseReleaseTo')
+    warehouse_receipt = models.ForeignKey(PickUpOrder, blank=True, null=True, on_delete=models.DO_NOTHING, related_name="pickupOrder")
+    pro_number              =   models.CharField(max_length=200, blank=True, null=True)
+    tracking_number         =   models.CharField(max_length=200, blank=True, null=True)
+    purchase_order_number   =   models.CharField(max_length=200, blank=True, null=True)
+    commodities  = models.JSONField(blank=True, null=True)
+    charges = models.JSONField(blank=True, null=True)
+    disabled = models.BooleanField(default=False)
 

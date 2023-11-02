@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'user',
     'accounting',
     'maintenance',
+    'configuration',
     'import_export',
 ]
 

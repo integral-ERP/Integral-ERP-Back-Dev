@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounting.models import chartAccounts, ItemServices, openingBalance
+from accounting.models import chartAccounts, ItemServices, openingBalance, invoice
 
 class chartAccountsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,6 +11,8 @@ class chartAccountsSerializer(serializers.ModelSerializer):
                     'balanceUSD', 
                     'currency', 
                     'parentAccount',
+                    'accountNumber',
+                    'note',
                     ]
  
 class ItemServicesSerializer(serializers.ModelSerializer):
@@ -32,4 +34,35 @@ class openingBalanceSerializer(serializers.ModelSerializer):
         fields   = ['id', 
                     'name',
                     'balance',
+                    ]
+
+class invoiceSerializer(serializers.ModelSerializer):
+    class Meta :
+        model   = invoice
+        fields   = ['id', 
+                    'number',
+                    'account',
+                    'paymentTem',
+                    'division',
+                    'apply',
+                    'due',
+                    'trasaDate',
+                    'bilingAddres',
+                    'paidAdd',
+                    'exchangeRate',
+                    'amount',
+                    'taxCode',
+                    'totalAmount',
+                    'amountDue',
+                    'invoiceCharges',
+                    'amount',
+                    'taxCode',
+                    'amountDue',
+                    'charges',
+                    'currency',
+                    'issuedById',
+                    'issuedByName',
+                    'paymentById',
+                    'paymentByDesc',
+
                     ]

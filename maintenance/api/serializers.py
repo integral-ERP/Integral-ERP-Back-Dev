@@ -14,6 +14,7 @@ from maintenance.models import (
     Consignee,
     DeliveryLocation,
     ClientToBill,
+    ReleasedTo
 )
 
 from drf_extra_fields.fields import Base64ImageField
@@ -587,3 +588,80 @@ class ClientToBillSerializer(serializers.ModelSerializer):
         clientBill.save()
 
         return clientBill
+
+
+class ReleasedToSerializer(serializers.ModelSerializer):
+    customerid = serializers.CharField(max_length=200, required=False, allow_null=True)
+    vendorid = serializers.CharField(max_length=200, required=False, allow_null=True)
+    agentid = serializers.CharField(max_length=200, required=False, allow_null=True)
+    carrierid = serializers.CharField(max_length=200, required=False, allow_null=True)
+
+    class Meta:
+        model = DeliveryLocation
+        fields = [
+            "id",
+            "customer",
+            "vendor",
+            "agent",
+            "carrier",
+            "customerid",
+            "vendorid",
+            "agentid",
+            "carrierid",
+            "data",
+        ]
+
+    def create(self, validated_data):
+        customer_id = validated_data.pop("customerid", None)
+        vendor_id = validated_data.pop("vendorid", None)
+        agent_id = validated_data.pop("agentid", None)
+        carrier_id = validated_data.pop("carrierid", None)
+
+        customer = None
+        vendor = None
+        agent = None
+        carrier = None
+
+        if customer_id:
+            try:
+                customer = Customer.objects.get(id=customer_id)
+            except Customer.DoesNotExist:
+                pass
+
+        if vendor_id:
+            try:
+                vendor = Vendor.objects.get(id=vendor_id)
+            except Vendor.DoesNotExist:
+                pass
+
+        if agent_id:
+            try:
+                agent = Agent.objects.get(id=agent_id)
+            except Agent.DoesNotExist:
+                pass
+
+        if carrier_id:
+            try:
+                carrier = Carrier.objects.get(id=carrier_id)
+            except Carrier.DoesNotExist:
+                pass
+
+        obj = None
+        if customer:
+            obj = CustomerSerializer(customer).data
+        if vendor:
+            obj = VendorSerializer(vendor).data
+        if agent:
+            obj = AgentSerializer(agent).data
+        if carrier:
+            obj = CarrierSerializer(carrier).data
+        data = {"obj": obj}
+
+        # Crea el objeto Shipper con los datos proporcionados
+        releasedTo = ReleasedTo.objects.create(**validated_data)
+
+        # Almacenar los datos JSON en un campo separado
+        releasedTo.data = data
+        releasedTo.save()
+
+        return releasedTo

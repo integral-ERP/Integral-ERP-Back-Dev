@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
-from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill
-from maintenance.api.serializers import CarrierSerializer,AgentSerializer,VendorSerializer,CustomerSerializer,EmployeeSerializer,PortSerializer,PackageTypeSerializer,LocationSerializer,CompanySerializer,ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer
+from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,PackageType,Location,Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill, ReleasedTo
+from maintenance.api.serializers import CarrierSerializer,AgentSerializer,VendorSerializer,CustomerSerializer,EmployeeSerializer,PortSerializer,PackageTypeSerializer,LocationSerializer,CompanySerializer,ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer, ReleasedToSerializer
 
 
 class CarrierApiViewSet(ModelViewSet):
@@ -90,3 +90,9 @@ class ClientToBillApiViewSet(ModelViewSet):
     queryset = ClientToBill.objects.all()
     filter_backends = [filters.SearchFilter]
     search_fields = ['shipper','consignee']
+
+class ReleasedToApiViewSet(ModelViewSet):
+    serializer_class = ReleasedToSerializer
+    queryset = ReleasedTo.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['id', 'customer', 'vendor', 'agent', 'carrier']
