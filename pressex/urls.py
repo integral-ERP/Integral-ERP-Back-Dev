@@ -26,7 +26,8 @@ from drf_yasg.views import get_schema_view
 
 from accounting.api.router import router_accounting
 from maintenance.api.router import router_maintenance
-from wareHouse.api.router import router_wareHouse 
+from wareHouse.api.router import router_wareHouse
+from configuration.api.router import router_configuration
 
 
 schema_view = get_schema_view(
@@ -50,6 +51,7 @@ urlpatterns = [
     path('api/', include(router_accounting.urls)),
     path('api/', include(router_maintenance.urls)),
     path('api/', include(router_wareHouse.urls)),
+    path('api/', include(router_configuration.urls)),
 
 
 ]
