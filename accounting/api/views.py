@@ -1,19 +1,19 @@
 from rest_framework.viewsets import ModelViewSet
-from accounting.models import  chartAccounts, ItemServices, openingBalance, invoice
-from accounting.api.serializers import  chartAccountsSerializer, ItemServicesSerializer, openingBalanceSerializer, invoiceSerializer
+from accounting.models import  ChartAccounts, ItemServices, OpeningBalance, Invoice
+from accounting.api.serializers import  ChartAccountsSerializer, ItemServicesSerializer, OpeningBalanceSerializer, InvoiceSerializer
 
-class chartAccountsApiViewSet(ModelViewSet):
-    serializer_class = chartAccountsSerializer
-    queryset = chartAccounts.objects.all()
+class ChartAccountsApiViewSet(ModelViewSet):
+    serializer_class = ChartAccountsSerializer
+    queryset = ChartAccounts.objects.all()
 
 class ItemServicesApiViewSet(ModelViewSet):
     serializer_class = ItemServicesSerializer
     queryset = ItemServices.objects.all()
     
-class openingBalanceApiViewSet(ModelViewSet):
-    serializer_class = openingBalanceSerializer
-    queryset = openingBalance.objects.all()
+class OpeningBalanceApiViewSet(ModelViewSet):
+    serializer_class = OpeningBalanceSerializer
+    queryset = OpeningBalance.objects.all()
 
-class invoiceApiViewSet(ModelViewSet):
-    serializer_class =invoiceSerializer
-    queryset = invoice.objects.all()
+class InvoiceApiViewSet(ModelViewSet):
+    serializer_class =InvoiceSerializer
+    queryset = Invoice.objects.all()
