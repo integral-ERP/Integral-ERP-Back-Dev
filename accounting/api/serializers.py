@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from accounting.models import chartAccounts, ItemServices, openingBalance, invoice
+from accounting.models import ChartAccounts, ItemServices, OpeningBalance, Invoice
 
-class chartAccountsSerializer(serializers.ModelSerializer):
+class ChartAccountsSerializer(serializers.ModelSerializer):
     class Meta:
-        model   = chartAccounts
-        fields  = ['id', 
+        model   = ChartAccounts
+        fields  = [ 'id', 
                     'name', 
                     'type', 
                     'referenceNum', 
@@ -18,7 +18,7 @@ class chartAccountsSerializer(serializers.ModelSerializer):
 class ItemServicesSerializer(serializers.ModelSerializer):
     class Meta :
         model   = ItemServices
-        fields   = ['id', 
+        fields  = ['id', 
                     'code', 
                     'description', 
                     'accountName', 
@@ -28,17 +28,17 @@ class ItemServicesSerializer(serializers.ModelSerializer):
                     'iataCode',
                     ]
 
-class openingBalanceSerializer(serializers.ModelSerializer):
+class OpeningBalanceSerializer(serializers.ModelSerializer):
     class Meta :
-        model   = openingBalance
-        fields   = ['id', 
+        model   = OpeningBalance
+        fields  = ['id', 
                     'name',
                     'balance',
                     ]
 
-class invoiceSerializer(serializers.ModelSerializer):
+class InvoiceSerializer(serializers.ModelSerializer):
     class Meta :
-        model   = invoice
+        model   = Invoice
         fields   = ['id', 
                     'number',
                     'account',
@@ -64,5 +64,8 @@ class invoiceSerializer(serializers.ModelSerializer):
                     'issuedByName',
                     'paymentById',
                     'paymentByDesc',
-
+                    'accountById',
+                    'accountByName',
+                    'accountByType',
+                    'accounten',
                     ]
