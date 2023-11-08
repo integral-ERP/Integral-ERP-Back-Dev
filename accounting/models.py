@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class ChartAccounts(models.Model):
+class chartAccounts(models.Model):
     name            =   models.CharField(max_length=100, blank=True, null=True)
     type            =   models.CharField(max_length=100, blank=True, null=True)
     referenceNum    =   models.BigIntegerField(blank=True, null=True)
@@ -22,11 +22,11 @@ class ItemServices(models.Model):
     currency    =   models.CharField(max_length=100, blank=True, null=True)
     iataCode    =   models.CharField(max_length=100, blank=True, null=True)
   
-class OpeningBalance(models.Model):
+class openingBalance(models.Model):
     name        =   models.CharField(max_length=100, blank=True, null=True)
     balance     =   models.FloatField(blank=True, null=True)
 
-class Invoice(models.Model):
+class invoice(models.Model):
     number      =   models.CharField(max_length=200, blank=True, null=True)
     account     =   models.CharField(max_length=200, blank=True, null=True)
     paymentTem  =   models.CharField(max_length=200, blank=True, null=True)
@@ -39,17 +39,12 @@ class Invoice(models.Model):
     issuedById  =   models.CharField(max_length=200, blank=True, null=True)
     issuedByName=   models.CharField(max_length=200, blank=True, null=True)
 
-    invoiceById         =   models.CharField(max_length=200, blank=True, null=True)
-    invoiceBydescription=   models.CharField(max_length=200, blank=True, null=True)
+    invoiceById=   models.CharField(max_length=200, blank=True, null=True)
+    invoiceBydescription=    models.CharField(max_length=200, blank=True, null=True)
     
-    paymentById     =   models.CharField(max_length=200, blank=True, null=True)
-    paymentByDesc   =   models.CharField(max_length=200, blank=True, null=True)
+    paymentById=   models.CharField(max_length=200, blank=True, null=True)
+    paymentByDesc=    models.CharField(max_length=200, blank=True, null=True)
 
-    accountById     =   models.CharField(max_length=200, blank=True, null=True)
-    accountByName   =   models.CharField(max_length=200, blank=True, null=True)
-    accountByType   =   models.CharField(max_length=200, blank=True, null=True)
-    typeByCode      =   models.CharField(max_length=200, blank=True, null=True)
-    accounten     =   models.CharField(max_length=200, blank=True, null=True)
     # ----------------------
     paidAdd         =   models.CharField(max_length=200, blank=True, null=True)
     exchangeRate    =   models.BigIntegerField(blank=True, null=True)
@@ -59,4 +54,3 @@ class Invoice(models.Model):
     taxCode         =   models.BigIntegerField(blank=True, null=True)
     amountDue       =   models.BigIntegerField(blank=True, null=True)
     charges         =   models.JSONField(blank=True, null=True)
-
