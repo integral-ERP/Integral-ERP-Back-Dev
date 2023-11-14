@@ -16,11 +16,12 @@ class PickUpOrderSerializer(serializers.ModelSerializer):
     inland_carrierObj = CarrierSerializer(required=False,source='inland_carrier')
     main_carrierObj = CarrierSerializer(required=False,source='main_carrier')
     supplierObj = CustomerSerializer(required=False,source='supplier')
+    client_to_billObj = ClientToBillSerializer(required=False, source= 'client_to_bill')
     
     class Meta:
         model = PickUpOrder
        
-        fields = [ 'id', 'status','number','creation_date','pick_up_date','delivery_date','date','issued_by','issued_byObj','destination_agent','destination_agentObj','employee','employeeObj','shipper','shipperObj','pick_up_location','pickUpLocationObj','consignee','consigneeObj','delivery_location','deliveryLocationObj','inland_carrier','inland_carrierObj','main_carrier','main_carrierObj','pro_number','tracking_number','supplier','supplierObj','invoice_number','purchase_order_number', 'commodities'
+        fields = [ 'id', 'status','number','creation_date','pick_up_date','delivery_date','date','issued_by','issued_byObj','destination_agent','destination_agentObj','employee','employeeObj','shipper','shipperObj','pick_up_location','pickUpLocationObj','consignee','consigneeObj','delivery_location','deliveryLocationObj','inland_carrier','inland_carrierObj','main_carrier','main_carrierObj','pro_number','tracking_number','supplier','supplierObj','invoice_number','purchase_order_number', 'commodities', 'client_to_bill', 'client_to_billObj'
                 ] 
  
 

@@ -41,7 +41,7 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'tracking_number',
                     'supplier',
                     'invoice_number',
-                    'purchase_order_number'
+                    'purchase_order_number',
                 ]
     resource_class = PickUpOrderResource
 

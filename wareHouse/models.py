@@ -17,6 +17,7 @@ class PickUpOrder(models.Model):
     shipper                 =   models.ForeignKey(Shipper, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='pickUpShipper')
     pick_up_location        =   models.ForeignKey(PickUpLocation, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='pickUpLocation')
     consignee               =   models.ForeignKey(Consignee, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='pickUpConsignee')
+    client_to_bill = models.ForeignKey(ClientToBill, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='pickUpclientToBill')
     delivery_location       =   models.ForeignKey(DeliveryLocation, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='deliveryLocation')
     inland_carrier          =   models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='inlandCarrier') 
     main_carrier            =   models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='pickUpCarrier')
