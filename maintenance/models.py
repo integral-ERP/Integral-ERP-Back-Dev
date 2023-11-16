@@ -307,6 +307,10 @@ class ClientToBill(models.Model):
     shipper = models.ForeignKey(Shipper,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_shipper')
     consigneeid = models.CharField(max_length=200, blank=True, null=True)
     consignee = models.ForeignKey(Consignee,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_consignee')
+    customerid = models.CharField(max_length=200, blank=True, null=True)
+    customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_customer')
+    agentid = models.CharField(max_length=200, blank=True, null=True)
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_agent')
     data = models.JSONField(blank=True, null=True)
     def __str__(self):
         if self.shipper:
@@ -329,6 +333,10 @@ class ClientToBill(models.Model):
                 return self.carrier.name
             else:
                 return "N/A"
+        elif self.customer:
+            return self.customer.name
+        elif self.agent:
+            return self.agent.name
         else:
             return "N/A"
 

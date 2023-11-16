@@ -536,29 +536,41 @@ class DeliveryLocationSerializer(serializers.ModelSerializer):
 
 class ClientToBillSerializer(serializers.ModelSerializer):
     shipperid = serializers.CharField(max_length=200, required=False, allow_null=True)
-    shipperObj = ShipperSerializer(required=False,source='shipper')
+    shipperObj = ShipperSerializer(required=False,source='shipper', allow_null=True)
     consigneeid = serializers.CharField(max_length=200, required=False, allow_null=True)
-    consigneeObj = ConsigneeSerializer(required=False,source='consignee')
+    consigneeObj = ConsigneeSerializer(required=False,source='consignee', allow_null=True)
+    customerId = serializers.CharField(max_length=200, required=False, allow_null=True)
+    customerObj = CustomerSerializer(required = False, source='customer', allow_null=True)
+    agentId = serializers.CharField(max_length=200, required=False, allow_null=True)
+    agentObj = AgentSerializer(required= False, source='agent', allow_null=True)
 
     class Meta:
         model = ClientToBill
         fields = [
-            "id",
-            "shipper",
-            "shipperid",
-            "shipperObj",
-            "consignee",
-            "consigneeid",
-            "consigneeObj",
-            "data",
-        ]
+        "id",
+        "shipper",
+        "shipperid",
+        "shipperObj",
+        "consignee",
+        "consigneeid",
+        "consigneeObj",
+        "customerId",
+        "customerObj",
+        "agentId",
+        "agentObj",
+        "data",
+    ]
 
     def create(self, validated_data):
         shipper_id = validated_data.pop("shipperid", None)
         consignee_id = validated_data.pop("consigneeid", None)
+        customer_id = validated_data.pop("customerId", None)
+        agent_id = validated_data.pop("agentId", None)
         # Buscar los objetos correspondientes en las tablas respectivas
         shipper = None
         consignee = None
+        customer = None
+        agent = None
 
         if shipper_id:
             try:
@@ -572,12 +584,29 @@ class ClientToBillSerializer(serializers.ModelSerializer):
             except Consignee.DoesNotExist:
                 pass
 
+        if customer_id:
+            try:
+                customer = Customer.objects.get(id=customer_id)
+            except Customer.DoesNotExist:
+                pass
+        
+        if agent_id:
+            try:
+                agent = Agent.objects.get(id=agent_id)
+            except Agent.DoesNotExist:
+                pass
+
+
         # Almacena los datos recuperados como una propiedad JSON
         clientBillObj = None
         if shipper:
             clientBillObj = ShipperSerializer(shipper).data
         if consignee:
             clientBillObj = ConsigneeSerializer(consignee).data
+        if customer:
+            clientBillObj = CustomerSerializer(customer).data
+        if agent:
+            clientBillObj = AgentSerializer(agent).data
         data = {"obj": clientBillObj}
 
         # Crea el objeto Shipper con los datos proporcionados

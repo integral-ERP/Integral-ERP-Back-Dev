@@ -6,17 +6,17 @@ from maintenance.api.serializers import AgentSerializer,CustomerSerializer,Emplo
 
 
 class PickUpOrderSerializer(serializers.ModelSerializer):
-    issued_byObj = AgentSerializer(required=False,source='issued_by')
-    destination_agentObj = AgentSerializer(required=False,source='destination_agent')
-    employeeObj = EmployeeSerializer(required=False,source='employee')
-    shipperObj = ShipperSerializer(required=False,source='shipper')
-    pickUpLocationObj = PickUpLocationSerializer(required=False,source='pick_up_location')
-    consigneeObj = ConsigneeSerializer(required=False,source='consignee')
-    deliveryLocationObj = DeliveryLocationSerializer(required=False,source='delivery_location')
-    inland_carrierObj = CarrierSerializer(required=False,source='inland_carrier')
-    main_carrierObj = CarrierSerializer(required=False,source='main_carrier')
-    supplierObj = CustomerSerializer(required=False,source='supplier')
-    client_to_billObj = ClientToBillSerializer(required=False, source= 'client_to_bill')
+    issued_byObj = AgentSerializer(required=False,source='issued_by', read_only=True, allow_null=True)
+    destination_agentObj = AgentSerializer(required=False,source='destination_agent', read_only=True, allow_null=True)
+    employeeObj = EmployeeSerializer(required=False,source='employee', read_only=True, allow_null=True)
+    shipperObj = ShipperSerializer(required=False,source='shipper', read_only=True, allow_null=True)
+    pickUpLocationObj = PickUpLocationSerializer(required=False,source='pick_up_location', read_only=True, allow_null=True)
+    consigneeObj = ConsigneeSerializer(required=False,source='consignee', read_only=True, allow_null=True)
+    deliveryLocationObj = DeliveryLocationSerializer(required=False,source='delivery_location', read_only=True, allow_null=True)
+    inland_carrierObj = CarrierSerializer(required=False,source='inland_carrier', read_only=True, allow_null=True)
+    main_carrierObj = CarrierSerializer(required=False,source='main_carrier', read_only=True, allow_null=True)
+    supplierObj = CustomerSerializer(required=False,source='supplier', read_only=True, allow_null=True)
+    client_to_billObj = ClientToBillSerializer(required=False, source= 'client_to_bill', read_only=True, allow_null=True)
     
     class Meta:
         model = PickUpOrder
@@ -38,12 +38,12 @@ class ReceptionOrderSerializer(serializers.ModelSerializer):
         fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','mainCarrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number']
 
 class ReleaseOrderSerializer(serializers.ModelSerializer):
-    issued_byObj = AgentSerializer(required=False,source='issued_by')
-    clientBillObj = ReleasedToSerializer(required=False,source='client_to_bill')
-    carrierObj = CarrierSerializer(required=False,source='carrier')
-    employeeObj = EmployeeSerializer(required=False, source='employee')
-    warehouseReceiptObj = PickUpOrderSerializer(required=False, source='warehouse_receipt')
-    releasedToObj = ReleasedToSerializer(required=False, source='released_to')
+    issued_byObj = AgentSerializer(required=False,source='issued_by', read_only=True)
+    clientBillObj = ReleasedToSerializer(required=False,source='client_to_bill', read_only=True)
+    carrierObj = CarrierSerializer(required=False,source='carrier', read_only=True)
+    employeeObj = EmployeeSerializer(required=False, source='employee', read_only=True)
+    warehouseReceiptObj = PickUpOrderSerializer(required=False, source='warehouse_receipt', read_only=True)
+    releasedToObj = ReleasedToSerializer(required=False, source='released_to', read_only=True)
     class Meta:
         model = ReleaseOrder
         fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities', 'disabled']
