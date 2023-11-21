@@ -88,7 +88,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'pressex.wsgi.application'
+WSGI_APPLICATION = 'pressex.wsgi.application'
 
 
 # Database
