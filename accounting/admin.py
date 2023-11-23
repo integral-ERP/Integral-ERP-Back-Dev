@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounting.models import chartAccounts, ItemServices, openingBalance
+from accounting.models import  ChartAccounts, ItemServices, OpeningBalance, Invoice
 
 # ---------------Import/Export------------------------
 from import_export import resources
@@ -7,30 +7,37 @@ from import_export.admin import ImportExportModelAdmin
 
 #Classes assigned for import/export. here
 
-class chartAccountsResource(resources.ModelResource):
+class ChartAccountsResource(resources.ModelResource):
     class Meta:
-        model = chartAccounts
+        model = ChartAccounts
 
 class ItemServicesResource(resources.ModelResource):
     class Meta:
         model = ItemServices
 
-class openingBalanceResource(resources.ModelResource):
+class OpeningBalanceResource(resources.ModelResource):
     class Meta:
-        model = openingBalance
+        model = OpeningBalance
+
+class InvoiceResource(resources.ModelResource):
+    class Meta:
+        model = Invoice
 
 # Register your models here.
 
-@admin.register (chartAccounts)
+@admin.register (ChartAccounts)
 class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
                     'name',  
                     'type', 
-                    'accountNumber', 
-                    'parentAccount', 
+                    'referenceNum', 
+                    'balanceUSD', 
                     'currency', 
-                    'note'
+                    'parentAccount',
+                    'accountNumber',
+                    'note',
                     ] 
+    resource_class = ChartAccountsResource
      
 
 @admin.register (ItemServices)
@@ -47,11 +54,41 @@ class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ItemServicesResource
     
     
-@admin.register (openingBalance)
+@admin.register (OpeningBalance)
 class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
                     'name',
                     'balance'
                     ]
-    resource_class = openingBalanceResource
-    
+    resource_class = OpeningBalanceResource
+
+@admin.register (Invoice)
+class invoiceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['id', 
+                    'number',
+                    'account',
+                    'paymentTem',
+                    'division',
+                    'apply',
+                    'due',
+                    'trasaDate',
+                    'bilingAddres',
+                    'paidAdd',
+                    'exchangeRate',
+                    'totalAmount',
+                    'invoiceCharges',
+                    'amount',
+                    'taxCode',
+                    'amountDue',
+                    'charges',
+                    'currency',
+                    'issuedById',
+                    'issuedByName',
+                    'paymentById',
+                    'paymentByDesc',
+                    'accountById',
+                    'accountByName',
+                    'accountByType',
+                    'accounten',
+                    ]
+    resource_class = InvoiceResource

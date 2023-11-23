@@ -1,22 +1,24 @@
 from rest_framework import serializers
-from accounting.models import chartAccounts, ItemServices, openingBalance
+from accounting.models import ChartAccounts, ItemServices, OpeningBalance, Invoice
 
-class chartAccountsSerializer(serializers.ModelSerializer):
+class ChartAccountsSerializer(serializers.ModelSerializer):
     class Meta:
-        model   = chartAccounts
-        fields  = ['id', 
-                    'name',  
+        model   = ChartAccounts
+        fields  = [ 'id', 
+                    'name', 
                     'type', 
-                    'accountNumber', 
-                    'parentAccount', 
+                    'referenceNum', 
+                    'balanceUSD', 
                     'currency', 
-                    'note'
+                    'parentAccount',
+                    'accountNumber',
+                    'note',
                     ]
  
 class ItemServicesSerializer(serializers.ModelSerializer):
     class Meta :
         model   = ItemServices
-        fields   = ['id', 
+        fields  = ['id', 
                     'code', 
                     'description', 
                     'accountName', 
@@ -26,10 +28,44 @@ class ItemServicesSerializer(serializers.ModelSerializer):
                     'iataCode',
                     ]
 
-class openingBalanceSerializer(serializers.ModelSerializer):
+class OpeningBalanceSerializer(serializers.ModelSerializer):
     class Meta :
-        model   = openingBalance
-        fields   = ['id', 
+        model   = OpeningBalance
+        fields  = ['id', 
                     'name',
                     'balance',
+                    ]
+
+class InvoiceSerializer(serializers.ModelSerializer):
+    class Meta :
+        model   = Invoice
+        fields   = ['id', 
+                    'number',
+                    'account',
+                    'paymentTem',
+                    'division',
+                    'apply',
+                    'due',
+                    'trasaDate',
+                    'bilingAddres',
+                    'paidAdd',
+                    'exchangeRate',
+                    'amount',
+                    'taxCode',
+                    'totalAmount',
+                    'amountDue',
+                    'invoiceCharges',
+                    'amount',
+                    'taxCode',
+                    'amountDue',
+                    'charges',
+                    'currency',
+                    'issuedById',
+                    'issuedByName',
+                    'paymentById',
+                    'paymentByDesc',
+                    'accountById',
+                    'accountByName',
+                    'accountByType',
+                    'accounten',
                     ]

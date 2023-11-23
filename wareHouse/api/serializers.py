@@ -33,6 +33,14 @@ class ReceptionOrderSerializer(serializers.ModelSerializer):
     clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill')
     mainCarrierObj = CarrierSerializer(required=False,source='main_carrier')
     employeeObj = EmployeeSerializer(required=False, source='employee')
+class ReceptionOrderSerializer(serializers.ModelSerializer):
+    issued_byObj = AgentSerializer(required=False,source='issued_by')
+    destination_agentObj = AgentSerializer(required=False,source='destination_agent')
+    shipperObj = ShipperSerializer(required=False,source='shipper')
+    consigneeObj = ConsigneeSerializer(required=False,source='consignee')
+    clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill')
+    mainCarrierObj = CarrierSerializer(required=False,source='main_carrier')
+    employeeObj = EmployeeSerializer(required=False, source='employee')
     class Meta:
         model = ReceptionOrder
         fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','mainCarrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number']
@@ -45,5 +53,7 @@ class ReleaseOrderSerializer(serializers.ModelSerializer):
     warehouseReceiptObj = PickUpOrderSerializer(required=False, source='warehouse_receipt', read_only=True)
     releasedToObj = ReleasedToSerializer(required=False, source='released_to', read_only=True)
     class Meta:
+        model = ReleaseOrder
+        fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities', 'disabled']
         model = ReleaseOrder
         fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities', 'disabled']
