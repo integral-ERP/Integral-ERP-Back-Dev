@@ -28,6 +28,7 @@ class Carrier(models.Model):
     airway_bill_number      = models.TextField(blank=True, null=True)
     passenger_only_airline  = models.BooleanField(default=False)
     type_person             = models.CharField(max_length=200, blank=True, null=True, default="Carrier")
+    disabled = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -51,6 +52,7 @@ class Agent(models.Model):
     country                 = models.CharField(max_length=200, blank=True, null=True)
     zip_code                = models.CharField(max_length=200, blank=True, null=True)
     type_person             = models.CharField(max_length=200, default="agent", blank=True, null=True)
+    disabled = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -74,6 +76,7 @@ class Vendor(models.Model):
     country                 = models.CharField(max_length=200, blank=True, null=True)
     zip_code                = models.CharField(max_length=200, blank=True, null=True)
     type_person             = models.CharField(max_length=200, default="vendor", blank=True, null=True)
+    disabled = models.BooleanField(default=False)
 
 
     def __str__(self):
@@ -98,6 +101,7 @@ class Customer(models.Model):
     country                 = models.CharField(max_length=200, blank=True, null=True)
     zip_code                = models.CharField(max_length=200, blank=True, null=True)
     type_person             = models.CharField(max_length=200, default="customer", blank=True, null=True)
+    disabled = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -121,6 +125,7 @@ class Employee(models.Model):
     country                 = models.CharField(max_length=200, blank=True, null=True)
     zip_code                = models.CharField(max_length=200, blank=True, null=True)
     type_person             = models.CharField(max_length=200, default="employee", blank=True, null=True)
+    disabled = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -142,6 +147,7 @@ class Port(models.Model):
     border_crossing = models.BooleanField(default=False, blank=True, null=True)
     us_customs_code = models.CharField(max_length=200, blank=True, null=True)
     type_person     = models.CharField(max_length=200, default="port", blank=True, null=True)
+    disabled = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -162,6 +168,7 @@ class PackageType(models.Model):
     ground          = models.BooleanField(default=False, blank=True, null=True)
     air             = models.BooleanField(default=False, blank=True, null=True)
     ocean           = models.BooleanField(default=False, blank=True, null=True)
+    disabled = models.BooleanField(default=False)
 
     def __str__(self):
         return self.description
@@ -214,6 +221,7 @@ class Company(models.Model):
     company_tsa_code        = models.CharField(max_length=200, blank=True, null=True)
     company_img_name        = models.CharField(max_length=200, blank=True, null=True)
     company_img_logo        = models.ImageField(upload_to="./logo", blank=True, null=True)
+    disabled = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -227,6 +235,7 @@ class Shipper(models.Model):
     agentid = models.CharField(max_length=200, blank=True, null=True)
     agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='shipper_agent')  
     data = models.JSONField(blank=True, null=True)
+    disabled = models.BooleanField(default=False)
     def __str__(self):
         if self.customer:
             return self.customer.name
@@ -246,6 +255,7 @@ class PickUpLocation(models.Model):
     agentid = models.CharField(max_length=200, blank=True, null=True)
     agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='pickup_agent')
     data = models.JSONField(blank=True, null=True)
+    disabled = models.BooleanField(default=False)
     def __str__(self):
         if self.customer:
             return self.customer.name
@@ -266,6 +276,7 @@ class Consignee(models.Model):
     agentid = models.CharField(max_length=200, blank=True, null=True)
     agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='consignee_agent')
     data = models.JSONField(blank=True, null=True)
+    disabled = models.BooleanField(default=False)
     def __str__(self):
         if self.customer:
             return self.customer.name
@@ -288,6 +299,7 @@ class DeliveryLocation(models.Model):
     agentid = models.CharField(max_length=200, blank=True, null=True)
     agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='delivery_agent')
     data = models.JSONField(blank=True, null=True)
+    disabled = models.BooleanField(default=False)
     def __str__(self):
         if self.customer:
             return self.customer.name
@@ -310,6 +322,7 @@ class ClientToBill(models.Model):
     agentid = models.CharField(max_length=200, blank=True, null=True)
     agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_agent')
     data = models.JSONField(blank=True, null=True)
+    disabled = models.BooleanField(default=False)
     def __str__(self):
         if self.shipper:
             if self.customer:
@@ -349,6 +362,7 @@ class ReleasedTo(models.Model):
     agentid = models.CharField(max_length=200, blank=True, null=True)
     agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='releasedto_agent')
     data = models.JSONField(blank=True, null=True)
+    disabled = models.BooleanField(default=False)
     def __str__(self):
         if self.customer:
             return self.customer.name

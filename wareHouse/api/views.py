@@ -5,19 +5,40 @@ from wareHouse.api.serializers import PickUpOrderSerializer, ReceptionOrderSeria
 from rest_framework import status
 from rest_framework.response import Response
 
-class PickUpOrderApiViewSet(ModelViewSet):
+class BaseModelViewSet(ModelViewSet):
+    disabled_field = 'disabled'
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        setattr(instance, self.disabled_field, True)
+        instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class PickUpOrderApiViewSet(BaseModelViewSet):
     serializer_class = PickUpOrderSerializer
-    queryset = PickUpOrder.objects.all().select_related('employee')
+    queryset = PickUpOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
     search_fields = ['status','number','creation_date','pick_up_date','delivery_date','date','issued_by','destination_agent','employee','shipper','pick_up_location','consignee','delivery_location','inland_carrier','main_carrier','pro_number','tracking_number','supplier','invoice_number','purchase_order_number']
 
-class ReceptionOrderApiViewSet(ModelViewSet):
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.disabled = True
+        instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class ReceptionOrderApiViewSet(BaseModelViewSet):
     serializer_class = ReceptionOrderSerializer
-    queryset = ReceptionOrder.objects.all().select_related('employee')
+    queryset = ReceptionOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
     search_fields = ['status','number','creation_date','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier','commodities','events','attachments']
 
-class ReleaseOrderApiViewSet(ModelViewSet):
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.disabled = True
+        instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class ReleaseOrderApiViewSet(BaseModelViewSet):
     serializer_class = ReleaseOrderSerializer
     queryset = ReleaseOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
@@ -25,6 +46,6 @@ class ReleaseOrderApiViewSet(ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance.disabled = True  # Mark the record as disabled
+        instance.disabled = True
         instance.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
