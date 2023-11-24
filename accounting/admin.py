@@ -36,6 +36,7 @@ class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'parentAccount',
                     'accountNumber',
                     'note',
+                    'typeChart',
                     ] 
     resource_class = ChartAccountsResource
      
@@ -69,7 +70,8 @@ class invoiceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'account',
                     'paymentTem',
                     'division',
-                    'apply',
+                    'applyId',
+                    'apply',        #verificar y borrar
                     'due',
                     'trasaDate',
                     'bilingAddres',
@@ -82,7 +84,7 @@ class invoiceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'amountDue',
                     'charges',
                     'currency',
-                    'issuedById',
+                    'issued_by',
                     'issuedByName',
                     'paymentById',
                     'paymentByDesc',
@@ -90,5 +92,6 @@ class invoiceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'accountByName',
                     'accountByType',
                     'accounten',
+                    'typeChart',
                     ]
     resource_class = InvoiceResource

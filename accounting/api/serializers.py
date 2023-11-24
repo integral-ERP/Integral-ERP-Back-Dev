@@ -13,6 +13,7 @@ class ChartAccountsSerializer(serializers.ModelSerializer):
                     'parentAccount',
                     'accountNumber',
                     'note',
+                    'typeChart',
                     ]
  
 class ItemServicesSerializer(serializers.ModelSerializer):
@@ -22,7 +23,8 @@ class ItemServicesSerializer(serializers.ModelSerializer):
                     'code', 
                     'description', 
                     'accountName', 
-                    'type', 'amount', 
+                    'type', 
+                    'amount', 
                     'autCreation', 
                     'currency', 
                     'iataCode',
@@ -44,6 +46,7 @@ class InvoiceSerializer(serializers.ModelSerializer):
                     'account',
                     'paymentTem',
                     'division',
+                    'applyId',
                     'apply',
                     'due',
                     'trasaDate',
@@ -55,12 +58,9 @@ class InvoiceSerializer(serializers.ModelSerializer):
                     'totalAmount',
                     'amountDue',
                     'invoiceCharges',
-                    'amount',
-                    'taxCode',
-                    'amountDue',
                     'charges',
                     'currency',
-                    'issuedById',
+                    'issued_by',
                     'issuedByName',
                     'paymentById',
                     'paymentByDesc',
@@ -68,4 +68,6 @@ class InvoiceSerializer(serializers.ModelSerializer):
                     'accountByName',
                     'accountByType',
                     'accounten',
+                    'typeService',
+                    'typeChart',
                     ]
