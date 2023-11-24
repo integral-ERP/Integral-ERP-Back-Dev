@@ -1,13 +1,13 @@
 from rest_framework import serializers
-from configuration.models import paymentTerms
+from configuration.models import PaymentTerms
 
-class paymentTermsSerializer(serializers.ModelSerializer):
+class PaymentTermsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = paymentTerms
+        model = PaymentTerms
         fields = [ 'id',
                     'description',
                     'dueDays',
                     'discountPercentage',
                     'discountDays',
-                    'inactive',
+                    'inactive', 
       ]

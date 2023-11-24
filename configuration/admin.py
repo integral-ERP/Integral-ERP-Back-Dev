@@ -1,5 +1,5 @@
 from django.contrib import admin
-from configuration.models import paymentTerms
+from configuration.models import PaymentTerms
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -8,11 +8,11 @@ from import_export.admin import ImportExportModelAdmin
 
 class paymentTermsResource(resources.ModelResource):
     class Meta:
-        model = paymentTerms
+        model = PaymentTerms
 
 ################### Register your models here. #########################
 
-@admin.register(paymentTerms)
+@admin.register(PaymentTerms)
 class configurationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id',
                     'description',

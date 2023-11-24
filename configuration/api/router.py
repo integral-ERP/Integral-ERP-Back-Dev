@@ -1,9 +1,6 @@
 from rest_framework.routers import DefaultRouter
-from configuration.api.views import paymentTermsViewSet
+from configuration.api.views import PaymentTermsViewSet
 
 router_configuration = DefaultRouter()
 
-router_configuration.register(prefix='paymentTerms', basename='paymentTerms', viewset=paymentTermsViewSet)
-
-
-
+router_configuration.register(prefix='PaymentTerms', basename='PaymentTerms', viewset=PaymentTermsViewSet)

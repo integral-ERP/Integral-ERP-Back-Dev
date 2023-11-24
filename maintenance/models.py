@@ -2,35 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-
-class Carrier(models.Model):
-    name                    = models.CharField(max_length=200, blank=True, null=True)
-    phone                   = models.CharField(max_length=200, blank=True, null=True)
-    mobile_phone            = models.CharField(max_length=200, blank=True, null=True)
-    email                   = models.CharField(max_length=200, blank=True, null=True)
-    fax                     = models.CharField(max_length=200, blank=True, null=True)
-    website                 = models.CharField(max_length=200, blank=True, null=True)
-    reference_number        = models.CharField(max_length=200, blank=True, null=True)
-    contact_first_name      = models.CharField(max_length=200, blank=True, null=True)
-    contact_last_name       = models.CharField(max_length=200, blank=True, null=True)
-    identification_number   = models.CharField(max_length=200, blank=True, null=True)
-    identification_type     = models.CharField(max_length=200, blank=True, null=True)
-    street_and_number       = models.TextField(blank=True, null=True)
-    city                    = models.CharField(max_length=200, blank=True, null=True)
-    state                   = models.CharField(max_length=200, blank=True, null=True)
-    country                 = models.CharField(max_length=200, blank=True, null=True)
-    zip_code                = models.CharField(max_length=200, blank=True, null=True)
-    carrier_type            = models.CharField(max_length=200, blank=True, null=True)
-    method_code             = models.CharField(max_length=200, blank=True, null=True)
-    carrier_code            = models.CharField(max_length=200, blank=True, null=True)
-    scac_number             = models.CharField(max_length=200, blank=True, null=True)
-    iata_code               = models.CharField(max_length=200, blank=True, null=True)
-    airline_code            = models.CharField(max_length=200, blank=True, null=True)
-    airline_prefix          = models.CharField(max_length=200, blank=True, null=True)
-    airway_bill_number      = models.TextField(blank=True, null=True)
-    passenger_only_airline  = models.BooleanField(default=False)
-    type_person             = models.CharField(max_length=200, blank=True, null=True, default="Carrier")
-
 class Carrier(models.Model):
     name                    = models.CharField(max_length=200, blank=True, null=True)
     phone                   = models.CharField(max_length=200, blank=True, null=True)
