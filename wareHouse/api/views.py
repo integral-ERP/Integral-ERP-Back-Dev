@@ -12,7 +12,7 @@ class BaseModelViewSet(ModelViewSet):
         instance = self.get_object()
         setattr(instance, self.disabled_field, True)
         instance.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(data = instance,status=status.HTTP_200_OK)
 
 class PickUpOrderApiViewSet(BaseModelViewSet):
     serializer_class = PickUpOrderSerializer
