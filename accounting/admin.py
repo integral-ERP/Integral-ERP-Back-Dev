@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounting.models import  ChartAccounts, ItemServices, OpeningBalance, Invoice
+from accounting.models import  ChartAccounts, ItemServices, OpeningBalance, Invoice, Payments
 
 # ---------------Import/Export------------------------
 from import_export import resources
@@ -22,6 +22,10 @@ class OpeningBalanceResource(resources.ModelResource):
 class InvoiceResource(resources.ModelResource):
     class Meta:
         model = Invoice
+
+class PaymentsResource(resources.ModelResource):
+    class Meta:
+        model = Payments
 
 # Register your models here.
 
@@ -70,19 +74,13 @@ class invoiceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'account',
                     'paymentTem',
                     'division',
-                    'applyId',
                     'apply',        #verificar y borrar
                     'due',
                     'trasaDate',
                     'bilingAddres',
                     'paidAdd',
                     'exchangeRate',
-                    'totalAmount',
                     'invoiceCharges',
-                    'amount',
-                    'taxCode',
-                    'amountDue',
-                    'charges',
                     'currency',
                     'issued_by',
                     'issuedByName',
@@ -91,7 +89,19 @@ class invoiceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'accountById',
                     'accountByName',
                     'accountByType',
-                    'accounten',
-                    'typeChart',
                     ]
     resource_class = InvoiceResource
+
+@admin.register (Payments)
+class PaymentsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['id', 
+                    'customerById',
+                    'customerByName',
+                    'amountReceived',
+                    'trasaDate',
+                    # 'transaction_Date',
+                    'number',
+                    'memo',
+                    'inviceData',
+                    ]
+    resource_class = PaymentsResource

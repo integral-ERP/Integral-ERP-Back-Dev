@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from accounting.api.views import  ChartAccountsApiViewSet, ItemServicesApiViewSet, OpeningBalanceApiViewSet, InvoiceApiViewSet
+from accounting.api.views import  ChartAccountsApiViewSet, ItemServicesApiViewSet, OpeningBalanceApiViewSet, InvoiceApiViewSet, PaymentsApiViewSet
 
 router_accounting = DefaultRouter()
 
@@ -7,3 +7,4 @@ router_accounting.register(prefix='ChartAccounts', basename='ChartAccounts', vie
 router_accounting.register(prefix='ItemServices', basename='ItemServices', viewset=ItemServicesApiViewSet)
 router_accounting.register(prefix='OpeningBalance', basename='OpeningBalance', viewset=OpeningBalanceApiViewSet)
 router_accounting.register(prefix='Invoice', basename='Invoice', viewset=InvoiceApiViewSet)
+router_accounting.register(prefix='Payments', basename='Payments', viewset=PaymentsApiViewSet)

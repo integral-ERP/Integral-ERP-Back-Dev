@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounting.models import ChartAccounts, ItemServices, OpeningBalance, Invoice
+from accounting.models import ChartAccounts, ItemServices, OpeningBalance, Invoice, Payments
 
 class ChartAccountsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,19 +46,13 @@ class InvoiceSerializer(serializers.ModelSerializer):
                     'account',
                     'paymentTem',
                     'division',
-                    'applyId',
-                    'apply',
+                    'apply',        #verificar y borrar
                     'due',
                     'trasaDate',
                     'bilingAddres',
                     'paidAdd',
                     'exchangeRate',
-                    'amount',
-                    'taxCode',
-                    'totalAmount',
-                    'amountDue',
                     'invoiceCharges',
-                    'charges',
                     'currency',
                     'issued_by',
                     'issuedByName',
@@ -67,7 +61,19 @@ class InvoiceSerializer(serializers.ModelSerializer):
                     'accountById',
                     'accountByName',
                     'accountByType',
-                    'accounten',
-                    'typeService',
-                    'typeChart',
                     ]
+        
+class PaymentsSerializer (serializers.ModelSerializer):
+    class Meta :
+        model   = Payments
+        fields   = ['id', 
+                    'customerById',
+                    'customerByName',
+                    'amountReceived',
+                    'trasaDate',
+                    # 'transaction_Date',
+                    'number',
+                    'memo',
+                    'inviceData',
+                    ]
+

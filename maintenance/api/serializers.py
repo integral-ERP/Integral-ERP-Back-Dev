@@ -42,6 +42,7 @@ class CarrierSerializer(serializers.ModelSerializer):
             "country",
             "zip_code",
             "type_person",
+            'disabled'
         ]
 
 
