@@ -25,7 +25,6 @@ jsonschema-specifications==2023.6.1
 packaging==23.1
 Pillow==10.0.0
 promise==2.3
-psycopg2==2.9.6
 PyJWT==2.7.0
 python-slugify==8.0.1
 pytz==2023.3
