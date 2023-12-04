@@ -41,6 +41,7 @@ class ReceptionOrder(models.Model):
     consignee = models.ForeignKey(Consignee, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='receptionConsignee')
     client_to_bill = models.ForeignKey(ClientToBill, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='clientToBill')
     main_carrier = models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='receptionCarrier')
+    supplier = models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='receptionSupplier')
     commodities  = models.JSONField(blank=True, null=True)
     events = models.JSONField(blank=True, null=True)
     attachments = models.JSONField(blank=True, null=True)
