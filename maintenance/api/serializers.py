@@ -573,10 +573,10 @@ class ClientToBillSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         shipper_id = validated_data.pop("shipperid", None)
         consignee_id = validated_data.pop("consigneeid", None)
-        customer_id = validated_data.pop("customerId", None)
-        agent_id = validated_data.pop("agentId", None)
-        vendor_id = validated_data.pop("vendorId", None)
-        carrier_id = validated_data.pop("carrierId", None)
+        customer_id = validated_data.pop("customerid", None)
+        agent_id = validated_data.pop("agentid", None)
+        vendor_id = validated_data.pop("vendorid", None)
+        carrier_id = validated_data.pop("carrierid", None)
         # Buscar los objetos correspondientes en las tablas respectivas
         shipper = None
         consignee = None
