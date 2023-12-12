@@ -544,6 +544,10 @@ class ClientToBillSerializer(serializers.ModelSerializer):
     customerObj = CustomerSerializer(required = False, source='customer', allow_null=True)
     agentId = serializers.CharField(max_length=200, required=False, allow_null=True)
     agentObj = AgentSerializer(required= False, source='agent', allow_null=True)
+    vendorId = serializers.CharField(max_length=200, required=False, allow_null=True)
+    vendorObj = VendorSerializer(required= False, source='vendor', allow_null=True)
+    carrierId = serializers.CharField(max_length=200, required=False, allow_null=True)
+    carrierObj = CarrierSerializer(required= False, source='carrier', allow_null=True)
 
     class Meta:
         model = ClientToBill
@@ -559,19 +563,27 @@ class ClientToBillSerializer(serializers.ModelSerializer):
         "customerObj",
         "agentId",
         "agentObj",
+        "vendorId",
+        "vendorObj",
+        "carrierId",
+        "carrierObj",
         "data",
     ]
 
     def create(self, validated_data):
         shipper_id = validated_data.pop("shipperid", None)
         consignee_id = validated_data.pop("consigneeid", None)
-        customer_id = validated_data.pop("customerId", None)
-        agent_id = validated_data.pop("agentId", None)
+        customer_id = validated_data.pop("customerid", None)
+        agent_id = validated_data.pop("agentid", None)
+        vendor_id = validated_data.pop("vendorid", None)
+        carrier_id = validated_data.pop("carrierid", None)
         # Buscar los objetos correspondientes en las tablas respectivas
         shipper = None
         consignee = None
         customer = None
         agent = None
+        vendor = None
+        carrier = None
 
         if shipper_id:
             try:
@@ -597,6 +609,18 @@ class ClientToBillSerializer(serializers.ModelSerializer):
             except Agent.DoesNotExist:
                 pass
 
+        if vendor_id:
+            try:
+                vendor = Vendor.objects.get(id=vendor_id)
+            except Vendor.DoesNotExist:
+                pass
+
+        if carrier_id:
+            try:
+                carrier = Carrier.objects.get(id=carrier_id)
+            except Carrier.DoesNotExist:
+                pass
+
 
         # Almacena los datos recuperados como una propiedad JSON
         clientBillObj = None
@@ -608,6 +632,11 @@ class ClientToBillSerializer(serializers.ModelSerializer):
             clientBillObj = CustomerSerializer(customer).data
         if agent:
             clientBillObj = AgentSerializer(agent).data
+        if vendor:
+            clientBillObj = VendorSerializer(vendor).data
+        if carrier:
+            clientBillObj = CarrierSerializer(carrier).data
+
         data = {"obj": clientBillObj}
 
         # Crea el objeto Shipper con los datos proporcionados

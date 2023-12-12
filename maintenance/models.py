@@ -313,14 +313,18 @@ class DeliveryLocation(models.Model):
             return "N/A"
         
 class ClientToBill(models.Model):
+    customerid = models.CharField(max_length=200, blank=True, null=True)
+    customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_customer')
+    vendorid = models.CharField(max_length=200, blank=True, null=True)
+    vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_vendor')
+    agentid = models.CharField(max_length=200, blank=True, null=True)
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_agent')
+    carrierid = models.CharField(max_length=200, blank=True, null=True)
+    carrier = models.ForeignKey(Carrier,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_carrier')
     shipperid = models.CharField(max_length=200, blank=True, null=True)
     shipper = models.ForeignKey(Shipper,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_shipper')
     consigneeid = models.CharField(max_length=200, blank=True, null=True)
     consignee = models.ForeignKey(Consignee,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_consignee')
-    customerid = models.CharField(max_length=200, blank=True, null=True)
-    customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_customer')
-    agentid = models.CharField(max_length=200, blank=True, null=True)
-    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='client_agent')
     data = models.JSONField(blank=True, null=True)
     disabled = models.BooleanField(default=False)
     def __str__(self):
@@ -348,6 +352,10 @@ class ClientToBill(models.Model):
             return self.customer.name
         elif self.agent:
             return self.agent.name
+        elif self.vendor:
+            return self.vendor.name
+        elif self.carrier:
+            return self.carrier.name
         else:
             return "N/A"
 
