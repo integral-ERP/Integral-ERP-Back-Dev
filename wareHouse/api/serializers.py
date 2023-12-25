@@ -24,24 +24,15 @@ class PickUpOrderSerializer(serializers.ModelSerializer):
         fields = [ 'id', 'status','number','creation_date','pick_up_date','delivery_date','date','issued_by','issued_byObj','destination_agent','destination_agentObj','employee','employeeObj','shipper','shipperObj','pick_up_location','pickUpLocationObj','consignee','consigneeObj','delivery_location','deliveryLocationObj','inland_carrier','inland_carrierObj','main_carrier','main_carrierObj','pro_number','tracking_number','supplier','supplierObj','invoice_number','purchase_order_number', 'commodities', 'client_to_bill', 'client_to_billObj', 'charges'
                 ] 
  
-
 class ReceptionOrderSerializer(serializers.ModelSerializer):
-    issued_byObj = AgentSerializer(required=False,source='issued_by')
-    destination_agentObj = AgentSerializer(required=False,source='destination_agent')
-    shipperObj = ShipperSerializer(required=False,source='shipper')
-    consigneeObj = ConsigneeSerializer(required=False,source='consignee')
-    clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill')
-    mainCarrierObj = CarrierSerializer(required=False,source='main_carrier')
-    employeeObj = EmployeeSerializer(required=False, source='employee')
-class ReceptionOrderSerializer(serializers.ModelSerializer):
-    issued_byObj = AgentSerializer(required=False,source='issued_by')
-    destination_agentObj = AgentSerializer(required=False,source='destination_agent')
-    shipperObj = ShipperSerializer(required=False,source='shipper')
-    consigneeObj = ConsigneeSerializer(required=False,source='consignee')
-    clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill')
-    mainCarrierObj = CarrierSerializer(required=False,source='main_carrier')
-    employeeObj = EmployeeSerializer(required=False, source='employee')
-    supplierObj = CarrierSerializer(required=False,source='supplier')
+    issued_byObj = AgentSerializer(required=False,source='issued_by', read_only=True)
+    destination_agentObj = AgentSerializer(required=False,source='destination_agent', read_only=True)
+    shipperObj = ShipperSerializer(required=False,source='shipper', read_only=True)
+    consigneeObj = ConsigneeSerializer(required=False,source='consignee', read_only=True)
+    clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill', read_only=True)
+    mainCarrierObj = CarrierSerializer(required=False,source='main_carrier', read_only=True)
+    employeeObj = EmployeeSerializer(required=False, source='employee', read_only=True)
+    supplierObj = CarrierSerializer(required=False,source='supplier' , read_only=True)
     class Meta:
         model = ReceptionOrder
         fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','mainCarrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number', 'supplier', 'supplierObj']

@@ -299,7 +299,7 @@ class ShipperSerializer(serializers.ModelSerializer):
         if vendor:
             shipperObj = VendorSerializer(vendor).data
         if agent:
-            shipperObj = AgentSerializer(shipper).data
+            shipperObj = AgentSerializer(agent).data
         data = {"obj": shipperObj}
 
         # Crea el objeto Shipper con los datos proporcionados
