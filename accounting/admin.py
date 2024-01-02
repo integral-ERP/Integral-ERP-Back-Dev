@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounting.models import  ChartAccounts, ItemServices, OpeningBalance, Invoice, Payments
+from accounting.models import  ChartAccounts, ItemServices, OpeningBalance, Invoice, Payments, Bills, Deposits
 
 # ---------------Import/Export------------------------
 from import_export import resources
@@ -27,6 +27,14 @@ class PaymentsResource(resources.ModelResource):
     class Meta:
         model = Payments
 
+class BillsResource(resources.ModelResource):
+    class Meta:
+        model = Bills
+        
+class DepositsResource(resources.ModelResource):
+    class Meta:
+        model = Deposits
+
 # Register your models here.
 
 @admin.register (ChartAccounts)
@@ -44,7 +52,6 @@ class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     ] 
     resource_class = ChartAccountsResource
      
-
 @admin.register (ItemServices)
 class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
@@ -57,8 +64,7 @@ class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'iataCode'
                     ]
     resource_class = ItemServicesResource
-    
-    
+     
 @admin.register (OpeningBalance)
 class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
@@ -99,9 +105,38 @@ class PaymentsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'customerByName',
                     'amountReceived',
                     'trasaDate',
-                    # 'transaction_Date',
                     'number',
                     'memo',
-                    'inviceData',
+                    'accountByType',
+                    'accountById',
+                    'accountRecei',
+                    'accountByBankType',
+                    'accountByBankId',
+                    'accountReceiBank',
                     ]
     resource_class = PaymentsResource
+
+@admin.register (Bills)
+class BilltsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['id', 
+                    'number',
+                    'due',
+                    'trasaDate',
+                    'accountById',
+                    'accountByType',
+                    'carriVerndorById',
+                    'carriVerndorByName',
+                    'paymentById',
+                    'paymentByDesc',
+                    'billCharges',
+                    ]
+    resource_class = BillsResource
+    
+@admin.register (Deposits)
+class DepositsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['id', 
+                    'bankAccount',
+                    'date',
+                    'memo',
+                    ]
+    resource_class = DepositsResource
