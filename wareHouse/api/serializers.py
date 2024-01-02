@@ -39,7 +39,7 @@ class ReceptionOrderSerializer(serializers.ModelSerializer):
 
 class ReleaseOrderSerializer(serializers.ModelSerializer):
     issued_byObj = AgentSerializer(required=False,source='issued_by', read_only=True)
-    clientBillObj = ReleasedToSerializer(required=False,source='client_to_bill', read_only=True)
+    clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill', read_only=True)
     carrierObj = CarrierSerializer(required=False,source='carrier', read_only=True)
     employeeObj = EmployeeSerializer(required=False, source='employee', read_only=True)
     warehouseReceiptObj = PickUpOrderSerializer(required=False, source='warehouse_receipt', read_only=True)

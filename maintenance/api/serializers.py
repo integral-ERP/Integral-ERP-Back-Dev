@@ -540,7 +540,7 @@ class ClientToBillSerializer(serializers.ModelSerializer):
     shipperObj = ShipperSerializer(required=False,source='shipper', allow_null=True)
     consigneeid = serializers.CharField(max_length=200, required=False, allow_null=True)
     consigneeObj = ConsigneeSerializer(required=False,source='consignee', allow_null=True)
-    customerId = serializers.CharField(max_length=200, required=False, allow_null=True)
+    customerid = serializers.CharField(max_length=200, required=False, allow_null=True)
     customerObj = CustomerSerializer(required = False, source='customer', allow_null=True)
     agentId = serializers.CharField(max_length=200, required=False, allow_null=True)
     agentObj = AgentSerializer(required= False, source='agent', allow_null=True)
@@ -559,7 +559,7 @@ class ClientToBillSerializer(serializers.ModelSerializer):
         "consignee",
         "consigneeid",
         "consigneeObj",
-        "customerId",
+        "customerid",
         "customerObj",
         "agentId",
         "agentObj",
@@ -584,7 +584,7 @@ class ClientToBillSerializer(serializers.ModelSerializer):
         agent = None
         vendor = None
         carrier = None
-
+        print ("validated_data", validated_data)
         if shipper_id:
             try:
                 shipper = Shipper.objects.get(id=shipper_id)
@@ -620,7 +620,7 @@ class ClientToBillSerializer(serializers.ModelSerializer):
                 carrier = Carrier.objects.get(id=carrier_id)
             except Carrier.DoesNotExist:
                 pass
-
+        
 
         # Almacena los datos recuperados como una propiedad JSON
         clientBillObj = None
@@ -645,8 +645,10 @@ class ClientToBillSerializer(serializers.ModelSerializer):
         # Almacenar los datos JSON en un campo separado
         clientBill.data = data
         clientBill.save()
+        print("validated_data", validated_data,shipper,consignee, customer,agent, vendor, carrier)
 
         return clientBill
+
 
 
 class ReleasedToSerializer(serializers.ModelSerializer):
