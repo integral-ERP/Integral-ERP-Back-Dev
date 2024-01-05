@@ -47,5 +47,3 @@ class ReleaseOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReleaseOrder
         fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'main_carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities', 'disabled']
-        model = ReleaseOrder
-        fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities', 'disabled']
