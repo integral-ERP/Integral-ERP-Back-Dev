@@ -35,6 +35,7 @@ class OpeningBalance(models.Model):
     disabled    =   models.BooleanField(default=False)
 
 class Invoice(models.Model):
+    status          =   models.CharField(max_length=200, blank=True, null=True)
     number          =   models.CharField(max_length=200, blank=True, null=True)
     account         =   models.CharField(max_length=200, blank=True, null=True)#Borrar
     paymentTem      =   models.CharField(max_length=200, blank=True, null=True)
@@ -58,7 +59,7 @@ class Invoice(models.Model):
     paidAdd         =   models.CharField(max_length=200, blank=True, null=True)
     exchangeRate    =   models.BigIntegerField(blank=True, null=True)
     invoiceCharges  =   models.JSONField(blank=True, null=True)
-    disabled            =   models.BooleanField(default=False)
+    disabled        =   models.BooleanField(default=False)
 
 class Payments(models.Model):
     customerById    =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING)
@@ -76,6 +77,7 @@ class Payments(models.Model):
     disabled            =   models.BooleanField(default=False)
 
 class Bills(models.Model): 
+    status          =   models.CharField(max_length=200, blank=True, null=True)
     number          =   models.CharField(max_length=200, blank=True, null=True)
     due             =   models.DateField(blank=True, null=True)
     trasaDate       =   models.DateField(blank=True, null=True)

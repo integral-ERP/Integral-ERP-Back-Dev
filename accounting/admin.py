@@ -76,6 +76,7 @@ class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register (Invoice)
 class invoiceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
+                    'status',
                     'number',
                     'account',
                     'paymentTem',
@@ -119,6 +120,7 @@ class PaymentsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register (Bills)
 class BilltsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
+                    'status',
                     'number',
                     'due',
                     'trasaDate',

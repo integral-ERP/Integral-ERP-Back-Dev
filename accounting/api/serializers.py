@@ -45,6 +45,7 @@ class InvoiceSerializer(serializers.ModelSerializer):
     class Meta :
         model   = Invoice
         fields   = ['id', 
+                    'status',
                     'number',
                     'account',
                     'paymentTem',
@@ -90,6 +91,7 @@ class BillsSerializer (serializers.ModelSerializer):
     class Meta :
         model   = Bills
         fields   = ['id', 
+                    'status',
                     'number',
                     'due',
                     'trasaDate',
