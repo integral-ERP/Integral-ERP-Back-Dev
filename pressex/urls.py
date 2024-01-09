@@ -28,7 +28,7 @@ from accounting.api.router import router_accounting
 from maintenance.api.router import router_maintenance
 from wareHouse.api.router import router_wareHouse
 from configuration.api.router import router_configuration
-
+from accounting.api.views import PaymentsApiViewSet
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -52,6 +52,8 @@ urlpatterns = [
     path('api/', include(router_accounting.urls)),
     path('api/', include(router_maintenance.urls)),
     path('api/', include(router_configuration.urls)),
+    path('api/invoices/filter_invoices_by_account_id/<int:account_id>/', PaymentsApiViewSet.filter_invoices_by_account_id,name='filter_invoices_by_account_id'),
+
     
 
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounting.models import ChartAccounts, ItemServices, OpeningBalance, Invoice
+from accounting.models import ChartAccounts, ItemServices, OpeningBalance, Invoice, Payments, Bills, Deposits
 
 class ChartAccountsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +14,7 @@ class ChartAccountsSerializer(serializers.ModelSerializer):
                     'accountNumber',
                     'note',
                     'typeChart',
+                    'disabled',
                     ]
  
 class ItemServicesSerializer(serializers.ModelSerializer):
@@ -28,6 +29,7 @@ class ItemServicesSerializer(serializers.ModelSerializer):
                     'autCreation', 
                     'currency', 
                     'iataCode',
+                    'disabled',
                     ]
 
 class OpeningBalanceSerializer(serializers.ModelSerializer):
@@ -36,29 +38,25 @@ class OpeningBalanceSerializer(serializers.ModelSerializer):
         fields  = ['id', 
                     'name',
                     'balance',
+                    'disabled',
                     ]
 
 class InvoiceSerializer(serializers.ModelSerializer):
     class Meta :
         model   = Invoice
         fields   = ['id', 
+                    'status',
                     'number',
                     'account',
                     'paymentTem',
                     'division',
-                    'applyId',
-                    'apply',
+                    'apply',        #verificar y borrar
                     'due',
                     'trasaDate',
                     'bilingAddres',
                     'paidAdd',
                     'exchangeRate',
-                    'amount',
-                    'taxCode',
-                    'totalAmount',
-                    'amountDue',
                     'invoiceCharges',
-                    'charges',
                     'currency',
                     'issued_by',
                     'issuedByName',
@@ -67,7 +65,52 @@ class InvoiceSerializer(serializers.ModelSerializer):
                     'accountById',
                     'accountByName',
                     'accountByType',
-                    'accounten',
-                    'typeService',
-                    'typeChart',
+                    'disabled',
+                    ]
+        
+class PaymentsSerializer (serializers.ModelSerializer):
+    class Meta :
+        model   = Payments
+        fields   = ['id', 
+                    'customerById',
+                    'customerByName',
+                    'amountReceived',
+                    'trasaDate',
+                    'number',
+                    'memo',
+                    'accountByType',
+                    'accountById',
+                    'accountRecei',
+                    'accountByBankType',
+                    'accountByBankId',
+                    'accountReceiBank',
+                    'disabled',
+                    ]
+
+class BillsSerializer (serializers.ModelSerializer):
+    class Meta :
+        model   = Bills
+        fields   = ['id', 
+                    'status',
+                    'number',
+                    'due',
+                    'trasaDate',
+                    'accountById',
+                    'accountByType',
+                    'carriVerndorById',
+                    'carriVerndorByName',
+                    'paymentById',
+                    'paymentByDesc',
+                    'billCharges',
+                    'disabled',
+                    ]
+
+class DepositsSerializer (serializers.ModelSerializer):
+    class Meta :
+        model   = Deposits
+        fields   = ['id', 
+                    'bankAccount',
+                    'date',
+                    'memo',
+                    'disabled',
                     ]

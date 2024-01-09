@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounting.models import  ChartAccounts, ItemServices, OpeningBalance, Invoice
+from accounting.models import  ChartAccounts, ItemServices, OpeningBalance, Invoice, Payments, Bills, Deposits
 
 # ---------------Import/Export------------------------
 from import_export import resources
@@ -23,6 +23,18 @@ class InvoiceResource(resources.ModelResource):
     class Meta:
         model = Invoice
 
+class PaymentsResource(resources.ModelResource):
+    class Meta:
+        model = Payments
+
+class BillsResource(resources.ModelResource):
+    class Meta:
+        model = Bills
+        
+class DepositsResource(resources.ModelResource):
+    class Meta:
+        model = Deposits
+
 # Register your models here.
 
 @admin.register (ChartAccounts)
@@ -40,7 +52,6 @@ class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     ] 
     resource_class = ChartAccountsResource
      
-
 @admin.register (ItemServices)
 class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
@@ -53,8 +64,7 @@ class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'iataCode'
                     ]
     resource_class = ItemServicesResource
-    
-    
+     
 @admin.register (OpeningBalance)
 class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
@@ -66,23 +76,18 @@ class accountingAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register (Invoice)
 class invoiceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id', 
+                    'status',
                     'number',
                     'account',
                     'paymentTem',
                     'division',
-                    'applyId',
                     'apply',        #verificar y borrar
                     'due',
                     'trasaDate',
                     'bilingAddres',
                     'paidAdd',
                     'exchangeRate',
-                    'totalAmount',
                     'invoiceCharges',
-                    'amount',
-                    'taxCode',
-                    'amountDue',
-                    'charges',
                     'currency',
                     'issued_by',
                     'issuedByName',
@@ -91,7 +96,49 @@ class invoiceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'accountById',
                     'accountByName',
                     'accountByType',
-                    'accounten',
-                    'typeChart',
                     ]
     resource_class = InvoiceResource
+
+@admin.register (Payments)
+class PaymentsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['id', 
+                    'customerById',
+                    'customerByName',
+                    'amountReceived',
+                    'trasaDate',
+                    'number',
+                    'memo',
+                    'accountByType',
+                    'accountById',
+                    'accountRecei',
+                    'accountByBankType',
+                    'accountByBankId',
+                    'accountReceiBank',
+                    ]
+    resource_class = PaymentsResource
+
+@admin.register (Bills)
+class BilltsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['id', 
+                    'status',
+                    'number',
+                    'due',
+                    'trasaDate',
+                    'accountById',
+                    'accountByType',
+                    'carriVerndorById',
+                    'carriVerndorByName',
+                    'paymentById',
+                    'paymentByDesc',
+                    'billCharges',
+                    ]
+    resource_class = BillsResource
+    
+@admin.register (Deposits)
+class DepositsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['id', 
+                    'bankAccount',
+                    'date',
+                    'memo',
+                    ]
+    resource_class = DepositsResource
