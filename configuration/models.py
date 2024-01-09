@@ -8,6 +8,7 @@ class PaymentTerms(models.Model):
     discountPercentage  =   models.IntegerField(blank=True, null=True)
     discountDays        =   models.IntegerField(blank=True, null=True)
     inactive            =   models.BooleanField(default=False)
+    disabled            =   models.BooleanField(default=False)
 
     def __str__(self):
         return self.description
