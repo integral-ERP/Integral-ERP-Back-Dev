@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
-from wareHouse.models import  PickUpOrder, ReceptionOrder, ReleaseOrder
-from wareHouse.api.serializers import PickUpOrderSerializer, ReceptionOrderSerializer, ReleaseOrderSerializer
+from wareHouse.models import  PickUpOrder, ReceptionOrder, ReleaseOrder, PreAlert
+from wareHouse.api.serializers import PickUpOrderSerializer, ReceptionOrderSerializer, ReleaseOrderSerializer, PreAlertSerializer
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -43,6 +43,18 @@ class ReleaseOrderApiViewSet(BaseModelViewSet):
     queryset = ReleaseOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
     search_fields = ['status', 'number', 'creation_date', 'employee', 'issued_by', 'client_to_bill', 'carrier', 'commodities']
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.disabled = True
+        instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class PreAlertApiViewSet(BaseModelViewSet):
+    serializer_class = PreAlertSerializer
+    queryset = PreAlert.objects.filter(disabled=False).select_related('client')
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['created_at', 'client', 'store', 'courier', 'packages']
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from wareHouse.models import  PickUpOrder, ReceptionOrder, ReleaseOrder
+from wareHouse.models import  PickUpOrder, ReceptionOrder, ReleaseOrder, PreAlert
 from maintenance.api.serializers import AgentSerializer,CustomerSerializer,EmployeeSerializer,CarrierSerializer, ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer, ReleasedToSerializer
 
 
@@ -47,3 +47,9 @@ class ReleaseOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReleaseOrder
         fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'main_carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities', 'disabled']
+
+class PreAlertSerializer(serializers.ModelSerializer):
+    clientObj = CustomerSerializer(required=False, source="client", read_only=True)
+    class Meta:
+        model = PreAlert
+        fields = ['id', 'created_at', 'client','clientObj', 'store', 'courier', 'packages','tracking_number']

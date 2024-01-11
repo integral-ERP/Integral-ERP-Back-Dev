@@ -71,3 +71,11 @@ class ReleaseOrder(models.Model):
     charges = models.JSONField(blank=True, null=True)
     disabled = models.BooleanField(default=False)
 
+class PreAlert(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    tracking_number = models.CharField(max_length=200, blank=True, null=True)
+    store = models.CharField(max_length=200, blank=True, null=True)
+    courier = models.CharField(max_length=200, blank=True, null=True)
+    client = models.ForeignKey(Customer, related_name="client", on_delete=models.DO_NOTHING)
+    packages = models.JSONField(blank=True, null=True)
+    disabled = models.BooleanField(default=False)
