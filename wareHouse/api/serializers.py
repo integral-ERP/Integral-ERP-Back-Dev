@@ -21,7 +21,7 @@ class PickUpOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = PickUpOrder
        
-        fields = [ 'id', 'status','number','creation_date','pick_up_date','delivery_date','date','issued_by','issued_byObj','destination_agent','destination_agentObj','employee','employeeObj','shipper','shipperObj','pick_up_location','pickUpLocationObj','consignee','consigneeObj','delivery_location','deliveryLocationObj','inland_carrier','inland_carrierObj','main_carrier','main_carrierObj','pro_number','tracking_number','supplier','supplierObj','invoice_number','purchase_order_number', 'commodities', 'client_to_bill', 'client_to_billObj', 'charges'
+        fields = [ 'id', 'status','number','creation_date','pick_up_date','delivery_date','date','issued_by','issued_byObj','destination_agent','destination_agentObj','employee','employeeObj','shipper','shipperObj','pick_up_location','pickUpLocationObj','consignee','consigneeObj','delivery_location','deliveryLocationObj','inland_carrier','inland_carrierObj','main_carrier','main_carrierObj','pro_number','tracking_number','supplier','supplierObj','invoice_number','purchase_order_number', 'commodities', 'client_to_bill', 'client_to_billObj', 'charges', 'weight'
                 ] 
  
 class ReceptionOrderSerializer(serializers.ModelSerializer):
@@ -35,7 +35,7 @@ class ReceptionOrderSerializer(serializers.ModelSerializer):
     supplierObj = CarrierSerializer(required=False,source='supplier' , read_only=True)
     class Meta:
         model = ReceptionOrder
-        fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','main_carrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number', 'supplier', 'supplierObj']
+        fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','main_carrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number', 'supplier', 'supplierObj', 'weight']
 
 class ReleaseOrderSerializer(serializers.ModelSerializer):
     issued_byObj = AgentSerializer(required=False,source='issued_by', read_only=True)
@@ -46,7 +46,7 @@ class ReleaseOrderSerializer(serializers.ModelSerializer):
     releasedToObj = ReleasedToSerializer(required=False, source='released_to', read_only=True)
     class Meta:
         model = ReleaseOrder
-        fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'main_carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities', 'disabled']
+        fields = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'main_carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities', 'disabled', 'weight']
 
 class PreAlertSerializer(serializers.ModelSerializer):
     clientObj = CustomerSerializer(required=False, source="client", read_only=True)
