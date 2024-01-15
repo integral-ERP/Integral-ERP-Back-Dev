@@ -140,5 +140,7 @@ class DepositsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'bankAccount',
                     'date',
                     'memo',
+                    'depositCharges',
+                    'total',
                     ]
     resource_class = DepositsResource

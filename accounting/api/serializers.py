@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from accounting.models import ChartAccounts, ItemServices, OpeningBalance, Invoice, Payments, Bills, Deposits
+# from maintenance.api.serializers import AgentSerializer
 
 class ChartAccountsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,6 +43,7 @@ class OpeningBalanceSerializer(serializers.ModelSerializer):
                     ]
 
 class InvoiceSerializer(serializers.ModelSerializer):
+    # issued_byObj = AgentSerializer(required=False,source='issued_by', read_only=True, allow_null=True)
     class Meta :
         model   = Invoice
         fields   = ['id', 
@@ -66,6 +68,9 @@ class InvoiceSerializer(serializers.ModelSerializer):
                     'accountByName',
                     'accountByType',
                     'disabled',
+                    # 'AgentSerializer',##########
+                    # 'issued_by',
+                    # 'issued_byObj'
                     ]
         
 class PaymentsSerializer (serializers.ModelSerializer):
@@ -112,5 +117,7 @@ class DepositsSerializer (serializers.ModelSerializer):
                     'bankAccount',
                     'date',
                     'memo',
+                    'depositCharges',
+                    'total',
                     'disabled',
                     ]

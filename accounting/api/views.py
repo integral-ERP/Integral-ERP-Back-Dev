@@ -170,11 +170,13 @@ class BillsApiViewSet(BaseModelViewSet):
 class DepositsApiViewSet(BaseModelViewSet):
     serializer_class = DepositsSerializer
     queryset = Deposits.objects.filter(disabled=False).all()
-    search_fields  = [ 'id', 
-                    'bankAccount',
-                    'date',
-                    'memo',
-                    'disabled',
+    search_fields  = [  'id', 
+                        'bankAccount',
+                        'date',
+                        'memo',
+                        'depositCharges'
+                        'total',
+                        'disabled',
                     ]
 
     def destroy(self, request, *args, **kwargs):
