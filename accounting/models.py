@@ -94,4 +94,6 @@ class Deposits(models.Model):
     bankAccount     =   models.CharField(max_length=200, blank=True, null=True)
     date            =   models.DateField(blank=True, null=True)
     memo            =   models.CharField(max_length=200, blank=True, null=True)
+    depositCharges  =   models.JSONField(blank=True, null=True)
+    total           =   models.CharField(max_length=200, blank=True, null=True)
     disabled        =   models.BooleanField(default=False)
