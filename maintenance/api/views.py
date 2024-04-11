@@ -4,6 +4,7 @@ from maintenance.models import Carrier,Agent,Vendor,Customer,Employee,Port,Packa
 from maintenance.api.serializers import CarrierSerializer,AgentSerializer,VendorSerializer,CustomerSerializer,EmployeeSerializer,PortSerializer,PackageTypeSerializer,LocationSerializer,CompanySerializer,ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer, ReleasedToSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 
 class BaseModelViewSet(ModelViewSet):
     disabled_field = 'disabled'
@@ -31,6 +32,16 @@ class VendorApiViewSet(BaseModelViewSet):
     queryset = Vendor.objects.filter(disabled=False)
     filter_backends = [filters.SearchFilter]
     search_fields = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 class CustomerApiViewSet(BaseModelViewSet):
     serializer_class = CustomerSerializer
@@ -88,6 +99,18 @@ class ConsigneeApiViewSet(BaseModelViewSet):
     queryset = Consignee.objects.filter(disabled=False)
     filter_backends = [filters.SearchFilter]
     search_fields = ['customer','vendor','agent','carrier']
+    pagination_class = PageNumberPagination
+    page_size = 10 
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 class DeliveryLocationApiViewSet(BaseModelViewSet):
     serializer_class = DeliveryLocationSerializer
@@ -105,4 +128,4 @@ class ReleasedToApiViewSet(BaseModelViewSet):
     serializer_class = ReleasedToSerializer
     queryset = ReleasedTo.objects.filter(disabled=False)
     filter_backends = [filters.SearchFilter]
-    search_fields = ['id', 'customer', 'vendor', 'agent', 'carrier']
+    search_fields = ['id', 'customer', 'vendor', 'agent', 'carrier']    
