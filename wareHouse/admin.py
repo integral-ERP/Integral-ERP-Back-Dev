@@ -61,7 +61,8 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'main_carrier',
                     'commodities',
                     'events',
-                    'attachments'
+                    'attachments',
+                    'weight',
                 ]
     resource_class = ReceptionOrderResource
 
