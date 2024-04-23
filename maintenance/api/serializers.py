@@ -265,43 +265,51 @@ class ShipperSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        try:
-            customer_id = validated_data.pop("customerid", None)
-            vendor_id = validated_data.pop("vendorid", None)
-            agent_id = validated_data.pop("agentid", None)
+        customer_id = validated_data.pop("customerid", None)
+        vendor_id = validated_data.pop("vendorid", None)
+        agent_id = validated_data.pop("agentid", None)
 
-            # Buscar los objetos correspondientes en las tablas respectivas
-            customer = None
-            vendor = None
-            agent = None
+        # Buscar los objetos correspondientes en las tablas respectivas
+        customer = None
+        vendor = None
+        agent = None
 
-            if customer_id:
+        if customer_id:
+            try:
                 customer = Customer.objects.get(id=customer_id)
-            if vendor_id:
+            except Customer.DoesNotExist:
+                pass
+
+        if vendor_id:
+            try:
                 vendor = Vendor.objects.get(id=vendor_id)
-            if agent_id:
+            except Vendor.DoesNotExist:
+                pass
+
+        if agent_id:
+            try:
                 agent = Agent.objects.get(id=agent_id)
+            except Agent.DoesNotExist:
+                pass
 
-            # Almacena los datos recuperados como una propiedad JSON
-            shipperObj = None
-            if customer:
-                shipperObj = CustomerSerializer(customer).data
-            if vendor:
-                shipperObj = VendorSerializer(vendor).data
-            if agent:
-                shipperObj = AgentSerializer(agent).data
-            data = {"obj": shipperObj}
+        # Almacena los datos recuperados como una propiedad JSON
+        shipperObj = None
+        if customer:
+            shipperObj = CustomerSerializer(customer).data
+        if vendor:
+            shipperObj = VendorSerializer(vendor).data
+        if agent:
+            shipperObj = AgentSerializer(agent).data
+        data = {"obj": shipperObj}
 
-            # Crea el objeto Shipper con los datos proporcionados
-            shipper = Shipper.objects.create(**validated_data)
+        # Crea el objeto Shipper con los datos proporcionados
+        shipper = Shipper.objects.create(**validated_data)
 
-            # Almacenar los datos JSON en un campo separado
-            shipper.data = data
-            shipper.save()
+        # Almacenar los datos JSON en un campo separado
+        shipper.data = data
+        shipper.save()
 
-            return shipper
-        except Exception as e:
-            raise serializers.ValidationError(str(e))
+        return shipper
 
 
 class PickUpLocationSerializer(serializers.ModelSerializer):

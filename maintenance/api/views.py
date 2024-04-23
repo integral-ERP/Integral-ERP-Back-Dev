@@ -38,7 +38,11 @@ class VendorApiViewSet(BaseModelViewSet, DataSendingMixin):
     filter_backends = [filters.SearchFilter]
     search_fields = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
 
+<<<<<<< HEAD
 class CustomerApiViewSet(BaseModelViewSet, DataSendingMixin):
+=======
+class CustomerApiViewSet(BaseModelViewSet):
+>>>>>>> parent of 835e84e (First steps to pagination)
     serializer_class = CustomerSerializer
     queryset = Customer.objects.filter(disabled=False)
     filter_backends = [filters.SearchFilter]
@@ -90,6 +94,7 @@ class ConsigneeApiViewSet(BaseModelViewSet, DataSendingMixin):
     serializer_class = ConsigneeSerializer
     queryset = Consignee.objects.filter(disabled=False)
     filter_backends = [filters.SearchFilter]
+<<<<<<< HEAD
     search_fields = ['customer', 'vendor', 'agent', 'carrier']
 
     def destroy(self, request, *args, **kwargs):
@@ -99,6 +104,11 @@ class ConsigneeApiViewSet(BaseModelViewSet, DataSendingMixin):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class DeliveryLocationApiViewSet(BaseModelViewSet, DataSendingMixin):
+=======
+    search_fields = ['customer','vendor','agent','carrier']
+
+class DeliveryLocationApiViewSet(BaseModelViewSet):
+>>>>>>> parent of 835e84e (First steps to pagination)
     serializer_class = DeliveryLocationSerializer
     queryset = DeliveryLocation.objects.filter(disabled=False)
     filter_backends = [filters.SearchFilter]
@@ -114,4 +124,8 @@ class ReleasedToApiViewSet(BaseModelViewSet, DataSendingMixin):
     serializer_class = ReleasedToSerializer
     queryset = ReleasedTo.objects.filter(disabled=False)
     filter_backends = [filters.SearchFilter]
+<<<<<<< HEAD
     search_fields = ['id', 'customer', 'vendor', 'agent', 'carrier']
+=======
+    search_fields = ['id', 'customer', 'vendor', 'agent', 'carrier']
+>>>>>>> parent of 835e84e (First steps to pagination)
