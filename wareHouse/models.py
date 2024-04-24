@@ -28,7 +28,7 @@ class PickUpOrder(models.Model):
     purchase_order_number   =   models.CharField(max_length=200, blank=True, null=True)
     commodities             =   models.JSONField(blank=True, null=True)
     charges                 =   models.JSONField(blank=True, null=True)
-    disabled = models.BooleanField(default=False)
+    disabled                = models.BooleanField(default=False)
 
 class ReceptionOrder(models.Model):
     status = models.CharField(max_length=200, blank=True, null=True)
@@ -51,7 +51,10 @@ class ReceptionOrder(models.Model):
     tracking_number         =   models.CharField(max_length=200, blank=True, null=True)
     invoice_number          =   models.CharField(max_length=200, blank=True, null=True)
     purchase_order_number   =   models.CharField(max_length=200, blank=True, null=True)
+    weight = models.FloatField(blank=True, null=True)
     disabled = models.BooleanField(default=False)
+    
+
     
 class ReleaseOrder(models.Model):
     status = models.CharField(max_length=200, blank=True, null=True)

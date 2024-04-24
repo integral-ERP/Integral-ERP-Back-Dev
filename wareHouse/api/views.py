@@ -30,7 +30,7 @@ class ReceptionOrderApiViewSet(BaseModelViewSet):
     serializer_class = ReceptionOrderSerializer
     queryset = ReceptionOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
-    search_fields = ['status','number','creation_date','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier','commodities','events','attachments']
+    search_fields = ['status','number','creation_date','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier','commodities','events','attachments','weight']
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -42,7 +42,8 @@ class ReleaseOrderApiViewSet(BaseModelViewSet):
     serializer_class = ReleaseOrderSerializer
     queryset = ReleaseOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
-    search_fields = ['status', 'number', 'creation_date', 'employee', 'issued_by', 'client_to_bill', 'carrier', 'commodities']
+    # search_fields = ['status', 'number', 'creation_date', 'employee', 'issued_by', 'client_to_bill', 'carrier', 'commodities']
+    search_fields = ['status', 'number', 'creation_date', 'release_date', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'main_carrierObj', 'warehouse_receipt', 'warehouseReceiptObj', 'released_to', 'releasedToObj', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities']
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

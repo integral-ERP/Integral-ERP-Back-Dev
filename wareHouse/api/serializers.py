@@ -35,7 +35,7 @@ class ReceptionOrderSerializer(serializers.ModelSerializer):
     supplierObj = CarrierSerializer(required=False,source='supplier' , read_only=True)
     class Meta:
         model = ReceptionOrder
-        fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','main_carrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number', 'supplier', 'supplierObj']
+        fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','main_carrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number', 'supplier', 'supplierObj','weight']
 
 class ReleaseOrderSerializer(serializers.ModelSerializer):
     issued_byObj = AgentSerializer(required=False,source='issued_by', read_only=True)
