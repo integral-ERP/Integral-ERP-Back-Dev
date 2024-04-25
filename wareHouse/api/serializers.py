@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from wareHouse.models import  PickUpOrder, ReceptionOrder, ReleaseOrder
-from maintenance.api.serializers import AgentSerializer,CustomerSerializer,EmployeeSerializer,CarrierSerializer, ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer, ReleasedToSerializer
+from maintenance.api.serializers import AgentSerializer,CustomerSerializer,EmployeeSerializer,CarrierSerializer, ShipperSerializer,PickUpLocationSerializer,ConsigneeSerializer,DeliveryLocationSerializer,ClientToBillSerializer, ReleasedToSerializer ,SupplierSerializer
 
 
 
@@ -32,7 +32,7 @@ class ReceptionOrderSerializer(serializers.ModelSerializer):
     clientBillObj = ClientToBillSerializer(required=False,source='client_to_bill', read_only=True)
     main_carrierObj = CarrierSerializer(required=False,source='main_carrier', read_only=True)
     employeeObj = EmployeeSerializer(required=False, source='employee', read_only=True)
-    supplierObj = CarrierSerializer(required=False,source='supplier' , read_only=True)
+    supplierObj = SupplierSerializer(required=False,source='supplier' , read_only=True)
     class Meta:
         model = ReceptionOrder
         fields = [  'id', 'status','number','creation_date','employee', 'employeeObj', 'issued_by','issued_byObj','destination_agent','destination_agentObj','shipper','shipperObj','consignee', 'consigneeObj','client_to_bill','clientBillObj','main_carrier','main_carrierObj','commodities','events','attachments', 'notes', 'charges', 'pro_number', 'tracking_number', 'invoice_number', 'purchase_order_number', 'supplier', 'supplierObj','weight']
