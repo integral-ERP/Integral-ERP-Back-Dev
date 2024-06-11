@@ -1,6 +1,6 @@
 from django.db import models
 
-from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill, ReleasedTo
+from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill, ReleasedTo,Supplier
 
 ######################### Create your models here. #################################
 
@@ -41,7 +41,7 @@ class ReceptionOrder(models.Model):
     consignee = models.ForeignKey(Consignee, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='receptionConsignee')
     client_to_bill = models.ForeignKey(ClientToBill, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='clientToBill')
     main_carrier = models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='receptionCarrier')
-    supplier = models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='receptionSupplier')
+    supplier = models.ForeignKey(Supplier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='receptionSupplier')# estaba shipper
     commodities  = models.JSONField(blank=True, null=True)
     events = models.JSONField(blank=True, null=True)
     attachments = models.JSONField(blank=True, null=True)

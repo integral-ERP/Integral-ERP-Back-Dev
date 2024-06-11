@@ -10,6 +10,7 @@ from maintenance.models import (
     Location,
     Company,
     Shipper,
+    Supplier,
     PickUpLocation,
     Consignee,
     DeliveryLocation,
@@ -310,7 +311,71 @@ class ShipperSerializer(serializers.ModelSerializer):
         shipper.save()
 
         return shipper
+    
+class SupplierSerializer(serializers.ModelSerializer):
+    customerid = serializers.CharField(max_length=200, required=False, allow_null=True)
+    vendorid = serializers.CharField(max_length=200, required=False, allow_null=True)
+    agentid = serializers.CharField(max_length=200, required=False, allow_null=True)
 
+    class Meta:
+        model = Supplier
+        fields = [
+            "id",
+            "customer",
+            "customerid",
+            "vendor",
+            "vendorid",
+            "agent",
+            "agentid",
+            "data",
+        ]
+
+    def create(self, validated_data):
+        customer_id = validated_data.pop("customerid", None)
+        vendor_id = validated_data.pop("vendorid", None)
+        agent_id = validated_data.pop("agentid", None)
+
+        # Buscar los objetos correspondientes en las tablas respectivas
+        customer = None
+        vendor = None
+        agent = None
+
+        if customer_id:
+            try:
+                customer = Customer.objects.get(id=customer_id)
+            except Customer.DoesNotExist:
+                pass
+
+        if vendor_id:
+            try:
+                vendor = Vendor.objects.get(id=vendor_id)
+            except Vendor.DoesNotExist:
+                pass
+
+        if agent_id:
+            try:
+                agent = Agent.objects.get(id=agent_id)
+            except Agent.DoesNotExist:
+                pass
+
+        # Almacena los datos recuperados como una propiedad JSON
+        supplierObj = None
+        if customer:
+            supplierObj = CustomerSerializer(customer).data
+        if vendor:
+            supplierObj = VendorSerializer(vendor).data
+        if agent:
+            supplierObj = AgentSerializer(agent).data
+        data = {"obj": supplierObj}
+
+        # Crea el objeto Shipper con los datos proporcionados
+        supplier = Supplier.objects.create(**validated_data) #estaba shipper
+
+        # Almacenar los datos JSON en un campo separado
+        supplier.data = data
+        supplier.save()
+
+        return supplier
 
 class PickUpLocationSerializer(serializers.ModelSerializer):
     customerid = serializers.CharField(max_length=200, required=False, allow_null=True)
