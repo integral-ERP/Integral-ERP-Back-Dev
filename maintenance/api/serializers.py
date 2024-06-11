@@ -11,6 +11,7 @@ from maintenance.models import (
     Company,
     Shipper,
     Supplier,
+    Supplier,
     PickUpLocation,
     Consignee,
     DeliveryLocation,
