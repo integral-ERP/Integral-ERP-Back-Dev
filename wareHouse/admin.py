@@ -42,6 +42,8 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'supplier',
                     'invoice_number',
                     'purchase_order_number',
+                    'volumen',
+                    'weight',
                 ]
     resource_class = PickUpOrderResource
 
@@ -62,6 +64,7 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'commodities',
                     'events',
                     'attachments',
+                    'volumen',
                     'weight',
                 ]
     resource_class = ReceptionOrderResource
@@ -69,5 +72,20 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 @admin.register(ReleaseOrder)
 class warehouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'issued_by', 'client_to_bill', 'carrier', 'warehouse_receipt', 'released_to', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities']
+    list_display = ['id',
+                    'status',
+                    'number', 
+                    'creation_date', 
+                    'release_date', 
+                    'employee', 
+                    'issued_by', 
+                    'client_to_bill', 
+                    'carrier',
+                    'warehouse_receipt', 
+                    'released_to', 
+                    'pro_number', 
+                    'tracking_number', 
+                    'purchase_order_number', 
+                    'commodities',
+                    ]
     resource_class = ReleaseOrderResource
