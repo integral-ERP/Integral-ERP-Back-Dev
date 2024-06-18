@@ -10,6 +10,7 @@ from maintenance.models import (
     Location,
     Company,
     Shipper,
+     Supplier,
     Supplier,
     PickUpLocation,
     Consignee,

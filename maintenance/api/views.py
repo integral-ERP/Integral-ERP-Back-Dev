@@ -2,6 +2,8 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
 from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company, Shipper, PickUpLocation, Consignee, DeliveryLocation, ClientToBill, ReleasedTo,Supplier
 from maintenance.api.serializers import CarrierSerializer, AgentSerializer, VendorSerializer, CustomerSerializer, EmployeeSerializer, PortSerializer, PackageTypeSerializer, LocationSerializer, CompanySerializer, ShipperSerializer, PickUpLocationSerializer, ConsigneeSerializer, DeliveryLocationSerializer, ClientToBillSerializer, ReleasedToSerializer,SupplierSerializer
+from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company, Shipper, PickUpLocation, Consignee, DeliveryLocation, ClientToBill, ReleasedTo,Supplier
+from maintenance.api.serializers import CarrierSerializer, AgentSerializer, VendorSerializer, CustomerSerializer, EmployeeSerializer, PortSerializer, PackageTypeSerializer, LocationSerializer, CompanySerializer, ShipperSerializer, PickUpLocationSerializer, ConsigneeSerializer, DeliveryLocationSerializer, ClientToBillSerializer, ReleasedToSerializer,SupplierSerializer
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -77,6 +79,12 @@ class CompanyApiViewSet(BaseModelViewSet, DataSendingMixin):
 class ShipperApiViewSet(BaseModelViewSet, DataSendingMixin):
     serializer_class = ShipperSerializer
     queryset = Shipper.objects.filter(disabled=False)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['customer', 'vendor', 'agent']
+
+class SupplierApiViewSet(BaseModelViewSet, DataSendingMixin):
+    serializer_class = SupplierSerializer
+    queryset = Supplier.objects.filter(disabled=False)
     filter_backends = [filters.SearchFilter]
     search_fields = ['customer', 'vendor', 'agent']
 
