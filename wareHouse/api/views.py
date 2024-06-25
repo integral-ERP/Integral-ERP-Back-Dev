@@ -20,6 +20,16 @@ class PickUpOrderApiViewSet(BaseModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['status','number','creation_date','pick_up_date','delivery_date','date','issued_by','destination_agent','employee','shipper','pick_up_location','consignee','delivery_location','inland_carrier','main_carrier','pro_number','tracking_number','supplier','invoice_number','purchase_order_number','volumen','weight',]
 
+    def perform_create(self, serializer):
+
+        last_pickup_order = PickUpOrder.objects.order_by('-number').first()
+        if last_pickup_order:
+            serializer.validated_data['number'] = last_pickup_order.number + 1
+        else:
+            serializer.validated_data['number'] = 1
+
+        serializer.save()
+
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         instance.disabled = True
@@ -30,7 +40,17 @@ class ReceptionOrderApiViewSet(BaseModelViewSet):
     serializer_class = ReceptionOrderSerializer
     queryset = ReceptionOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
-    search_fields = ['status','number','creation_date','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier','commodities','events','attachments','weight']
+    search_fields = ['status','number','creation_date','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier','commodities','events','attachments','volumen','weight',]
+
+    def perform_create(self, serializer):
+
+        last_reception_order = ReceptionOrder.objects.order_by('-number').first()
+        if last_reception_order:
+            serializer.validated_data['number'] = last_reception_order.number + 1
+        else:
+            serializer.validated_data['number'] = 1
+
+        serializer.save()
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
