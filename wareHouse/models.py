@@ -7,6 +7,9 @@ from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port,
 class PickUpOrder(models.Model):
     status                  =   models.CharField(max_length=200, blank=True, null=True)
     number                  =   models.PositiveBigIntegerField(blank=True, null=True)
+    creation_date_text      =   models.CharField(max_length=200, blank=True, null=True)
+    pick_up_date_text       =   models.CharField(max_length=200, blank=True, null=True)
+    delivery_date_text      =   models.CharField(max_length=200, blank=True, null=True)
     creation_date           =   models.DateTimeField(blank=True, null=True)
     pick_up_date            =   models.DateTimeField(blank=True, null=True)
     delivery_date           =   models.DateTimeField(blank=True, null=True)
@@ -35,7 +38,7 @@ class PickUpOrder(models.Model):
 class ReceptionOrder(models.Model):
     status                  =   models.CharField(max_length=200, blank=True, null=True)
     number                  =   models.PositiveBigIntegerField(blank=True, null=True)
-    creation_date           =   models.DateTimeField(blank=True, null=True)
+    creation_date           =   models.DateField(blank=True, null=True)
     employee                =   models.ForeignKey(Employee, blank=True, null=True, on_delete=models.DO_NOTHING)
     issued_by               =   models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING)
     destination_agent       =   models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='receptionDestinationAgent')
@@ -62,8 +65,8 @@ class ReceptionOrder(models.Model):
 class ReleaseOrder(models.Model):
     status                  =   models.CharField(max_length=200, blank=True, null=True)
     number                  =   models.PositiveBigIntegerField(blank=True, null=True)
-    creation_date           =   models.DateTimeField(blank=True, null=True)
-    release_date            =   models.DateTimeField(blank=True, null=True)
+    creation_date           =   models.DateField(blank=True, null=True)
+    release_date            =   models.DateField(blank=True, null=True)
     employee                =   models.ForeignKey(Employee, blank=True, null=True, on_delete=models.DO_NOTHING, related_name="releaseEmployee")
     issued_by               =   models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING, related_name="releaseAgent")
     carrier                 =   models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='releaseCarrier')

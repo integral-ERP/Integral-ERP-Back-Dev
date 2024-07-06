@@ -18,7 +18,7 @@ class PickUpOrderApiViewSet(BaseModelViewSet):
     serializer_class = PickUpOrderSerializer
     queryset = PickUpOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
-    search_fields = ['status','number','creation_date','pick_up_date','delivery_date','date','issued_by','destination_agent','employee','shipper','pick_up_location','consignee','delivery_location','inland_carrier','main_carrier','pro_number','tracking_number','supplier','invoice_number','purchase_order_number','volumen','weight',]
+    search_fields = ['status','number','creation_date_text','pick_up_date_text','delivery_date_text','creation_date','pick_up_date','delivery_date','date','issued_by','destination_agent','employee','shipper','pick_up_location','consignee','delivery_location','inland_carrier','main_carrier','pro_number','tracking_number','supplier','invoice_number','purchase_order_number','volumen','weight',]
 
     def perform_create(self, serializer):
 
