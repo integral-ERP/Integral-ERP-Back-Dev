@@ -41,8 +41,8 @@ class Invoice(models.Model):
     paymentTem      =   models.CharField(max_length=200, blank=True, null=True)
     division        =   models.CharField(max_length=200, blank=True, null=True)
     apply           =   models.CharField(max_length=200, blank=True, null=True)   #Verificar y borrar
-    due             =   models.DateField(blank=True, null=True)
-    trasaDate       =   models.DateField(blank=True, null=True)
+    due             =   models.DateTimeField(blank=True, null=True)
+    trasaDate       =   models.DateTimeField(blank=True, null=True)
     bilingAddres    =   models.TextField(blank=True, null=True)
     currency        =   models.CharField(max_length=200, blank=True, null=True)
     issued_by       =   models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING)
@@ -65,7 +65,7 @@ class Payments(models.Model):
     customerById    =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING)
     customerByName  =   models.CharField(max_length=200, blank=True, null=True)
     amountReceived  =   models.DecimalField(blank=True, null=True, max_digits=9, decimal_places=2)
-    trasaDate       =   models.DateField(blank=True, null=True)
+    trasaDate       =   models.DateTimeField(blank=True, null=True)
     number          =   models.CharField(max_length=200, blank=True, null=True)
     memo            =   models.CharField(max_length=200, blank=True, null=True)
     accountByType   =   models.CharField(max_length=200, blank=True, null=True)
@@ -79,8 +79,8 @@ class Payments(models.Model):
 class Bills(models.Model): 
     status          =   models.CharField(max_length=200, blank=True, null=True)
     number          =   models.CharField(max_length=200, blank=True, null=True)
-    due             =   models.DateField(blank=True, null=True)
-    trasaDate       =   models.DateField(blank=True, null=True)
+    due             =   models.DateTimeField(blank=True, null=True)
+    trasaDate       =   models.DateTimeField(blank=True, null=True)
     accountById     =   models.ForeignKey(ChartAccounts, blank=True, null=True, on_delete=models.DO_NOTHING)
     accountByType   =   models.CharField(max_length=200, blank=True, null=True)
     carriVerndorById=   models.ForeignKey(Vendor, blank=True, null=True, on_delete=models.DO_NOTHING)
@@ -92,7 +92,7 @@ class Bills(models.Model):
     
 class Deposits(models.Model): 
     bankAccount     =   models.CharField(max_length=200, blank=True, null=True)
-    date            =   models.DateField(blank=True, null=True)
+    date            =   models.DateTimeField(blank=True, null=True)
     memo            =   models.CharField(max_length=200, blank=True, null=True)
     depositCharges  =   models.JSONField(blank=True, null=True)
     total           =   models.CharField(max_length=200, blank=True, null=True)
