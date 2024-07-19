@@ -82,4 +82,5 @@ class ReleaseOrder(models.Model):
     commodities             =   models.JSONField(blank=True, null=True)
     charges                 =   models.JSONField(blank=True, null=True)
     disabled                =   models.BooleanField(default=False)
-
+    notes                   =   models.JSONField(blank=True, null=True)
+    attachments             =   models.JSONField(blank=True, null=True)
