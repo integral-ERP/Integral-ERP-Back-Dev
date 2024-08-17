@@ -88,7 +88,7 @@ class warehouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'client_to_bill', 
                     'carrier',
                     'warehouse_receipt', 
-                    'released_to', 
+                    'consignee',
                     'pro_number', 
                     'tracking_number', 
                     'purchase_order_number', 

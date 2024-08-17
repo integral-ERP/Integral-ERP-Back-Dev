@@ -74,7 +74,7 @@ class ReleaseOrder(models.Model):
     issued_by               =   models.ForeignKey(Agent, blank=True, null=True, on_delete=models.DO_NOTHING, related_name="releaseAgent")
     carrier                 =   models.ForeignKey(Carrier, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='releaseCarrier')
     client_to_bill          =   models.ForeignKey(ClientToBill, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='releaseclientToBill')
-    released_to             =   models.ForeignKey(ReleasedTo, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='releaseReleaseTo')
+    consignee               =   models.ForeignKey(Consignee, blank=True, null=True, on_delete=models.DO_NOTHING, related_name='releaseConsignee')
     warehouse_receipt       =   models.ForeignKey(PickUpOrder, blank=True, null=True, on_delete=models.DO_NOTHING, related_name="pickupOrder")
     pro_number              =   models.CharField(max_length=200, blank=True, null=True)
     tracking_number         =   models.CharField(max_length=200, blank=True, null=True)
