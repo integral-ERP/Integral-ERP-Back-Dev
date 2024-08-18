@@ -60,6 +60,7 @@ class ReceptionOrder(models.Model):
     weight                  =   models.FloatField(blank=True, null=True)
     volumen                 =   models.FloatField(blank=True, null=True)
     disabled                =   models.BooleanField(default=False)
+    pickup_order_id         =   models.CharField(max_length=200, blank=True, null=True)
     
 
     
