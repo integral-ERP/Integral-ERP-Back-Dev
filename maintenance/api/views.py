@@ -1,9 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
-from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company, Shipper, PickUpLocation, Consignee, DeliveryLocation, ClientToBill, ReleasedTo,Supplier
-from maintenance.api.serializers import CarrierSerializer, AgentSerializer, VendorSerializer, CustomerSerializer, EmployeeSerializer, PortSerializer, PackageTypeSerializer, LocationSerializer, CompanySerializer, ShipperSerializer, PickUpLocationSerializer, ConsigneeSerializer, DeliveryLocationSerializer, ClientToBillSerializer, ReleasedToSerializer,SupplierSerializer
-from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company, Shipper, PickUpLocation, Consignee, DeliveryLocation, ClientToBill, ReleasedTo,Supplier
-from maintenance.api.serializers import CarrierSerializer, AgentSerializer, VendorSerializer, CustomerSerializer, EmployeeSerializer, PortSerializer, PackageTypeSerializer, LocationSerializer, CompanySerializer, ShipperSerializer, PickUpLocationSerializer, ConsigneeSerializer, DeliveryLocationSerializer, ClientToBillSerializer, ReleasedToSerializer,SupplierSerializer
+from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company, Shipper, PickUpLocation, Consignee, DeliveryLocation, ClientToBill, ReleasedTo, Supplier, HazardousMaterial
+from maintenance.api.serializers import CarrierSerializer, AgentSerializer, VendorSerializer, CustomerSerializer, EmployeeSerializer, PortSerializer, PackageTypeSerializer, LocationSerializer, CompanySerializer, ShipperSerializer, PickUpLocationSerializer, ConsigneeSerializer, DeliveryLocationSerializer, ClientToBillSerializer, ReleasedToSerializer, SupplierSerializer, HazardousMaterialSerializer
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -129,3 +127,9 @@ class ReleasedToApiViewSet(BaseModelViewSet, DataSendingMixin):
     queryset = ReleasedTo.objects.filter(disabled=False)
     filter_backends = [filters.SearchFilter]
     search_fields = ['id', 'customer', 'vendor', 'agent', 'carrier']
+
+class HazardousMaterialApiViewSet(BaseModelViewSet, DataSendingMixin):
+    serializer_class = HazardousMaterialSerializer
+    queryset = HazardousMaterial.objects.filter(disabled=False)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['material_name', 'class_name']
