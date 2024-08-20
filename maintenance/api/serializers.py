@@ -16,7 +16,8 @@ from maintenance.models import (
     Consignee,
     DeliveryLocation,
     ClientToBill,
-    ReleasedTo
+    ReleasedTo,
+    HazardousMaterial
 )
 
 from drf_extra_fields.fields import Base64ImageField
@@ -792,3 +793,9 @@ class ReleasedToSerializer(serializers.ModelSerializer):
         releasedTo.save()
 
         return releasedTo
+
+
+class HazardousMaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HazardousMaterial
+        fields = '__all__'
