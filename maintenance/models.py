@@ -404,9 +404,8 @@ class ReleasedTo(models.Model):
 
 
 class HazardousMaterial(models.Model):
-    material_name           = models.CharField(max_length=255, blank=False, null=False)
-    class_name               = models.CharField(max_length=255, blank=False, null=False)
+    material_name           = models.CharField(max_length=200, blank=True, null=True)
+    class_name              = models.CharField(max_length=200, blank=True, null=True)
     disabled                = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.material_name
+    
