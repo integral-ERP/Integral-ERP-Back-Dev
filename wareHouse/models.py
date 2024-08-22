@@ -1,6 +1,6 @@
 from django.db import models
 
-from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill, ReleasedTo,Supplier
+from maintenance.models import Carrier, Agent, Vendor, Customer, Employee, Port, PackageType, Location, Company,Shipper,PickUpLocation,Consignee,DeliveryLocation,ClientToBill, ReleasedTo, Supplier
 
 ######################### Create your models here. #################################
 
@@ -82,4 +82,5 @@ class ReleaseOrder(models.Model):
     commodities             =   models.JSONField(blank=True, null=True)
     charges                 =   models.JSONField(blank=True, null=True)
     disabled                =   models.BooleanField(default=False)
-
+    notes                   =   models.JSONField(blank=True, null=True)
+    attachments             =   models.JSONField(blank=True, null=True)
