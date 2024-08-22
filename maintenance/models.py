@@ -401,5 +401,11 @@ class ReleasedTo(models.Model):
             return self.carrier.name
         else:
             return "N/A"
-        
+
+
+class HazardousMaterial(models.Model):
+    material_name           = models.CharField(max_length=200, blank=True, null=True)
+    class_name              = models.CharField(max_length=200, blank=True, null=True)
+    disabled                = models.BooleanField(default=False)
+
     
