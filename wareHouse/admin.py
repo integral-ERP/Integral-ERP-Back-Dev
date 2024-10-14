@@ -24,24 +24,27 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id',
                     'status',
                     'number',
-                    'creation_date',
-                    'pick_up_date',
-                    'delivery_date',
+                    'creation_date_text',
+                    'pick_up_date_text',
+                    'delivery_date_text',
                     'date',
+                    'inland_carrier',
+                    'main_carrier',
                     'issued_by',
                     'destination_agent',
                     'employee',
                     'shipper',
                     'pick_up_location',
                     'consignee',
+                    'client_to_bill',
                     'delivery_location',
-                    'inland_carrier',
-                    'main_carrier',
                     'pro_number',
                     'tracking_number',
                     'supplier',
                     'invoice_number',
                     'purchase_order_number',
+                    'volumen',
+                    'weight',
                 ]
     resource_class = PickUpOrderResource
 
@@ -52,6 +55,7 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'status',
                     'number',
                     'creation_date',
+                    'creation_date_text',
                     'employee',
                     'issued_by',
                     'destination_agent',
@@ -61,12 +65,34 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'main_carrier',
                     'commodities',
                     'events',
-                    'attachments'
+                    'attachments',
+                    'volumen',
+                    'weight',
                 ]
     resource_class = ReceptionOrderResource
 
 
 @admin.register(ReleaseOrder)
 class warehouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id', 'status', 'number', 'creation_date', 'release_date', 'employee', 'issued_by', 'client_to_bill', 'carrier', 'warehouse_receipt', 'released_to', 'pro_number', 'tracking_number', 'purchase_order_number', 'commodities']
+    list_display = ['id',
+                    'status',
+                    'number', 
+                    'clienTo',
+                    'client_to_bill',
+                    # 'creation_date', 
+                    'creation_date_text',
+                    # 'release_date', 
+                    'release_date_text',
+                    'employee', 
+                    'issued_by', 
+                    'carrier',
+                    'warehouse_receipt', 
+                    'consignee',
+                    'pro_number', 
+                    'tracking_number', 
+                    'purchase_order_number', 
+                    'commodities',
+                    'notes',
+                    'attachments',
+                    ]
     resource_class = ReleaseOrderResource

@@ -245,6 +245,25 @@ class Shipper(models.Model):
             return self.agent.name
         else:
             return "N/A"
+        
+class Supplier(models.Model):
+    customerid = models.CharField(max_length=200, blank=True, null=True)
+    customer = models.ForeignKey(Customer,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='supplier_customer')
+    vendorid = models.CharField(max_length=200, blank=True, null=True)
+    vendor = models.ForeignKey(Vendor,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='supplier_vendor')
+    agentid = models.CharField(max_length=200, blank=True, null=True)
+    agent = models.ForeignKey(Agent,blank=True,null=True, on_delete=models.DO_NOTHING,related_name='supplier_agent')  
+    data = models.JSONField(blank=True, null=True)
+    disabled = models.BooleanField(default=False)
+    def __str__(self):
+        if self.customer:
+            return self.customer.name
+        elif self.vendor:
+            return self.vendor.name
+        elif self.agent:
+            return self.agent.name
+        else:
+            return "N/A"
     
 
 class PickUpLocation(models.Model):
@@ -382,5 +401,11 @@ class ReleasedTo(models.Model):
             return self.carrier.name
         else:
             return "N/A"
-        
+
+
+class HazardousMaterial(models.Model):
+    material_name           = models.CharField(max_length=200, blank=True, null=True)
+    class_name              = models.CharField(max_length=200, blank=True, null=True)
+    disabled                = models.BooleanField(default=False)
+
     
