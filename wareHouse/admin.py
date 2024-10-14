@@ -63,6 +63,7 @@ class wareHouseAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                     'consignee',
                     'client_to_bill',
                     'main_carrier',
+                    'inland_carrier',
                     'commodities',
                     'events',
                     'attachments',
