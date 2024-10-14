@@ -12,6 +12,7 @@ class CarrierResource(resources.ModelResource):
         
 @admin.register(Carrier)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    search_fields=['name']
     list_display = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
     resource_class = CarrierResource 
 
@@ -21,7 +22,8 @@ class AgentResource(resources.ModelResource):
 
 @admin.register(Agent)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+    search_fields=['name']
+    list_display = ['id','name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
     resource_class = AgentResource
 
 class VendorResource(resources.ModelResource):
@@ -29,6 +31,7 @@ class VendorResource(resources.ModelResource):
         model = Vendor
 @admin.register(Vendor)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    search_fields=['name']
     list_display = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
     resource_class = VendorResource
 
@@ -37,7 +40,8 @@ class CustomerResource(resources.ModelResource):
         model = Customer
 @admin.register(Customer)
 class maintenanceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
+    search_fields=['name']
+    list_display = ['id','name','phone','mobile_phone','email','fax','website','reference_number','contact_first_name','contact_last_name','identification_number','identification_type','street_and_number','city','state','country','zip_code','type_person']
     resource_class = CustomerResource
 
 class EmployeeResource(resources.ModelResource):

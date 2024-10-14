@@ -609,11 +609,11 @@ class ClientToBillSerializer(serializers.ModelSerializer):
     consigneeObj = ConsigneeSerializer(required=False,source='consignee', allow_null=True)
     customerid = serializers.CharField(max_length=200, required=False, allow_null=True)
     customerObj = CustomerSerializer(required = False, source='customer', allow_null=True)
-    agentId = serializers.CharField(max_length=200, required=False, allow_null=True)
+    agentid = serializers.CharField(max_length=200, required=False, allow_null=True)
     agentObj = AgentSerializer(required= False, source='agent', allow_null=True)
-    vendorId = serializers.CharField(max_length=200, required=False, allow_null=True)
+    vendorid = serializers.CharField(max_length=200, required=False, allow_null=True)
     vendorObj = VendorSerializer(required= False, source='vendor', allow_null=True)
-    carrierId = serializers.CharField(max_length=200, required=False, allow_null=True)
+    carrierid = serializers.CharField(max_length=200, required=False, allow_null=True)
     carrierObj = CarrierSerializer(required= False, source='carrier', allow_null=True)
 
     class Meta:
@@ -628,11 +628,11 @@ class ClientToBillSerializer(serializers.ModelSerializer):
         "consigneeObj",
         "customerid",
         "customerObj",
-        "agentId",
+        "agentid",
         "agentObj",
-        "vendorId",
+        "vendorid",
         "vendorObj",
-        "carrierId",
+        "carrierid",
         "carrierObj",
         "data",
     ]
@@ -651,7 +651,7 @@ class ClientToBillSerializer(serializers.ModelSerializer):
         agent = None
         vendor = None
         carrier = None
-        print ("validated_data", validated_data)
+
         if shipper_id:
             try:
                 shipper = Shipper.objects.get(id=shipper_id)

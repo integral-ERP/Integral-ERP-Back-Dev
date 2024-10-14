@@ -85,3 +85,4 @@ class ReleaseOrder(models.Model):
     disabled                =   models.BooleanField(default=False)
     notes                   =   models.JSONField(blank=True, null=True)
     attachments             =   models.JSONField(blank=True, null=True)
+    clienTo                =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING) 
