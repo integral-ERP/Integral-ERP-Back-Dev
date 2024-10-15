@@ -40,7 +40,7 @@ class ReceptionOrderApiViewSet(BaseModelViewSet):
     serializer_class = ReceptionOrderSerializer
     queryset = ReceptionOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
-    search_fields = ['status','number','creation_date','creation_date_text','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier','commodities','events','attachments','volumen','weight',]
+    search_fields = ['status','number','creation_date','creation_date_text','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier', 'inland_carrier','commodities','events','attachments','volumen','weight',]
 
     def perform_create(self, serializer):
 
