@@ -31,6 +31,7 @@ class PickUpOrder(models.Model):
     purchase_order_number   =   models.CharField(max_length=200, blank=True, null=True)
     commodities             =   models.JSONField(blank=True, null=True)
     charges                 =   models.JSONField(blank=True, null=True)
+    carrier_charges         =   models.JSONField(blank=True, null=True)
     weight                  =   models.FloatField(blank=True, null=True)
     volumen                 =   models.FloatField(blank=True, null=True)
     disabled                =   models.BooleanField(default=False)
