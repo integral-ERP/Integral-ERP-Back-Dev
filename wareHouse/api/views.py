@@ -40,7 +40,7 @@ class ReceptionOrderApiViewSet(BaseModelViewSet):
     serializer_class = ReceptionOrderSerializer
     queryset = ReceptionOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
-    search_fields = ['status','number','creation_date','creation_date_text','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier','commodities','events','attachments','volumen','weight',]
+    search_fields = ['status','number','creation_date','creation_date_text','employee','issued_by','destination_agent','shipper','consignee','client_to_bill','main_carrier', 'inland_carrier','commodities','events','attachments','volumen','weight',]
 
     def perform_create(self, serializer):
 
@@ -62,7 +62,7 @@ class ReleaseOrderApiViewSet(BaseModelViewSet):
     serializer_class = ReleaseOrderSerializer
     queryset = ReleaseOrder.objects.filter(disabled=False).select_related('employee')
     filter_backends = [filters.SearchFilter]
-    search_fields = ['status', 'number', 'creation_date', 'release_date', 'release_date_text', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'main_carrierObj', 'warehouse_receipt', 'warehouseReceiptObj',  'consignee','pro_number', 'tracking_number', 'purchase_order_number', 'commodities','clienTo']
+    search_fields = ['status', 'number', 'creation_date', 'release_date', 'release_date_text', 'employee', 'employeeObj', 'issued_by', 'issued_byObj', 'client_to_bill', 'clientBillObj', 'carrier', 'mainz_carrierObj', 'warehouse_receipt', 'warehouseReceiptObj',  'consignee','pro_number', 'tracking_number', 'purchase_order_number', 'commodities','clienTo']
 
     def perform_create(self, serializer):
 
