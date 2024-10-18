@@ -87,3 +87,4 @@ class ReleaseOrder(models.Model):
     notes                   =   models.JSONField(blank=True, null=True)
     attachments             =   models.JSONField(blank=True, null=True)
     clienTo                =   models.ForeignKey(Customer, blank=True, null=True, on_delete=models.DO_NOTHING) 
+    wh_receipt_id         =   models.CharField(max_length=200, blank=True, null=True)
